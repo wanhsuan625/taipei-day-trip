@@ -44,25 +44,28 @@ def attractions():
 		connection_object = connection_pool.get_connection()
 		cursor = connection_object.cursor()
 		
-		sql_get = "select * from travel limit 12 offset 12"
+		sql_get = "select * from travel limit 12 offset 24"
 		cursor.execute(sql_get)
 		result = cursor.fetchall()
 
+		attractionList = []
+		for i in range(12):
+			item = {
+					"id": result[i][0],
+					"name": result[i][1],
+					"category": result[i][2],
+					"description": result[i][3],
+					"address": result[i][4],
+					"transport": result[i][5],
+					"mrt": result[i][6],
+					"lat": result[i][7],
+					"lng": result[i][8],
+					"images": result[i][9]}
+			
+			attractionList.append(item)
+		
 		data = {
-			"data":[
-				{
-					"id": result[0][0],
-					"name": result[0][1],
-					"category": result[0][2],
-					"description": result[0][3],
-					"address": result[0][4],
-					"transport": result[0][5],
-					"mrt": result[0][6],
-					"lat": result[0][7],
-					"lng": result[0][8],
-					"images": result[0][9],
-				}
-			]
+			"data":attractionList
 		}
 
 		return jsonify(data)
