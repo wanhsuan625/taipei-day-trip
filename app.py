@@ -34,6 +34,7 @@ def thankyou():
 
 
 # API
+# 景點資料列表
 @app.route("/api/attractions")
 def attractions():
 	page = request.args.get("page",0)
@@ -134,6 +135,51 @@ def attractions():
 		cursor.close()
 		connection_object.close()
 
+# 景點編號
+@app.route("/api/attraction/<attractionId>")
+def attractionID(attractionId):
+	try:
+		connection_object = connection_pool.get_connection()
+		cursor = connection_object.cursor()
+		
+		sql_count = "select count(id) from travel"
+		cursor.execute(sql_count)
+		result_count = cursor.fetchone()[0]
+
+		sql_id = "select * from travel where id = %s"
+		val_id = (attractionId,)
+		cursor.execute(sql_id, val_id)
+		result_id = cursor.fetchall()
+		
+		if int(attractionId) > result_count or int(attractionId) < 0 :
+			return jsonify({
+				"error": True,
+				"message": "景點編號不存在"
+			}), 400
+
+		item = {
+				"id": result_id[0][0],
+				"name": result_id[0][1],
+				"category": result_id[0][2],
+				"description": result_id[0][3],
+				"address": result_id[0][4],
+				"transport": result_id[0][5],
+				"mrt": result_id[0][6],
+				"lat": result_id[0][7],
+				"lng": result_id[0][8],
+				"images": result_id[0][9]
+			}
+		return jsonify(item)
+	
+	except:
+		return jsonify({
+			"error": True,
+			"message": "伺服器內部錯誤"
+		}), 500
+	
+	finally:
+		cursor.close()
+		connection_object.close()
 
 if __name__ == "__main__":
 	app.run(port=3000,debug=True)
