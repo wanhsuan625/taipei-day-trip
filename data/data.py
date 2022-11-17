@@ -27,7 +27,7 @@ for jsonObj in data["result"]["results"]:
         if i.endswith(end):
             i = "https" + i
             imgList.append(i)
-    
+
     # 存入資料庫中
     try:
         connection_object = connection_pool.get_connection()
@@ -37,7 +37,8 @@ for jsonObj in data["result"]["results"]:
         val = (jsonObj["name"], jsonObj["CAT"], jsonObj["description"], jsonObj["address"], jsonObj["direction"], jsonObj["MRT"], jsonObj["latitude"], jsonObj["longitude"],json.dumps(imgList))
         cursor.execute(sql, val)
         connection_object.commit()
-
+    except:
+            print("Unexpected Error")
     finally:
         cursor.close()
         connection_object.close()
