@@ -38,38 +38,54 @@ def thankyou():
 def attractions():
 	page = request.args.get("page",0)
 	page = int(page)
-	keyword = request.args.get("keyword",None)
+	keyword = request.args.get("keyword","")
 
 	try:
 		connection_object = connection_pool.get_connection()
 		cursor = connection_object.cursor()
 		
-		sql_get = "select * from travel limit 12 offset 24"
-		cursor.execute(sql_get)
-		result = cursor.fetchall()
+	# 首先處理page的問題
+		sql_count = "select count(id) from travel"
+		cursor.execute(sql_count)
+		lastPage = cursor.fetchone()[0] // 12   #58 // 12 = 4
+		print(lastPage)
+
+		sql_attractions = "select * from travel limit 12 offset %s"
+		val_attractions = (page*12,)
+		cursor.execute(sql_attractions, val_attractions)
+		result_attractions = cursor.fetchall()
 
 		attractionList = []
-		for i in range(12):
+		for i in result_attractions:
 			item = {
-					"id": result[i][0],
-					"name": result[i][1],
-					"category": result[i][2],
-					"description": result[i][3],
-					"address": result[i][4],
-					"transport": result[i][5],
-					"mrt": result[i][6],
-					"lat": result[i][7],
-					"lng": result[i][8],
-					"images": result[i][9]}
-			
+					"id": i[0],
+					"name": i[1],
+					"category": i[2],
+					"description": i[3],
+					"address": i[4],
+					"transport": i[5],
+					"mrt": i[6],
+					"lat": i[7],
+					"lng": i[8],
+					"images": i[9]
+					}
 			attractionList.append(item)
 		
+		if (page >= lastPage):
+			data = {
+				"nextPage": None,
+				"data":attractionList
+			}
+			return jsonify(data)
+		
 		data = {
+			"next page": page + 1,
 			"data":attractionList
 		}
-
 		return jsonify(data)
 	
+	except:
+		print("Unexpected Error")
 	finally:
 		cursor.close()
 		connection_object.close()
