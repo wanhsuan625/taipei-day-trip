@@ -142,16 +142,16 @@ def attractionID(attractionId):
 		connection_object = connection_pool.get_connection()
 		cursor = connection_object.cursor()
 		
-		sql_count = "select count(id) from travel"
+		sql_count = "select distinct id from travel"
 		cursor.execute(sql_count)
-		result_count = cursor.fetchone()[0]
+		result_count = cursor.fetchall()
 
 		sql_id = "select * from travel where id = %s"
 		val_id = (attractionId,)
 		cursor.execute(sql_id, val_id)
 		result_id = cursor.fetchall()
 		
-		if int(attractionId) > result_count or int(attractionId) < 0 :
+		if (int(attractionId),) not in result_count:
 			return jsonify({
 				"error": True,
 				"message": "景點編號不存在"
@@ -170,6 +170,34 @@ def attractionID(attractionId):
 				"images": result_id[0][9]
 			}
 		return jsonify(item)
+	
+	except:
+		return jsonify({
+			"error": True,
+			"message": "伺服器內部錯誤"
+		}), 500
+	
+	finally:
+		cursor.close()
+		connection_object.close()
+
+# 景點分類
+@app.route("/api/categories")
+def categories():
+	try:
+		connection_object = connection_pool.get_connection()
+		cursor = connection_object.cursor()
+
+		sql_category = "select distinct category from travel"
+		cursor.execute(sql_category)
+		result_category = cursor.fetchall()
+		
+		categoryList = []
+		for i in result_category:
+			categoryList.append(i[0])
+			
+		data = {"data": categoryList}
+		return jsonify(data)
 	
 	except:
 		return jsonify({
