@@ -70,7 +70,7 @@ def attractions():
 						"mrt": i[6],
 						"lat": i[7],
 						"lng": i[8],
-						"images": i[9]
+						"images": json.loads(i[9])
 					}
 				attractionList.append(item)
 			
@@ -108,7 +108,7 @@ def attractions():
 					"mrt": i[6],
 					"lat": i[7],
 					"lng": i[8],
-					"images": i[9]
+					"images": json.loads(i[9])
 				}
 			attractionList.append(item)
 		
@@ -167,9 +167,11 @@ def attractionID(attractionId):
 				"mrt": result_id[0][6],
 				"lat": result_id[0][7],
 				"lng": result_id[0][8],
-				"images": result_id[0][9]
+				"images": json.loads(result_id[0][9])
 			}
-		return jsonify(item)
+		data = {"data": item}
+
+		return jsonify(data)
 	
 	except:
 		return jsonify({
