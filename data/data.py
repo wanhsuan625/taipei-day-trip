@@ -34,7 +34,7 @@ for jsonObj in data["result"]["results"]:
         cursor =  connection_object.cursor()
 
         sql = "insert into travel(name, category, description, address, transport, mrt, lat, lng, images) values (%s,%s,%s,%s,%s,%s,%s,%s,%s);"
-        val = (jsonObj["name"], jsonObj["CAT"], jsonObj["description"], jsonObj["address"], jsonObj["direction"], jsonObj["MRT"], jsonObj["latitude"], jsonObj["longitude"],json.dumps(imgList))
+        val = (jsonObj["name"], jsonObj["CAT"], jsonObj["description"], jsonObj["address"].replace(" ",""), jsonObj["direction"], jsonObj["MRT"], jsonObj["latitude"], jsonObj["longitude"],json.dumps(imgList))
         cursor.execute(sql, val)
         connection_object.commit()
     except:
