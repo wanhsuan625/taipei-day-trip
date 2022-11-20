@@ -9,7 +9,7 @@ dbconfig = {
     "host":"localhost",
     "user":"root",
     "password":"aa22bb33",
-    "database":"taipeiDayTrip"
+    "database":"taipeidaytrip"
 }
 connection_pool = mysql.connector.pooling.MySQLConnectionPool(
     pool_name = "my_pool",
