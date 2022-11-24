@@ -1,0 +1,164 @@
+/* @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100&display=swap"); */
+*{
+    position: relative;
+    box-sizing: border-box;
+}
+html,body{
+    padding: 0;
+    margin: 0;
+}
+ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.wrapper{
+    width: 1920px;
+}
+
+/* NAVBAR */
+.navbar{
+    width: 1920px;
+    height: 54px;
+    background-color:#ffff;
+
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+.title{
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 30px;
+    line-height: 34px;
+    font-weight: 700;
+    color: #448899;
+
+    position: absolute;
+    top: 10px;
+    left: 360px;
+}
+.menu{
+    height: 14px;
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    line-height: 13px;
+    font-weight: 500;
+    color: #666666;
+
+    display: flex;
+    position: absolute;
+    top: 20px;
+    right: 370px;
+}
+.list1{
+    width: 64px;
+    height: 14px;
+    margin-right: 20px;
+}
+.list2{
+    width: 71px;
+    height: 14px;
+}
+
+/* SEARCH AREA */
+.backImg{
+    width: 1920px;
+    height: 320px;
+    background-image: url(image/welcome.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: absolute;
+    top: 54px;
+}
+.searchbox{
+    width: 1200px;
+    height: 169px;
+    padding: 10px;
+
+    position: absolute;
+    top: 129px;
+    left: 360px;
+}
+.searchbox h1{
+    width: 1180px;
+    height: 41px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 28px;
+    line-height: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 0;
+    color:#F8F8F8;
+    text-shadow: 0px 0px 30px #AABBCC;;
+}
+.searchbox p{
+    width: 1180px;
+    height: 22px;
+
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 16px;
+    line-height: 13px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    margin-top: 0;
+    color:#F8F8F8;
+}
+.searchbox input{
+    width: 400px;
+    height: 46px;
+    border: none;
+    padding: 15px;
+}
+.searchbox input::placeholder{
+    color: #757575;
+}
+.searchIcon{
+    width: 60px;
+    height: 46px;
+    background-color: #448899;
+    padding: 8px 15px;
+
+    position: absolute;
+    top:0;
+    left: 400px;
+}
+
+/* ATTRACTION AREA */
+.attractionContainer{
+    width: 1200px;
+    height: 816px;
+    margin-bottom: 40px;
+
+    position: absolute;
+    left: 360px;
+    top: 414px;
+
+    /* del */
+    border: 1px solid #000;
+}
+
+/* FOOTER */
+footer{
+    width: 1920px;
+    height: 104px;
+    background-color: #757575;
+
+    position: absolute;
+    top: 1270px;
+    display: flex;
+}
+footer > p{
+    margin: 0;
+    width: 100%;
+    font-family: 'Noto Sans TC' ,sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 13px;
+    color: #ffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
