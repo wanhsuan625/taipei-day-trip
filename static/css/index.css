@@ -31,7 +31,7 @@ nav{
 
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 }
 .outer{
     width: 1200px;
@@ -61,12 +61,12 @@ nav{
 
 /* SEARCH AREA */
 .searchContainer{
-    height: 320px;
     display: flex;
     justify-content: center;
 }
 .backImg{
     width: 1920px;
+    height: 320px;
     object-fit: cover;
 }
 .searchBox{
@@ -121,6 +121,30 @@ nav{
     position: absolute;
     top:0;
     left: 400px;
+}
+
+/* CATEGORY */
+.categoryBox{
+    width: 400px;
+    height: 162px;
+    background-color: #fff;
+    box-shadow: 0px 0px 20px #AABBCC;
+    border-radius: 5px;
+    margin-top: 5px;
+    z-index: 1;
+
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(4, 40px);
+}
+.categoryBox div{
+    padding: 10px 15px;
+    font-size: 14px;
+    line-height: 20px;
+}
+.categoryBox div:hover{
+    border-radius: 5px;
+    background-color: #E8E8E8;
 }
 
 /* ATTRACTIONS */
@@ -201,11 +225,14 @@ footer > p{
     justify-content: center;
 }
 
-/* LAYOUT - BELOW 1200px   */
+/* LAYOUT - BELOW 1280px   */
 @media (max-width: 1280px){
-    .outer{padding: 10px;}
-    .searchBox{width:95%;}
-    .searchContainer{ overflow: hidden;}
+    .outer{ padding: 10px;}
+    .searchContainer{
+        overflow-x: clip;
+        overflow-y: visible;    
+    }
+    .searchBox{ width:95%;}
     main{
         width: 95%;
         grid-template-columns:repeat(2, 1fr);
@@ -216,9 +243,12 @@ footer > p{
 
 /* LAYOUT - BELOW 600px  */
 @media (max-width: 600px){
-    .searchBar input{ width: 80%;}
-    .searchIcon{ left: 80%;}
-    .searchContainer{ overflow: hidden;}
+    .searchBar input{ width: 75%;}
+    .searchIcon{ left: 75%;}
+    .categoryBox{
+        width: 100%;
+        grid-template-columns: repeat(3, 30%);
+    }
     main{
         width: 100%;
         margin: 35px auto;
