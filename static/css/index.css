@@ -164,6 +164,7 @@ main{
     color: #fff;
     line-height: 20px;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;    /* 文字省略符號... */
 
     position: absolute;
