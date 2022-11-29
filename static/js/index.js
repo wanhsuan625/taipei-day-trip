@@ -1,5 +1,17 @@
-// 圖片排版設置
 const main = document.querySelector("main");
+const footer = document.querySelector("footer");
+const categoryBox = document.querySelector(".categoryBox");
+const searchInput = document.querySelector(".searchInput");
+
+let nextpage;
+let keyword;
+let isLoading = false;
+
+// 初始畫面
+fetchAttraction(0, "");
+fetchCategory();
+
+// 圖片排版設置
 function getAttraction(data){
     let result = data.data;
 
@@ -35,28 +47,32 @@ function getAttraction(data){
     }
 };
 
-let nextpage = 0;
-async function fetchAttraction(){
-    let attractionAPI = await fetch(`http://54.199.123.84:3000/api/attractions?page=${nextpage}`);
+async function fetchAttraction(page, keyword){
+    isLoading = true;
+
+    let attractionAPI = await fetch(`http://54.199.123.84:3000/api/attractions?page=${page}&keyword=${keyword}`);
     let attractionData = await attractionAPI.json();
     getAttraction(attractionData);
     nextpage = attractionData.nextPage;
+
+    isLoading = false;
 };
-fetchAttraction();
 
 // Intersection Observer 設定
-const footer = document.querySelector("footer");
 const options = {
     root : null,
-    rootMargin : "0px",
+    rootMargin : "50px",
     threshold : 1
 };
 let callback = (entries) => {
     entries.forEach(entry => {
-        console.log(entry.isIntersecting);
         if (entry.isIntersecting){
-            if(nextpage != null){
-                fetchAttraction();
+            if(nextpage != null && isLoading == false){
+                if(!keyword){
+                    fetchAttraction(nextpage,"");
+                }else{
+                    fetchAttraction(nextpage,keyword);
+                }
             }
         }
     })
@@ -64,8 +80,8 @@ let callback = (entries) => {
 let observer = new IntersectionObserver(callback, options);
 observer.observe(footer);
 
+
 // 搜尋框-景點分類
-const categoryBox = document.querySelector(".categoryBox");
 function getCategory(data){
     let result = data.data;
 
@@ -77,14 +93,16 @@ function getCategory(data){
     }
 };
 async function fetchCategory(){
+    isLoading = true;
+
     let categoryAPI = await fetch("http://54.199.123.84:3000/api/categories");
     let categoryData = await categoryAPI.json();
     getCategory(categoryData);
+
+    isLoading = false;
 };
-fetchCategory();
 
 // 點擊 searchinput - 景點分類框的呈現
-const searchInput = document.querySelector(".searchInput");
 searchInput.addEventListener("click",() => {
     categoryBox.style.display = "grid";
     
