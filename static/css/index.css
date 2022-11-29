@@ -126,23 +126,21 @@ nav{
 /* CATEGORY */
 .categoryBox{
     width: 400px;
-    height: 162px;
     background-color: #fff;
     box-shadow: 0px 0px 20px #AABBCC;
     border-radius: 5px;
     margin-top: 5px;
     z-index: 1;
 
-    display: grid;
+    display: none;        /* 先隱藏 */
     grid-template-columns: repeat(3, 120px);
-    grid-template-rows: repeat(4, 40px);
 }
-.categoryBox div{
+.categoryBox .category{
     padding: 10px 15px;
     font-size: 14px;
     line-height: 20px;
 }
-.categoryBox div:hover{
+.categoryBox .category:hover{
     border-radius: 5px;
     background-color: #E8E8E8;
 }
