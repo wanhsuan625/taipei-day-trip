@@ -1,4 +1,3 @@
-
 // 圖片排版設置
 const main = document.querySelector("main");
 function getAttraction(data){
@@ -35,10 +34,35 @@ function getAttraction(data){
         infoBox.appendChild(category);
     }
 };
-fetch("http://54.199.123.84:3000/api/attractions?page=0")
-    .then((response) => (response.json()))
-    .then((data) => getAttraction(data)
-);
+
+let nextpage = 0;
+async function fetchAttraction(){
+    let attractionAPI = await fetch(`http://54.199.123.84:3000/api/attractions?page=${nextpage}`);
+    let attractionData = await attractionAPI.json();
+    getAttraction(attractionData);
+    nextpage = attractionData.nextPage;
+};
+fetchAttraction();
+
+// Intersection Observer 設定
+const footer = document.querySelector("footer");
+const options = {
+    root : null,
+    rootMargin : "0px",
+    threshold : 1
+};
+let callback = (entries) => {
+    entries.forEach(entry => {
+        console.log(entry.isIntersecting);
+        if (entry.isIntersecting){
+            if(nextpage != null){
+                fetchAttraction();
+            }
+        }
+    })
+};
+let observer = new IntersectionObserver(callback, options);
+observer.observe(footer);
 
 // 搜尋框-景點分類
 const categoryBox = document.querySelector(".categoryBox");
@@ -59,7 +83,7 @@ async function fetchCategory(){
 };
 fetchCategory();
 
-// 點擊 searchinput - 景點分類框
+// 點擊 searchinput - 景點分類框的呈現
 const searchInput = document.querySelector(".searchInput");
 searchInput.addEventListener("click",() => {
     categoryBox.style.display = "grid";
