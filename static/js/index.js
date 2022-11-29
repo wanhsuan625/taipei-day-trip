@@ -1,7 +1,7 @@
 
 // 圖片排版設置
 const main = document.querySelector("main");
-function getData(data){
+function getAttraction(data){
     let result = data.data;
 
     for(let i = 0; i < result.length; i++){
@@ -29,18 +29,49 @@ function getData(data){
         let mrt = document.createElement("div");
         mrt.textContent = result[i].mrt;
         infoBox.appendChild(mrt);
-        // 種類
+        // 景點分類
         let category = document.createElement("div");
         category.textContent = result[i].category;
         infoBox.appendChild(category);
     }
-}
+};
+fetch("http://54.199.123.84:3000/api/attractions?page=0")
+    .then((response) => (response.json()))
+    .then((data) => getAttraction(data)
+);
 
-url = "http://54.199.123.84:3000/api/attractions?page=0"
-fetch(url).then((response) => {
-    console.log(response);
-    return response.json();
-}).then((data) =>{
-    console.log(data.data);
-    getData(data);
+// 搜尋框-景點分類
+const categoryBox = document.querySelector(".categoryBox");
+function getCategory(data){
+    let result = data.data;
+
+    for(let i = 0; i < result.length; i++){
+        let category = document.createElement("div");
+        category.className = "category";
+        category.textContent = result[i];
+        categoryBox.appendChild(category);
+    }
+};
+async function fetchCategory(){
+    let categoryAPI = await fetch("http://54.199.123.84:3000/api/categories");
+    let categoryData = await categoryAPI.json();
+    getCategory(categoryData);
+};
+fetchCategory();
+
+// 點擊 searchinput - 景點分類框
+const searchInput = document.querySelector(".searchInput");
+searchInput.addEventListener("click",() => {
+    categoryBox.style.display = "grid";
+    
+    let category = document.querySelectorAll(".category");
+    for(let i = 0; i < category.length; i++){
+        category[i].addEventListener("click",() => {
+            searchInput.setAttribute("value", category[i].innerHTML);
+        })
+    }
 })
+window.addEventListener("mouseup",() => {categoryBox.style.display = "none";})
+
+
+
