@@ -118,6 +118,7 @@ nav{
     padding: 8px 15px;
     border:none;
     border-radius: 0 7px 7px 0;
+    cursor: pointer;
 
     position: absolute;
     top:0;
