@@ -48,7 +48,6 @@ async function fetchAttraction(page, keyword){
 
     let attractionAPI = await fetch(`http://54.199.123.84:3000/api/attractions?page=${page}&keyword=${keyword}`);
     let attractionData = await attractionAPI.json();
-    console.log(attractionData.data);
     if(attractionData.data.length === 0){
         main.innerHTML = "查無此景點";
     }
@@ -88,6 +87,7 @@ const searchInput = document.querySelector(".searchInput");
 let button = document.querySelector("button");
 button.addEventListener("click",() => {
     keyword = searchInput.value;
+    searchInput.value = "";
     main.innerHTML = "";           // 清除畫面
     fetchAttraction(0,keyword);
 })
@@ -121,7 +121,7 @@ searchInput.addEventListener("click",() => {
     let category = document.querySelectorAll(".category");
     for(let i = 0; i < category.length; i++){
         category[i].addEventListener("click",() => {
-            searchInput.setAttribute("value", category[i].innerHTML);
+            searchInput.value = category[i].innerHTML;
         })
     }
 })
