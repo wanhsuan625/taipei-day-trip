@@ -1,10 +1,3 @@
-const main = document.querySelector("main");
-const footer = document.querySelector("footer");
-const categoryBox = document.querySelector(".categoryBox");
-const searchInput = document.querySelector(".searchInput");
-
-let nextpage;
-let keyword;
 let isLoading = false;
 
 // 初始畫面
@@ -12,6 +5,7 @@ fetchAttraction(0, "");
 fetchCategory();
 
 // 圖片排版設置
+const main = document.querySelector("main");
 function getAttraction(data){
     let result = data.data;
 
@@ -47,13 +41,21 @@ function getAttraction(data){
     }
 };
 
+let nextpage;
+let keyword;
 async function fetchAttraction(page, keyword){
     isLoading = true;
 
     let attractionAPI = await fetch(`http://54.199.123.84:3000/api/attractions?page=${page}&keyword=${keyword}`);
     let attractionData = await attractionAPI.json();
+    console.log(attractionData.data);
+    if(attractionData.data.length === 0){
+        main.innerHTML = "查無此景點";
+    }
     getAttraction(attractionData);
     nextpage = attractionData.nextPage;
+    console.log(nextpage);
+    console.log(keyword);
 
     isLoading = false;
 };
@@ -78,10 +80,20 @@ let callback = (entries) => {
     })
 };
 let observer = new IntersectionObserver(callback, options);
+const footer = document.querySelector("footer");
 observer.observe(footer);
 
+// keyword取值
+const searchInput = document.querySelector(".searchInput");
+let button = document.querySelector("button");
+button.addEventListener("click",() => {
+    keyword = searchInput.value;
+    main.innerHTML = "";           // 清除畫面
+    fetchAttraction(0,keyword);
+})
 
 // 搜尋框-景點分類
+const categoryBox = document.querySelector(".categoryBox");
 function getCategory(data){
     let result = data.data;
 
