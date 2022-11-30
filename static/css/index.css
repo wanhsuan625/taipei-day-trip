@@ -40,7 +40,7 @@ nav{
     justify-content: space-between;
     align-items: center;
 }
-.title{
+.title > a{
     font-size: 30px;
     line-height: 34px;
     font-weight: 700;
@@ -233,7 +233,7 @@ footer > p{
     }
     .searchBox{ width:95%;}
     main{
-        width: 95%;
+        width: 90%;
         grid-template-columns:repeat(2, 1fr);
         gap: 20px;
     }
@@ -248,7 +248,7 @@ footer > p{
         grid-template-columns: repeat(3, 30%);
     }
     main{
-        width: 100%;
+        width: 90%;
         margin: 35px auto;
         padding: 20px;
         grid-template-columns: 1fr;
