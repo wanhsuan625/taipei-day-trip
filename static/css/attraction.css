@@ -159,15 +159,29 @@ input[type="date"]{
 }
 .time label{ display: flex;}
 .time label input[type="radio"]{
+    appearance: none;
     width: 22px;
     height: 22px;
+    border-radius: 50%;
+    background-color: #ffff;
     margin: 0 4px 0 7px;
-    outline: none;
     cursor: pointer;
-    border-bottom: 0;
 }
-.time label input[type="radio"]:checked + p{
-    color: red;
+.time label input[type="radio"]::after{
+    content: '';
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: none;
+    background: #448899;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.time label input[type="radio"]:checked::after{
+    display: block;
 }
 .time label p{
     margin: 0;
