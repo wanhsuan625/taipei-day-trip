@@ -108,7 +108,7 @@ section{
 }
 .arrow img:hover{ opacity:1;}
 
-/* NAME AND BOOKING AREA*/
+/* NAME , MRT AND CATEGORY AREA*/
 .infoBox{
     width: 50%;
     right: 15px;
@@ -126,6 +126,8 @@ section{
     font-weight: 500;
     font-size: 16px;
 }
+
+/* BOOKING AREA */
 .bookingForm{
     background-color: #E8E8E8;
     border-radius: 5px;
@@ -135,19 +137,48 @@ section{
     height: 22px;
     font-weight: 700;
     font-size: 16px;
-    line-height: 13px;
+    line-height: 22px;
     margin-bottom: 15px;
 }
 .bookingForm p, span{
     font-weight: 500;
     font-size: 16px;
-    padding: 0;
+    margin-bottom: 15px;
 }
+input[type="date"]{
+    width: 193px;
+    height: 35px;
+    padding: 6px 10px;
+    border: 0px;
+}
+::-webkit-calendar-picker-indicator{
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+.time{
+    display: flex;
+    align-items: center;
+}
+.time label{ display: flex;}
+.time label input[type="radio"]{
+    width: 22px;
+    height: 22px;
+    margin: 0 4px 0 7px;
+    outline: none;
+    cursor: pointer;
+}
+.time label p{
+    margin: 0;
+    line-height: 20px;
+}
+
 .bookingForm > button{
     width: 154px;
     height: 36px;
     padding: 10px 20px;
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 21px;
     background-color: #448899;
     border-radius: 5px;
     border: none;
@@ -157,6 +188,24 @@ section{
     font-weight: 400;
     font-size: 19px;
     line-height: 16px;
+}
+
+/* DESCIBETION AREA */
+main{
+    width: 1180px;
+    margin: 0 auto;
+    color:#666666;
+    font-size: 16px;
+}
+.title{
+    height: 32px;
+    line-height: 32px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.content{
+    font-weight: 400;
+    line-height: 24px;
 }
 
 
