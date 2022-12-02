@@ -16,6 +16,10 @@ a{
     text-decoration: none;
     color: #666666;
 }
+hr{
+    width: 1200px;
+    margin: 40px auto;
+}
 
 .wrapper{width: 100%;}
 
@@ -244,6 +248,7 @@ footer > p{
     justify-content: center;
 }
 
+/* LAYOUT BELOW 1280px */
 @media (max-width: 1280px){
     .outer{ padding: 10px;}
     section{ width: 90%;}
@@ -253,6 +258,7 @@ footer > p{
     main{ width: 90%;}
 }
 
+/* LAYOUT BELOW 768px */
 @media (max-width:768px){
     section{
         width: 100%;
@@ -267,7 +273,7 @@ footer > p{
     .infoBox{
         width: 100%;
         right: 0;
-        padding: 10px;
+        padding: 20px 10px 0 10px;
     }
     main{
         width: 100%;
