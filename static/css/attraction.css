@@ -23,7 +23,7 @@ hr{
 
 .wrapper{width: 100%;}
 
-/* NAVBAR */
+/* --- NAVBAR --- */
 nav{
     width: 100%;
     height: 54px;
@@ -65,7 +65,8 @@ nav{
 }
 .list2{width: 71px;}
 
-/* IMAGE AREA */
+/* --- IMAGE --- */
+/* ADJECT IMAGE SIZE */
 section{
     width: 1200px;
     margin: 40px auto;
@@ -90,6 +91,8 @@ section{
     position: absolute;
     top: 0;
 }
+
+/* IMAGE - ARROW */
 .imgBox > .arrow{
     width: 100%;
     padding: 0px 10px;
@@ -105,6 +108,7 @@ section{
 }
 .arrow img:hover{ opacity:1;}
 
+/* --- BOOKING FORM --- */
 /* NAME , MRT AND CATEGORY AREA*/
 .infoBox{
     width: 50%;
@@ -157,7 +161,10 @@ input[type="date"]{
     display: flex;
     align-items: center;
 }
-.time label{ display: flex;}
+.time label{
+    display: flex;
+    cursor: pointer;
+}
 .time label input[type="radio"]{
     appearance: none;
     width: 22px;
@@ -165,7 +172,6 @@ input[type="date"]{
     border-radius: 50%;
     background-color: #ffff;
     margin: 0 4px 0 7px;
-    cursor: pointer;
 }
 .time label input[type="radio"]::after{
     content: '';
@@ -187,10 +193,7 @@ input[type="date"]{
     margin: 0;
     line-height: 20px;
 }
-.changeMoney{
-    margin-left: 7px;
-}
-
+.changeMoney{ margin-left: 7px;}
 .bookingForm > button{
     width: 154px;
     height: 36px;
@@ -208,7 +211,7 @@ input[type="date"]{
     line-height: 16px;
 }
 
-/* DESCIBETION AREA */
+/* --- ATTRACTION INFORMATION AREA --- */
 main{
     width: 1200px;
     margin: 0 auto;
@@ -228,7 +231,7 @@ main{
     line-height: 24px;
 }
 
-/* FOOTER */
+/* --- FOOTER --- */
 footer{
     width: 100%;
     height: 104px;

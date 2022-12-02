@@ -45,15 +45,15 @@
                     </div>
                     <div class="time">選擇時間：
                         <label>
-                            <input type="radio" name="choicetime" checked>
+                            <input type="radio" name="choicetime" onclick="getElementById('changeMoney').innerHTML = '新台幣 2000 元'" checked>
                             <p>上半天</p>
                         </label>
                         <label>
-                            <input type="radio" name="choicetime">
+                            <input type="radio" name="choicetime" onclick="getElementById('changeMoney').innerHTML = '新台幣 2500 元'">
                             <p>下半天</p>
                         </label>
                     </div>
-                    <div>導覽費用：<span class="changeMoney">新台幣 2000 元</span></div>
+                    <div>導覽費用：<span id="changeMoney">新台幣 2000 元</span></div>
                     <button>開始預約行程</button>
                 </div>
             </div>

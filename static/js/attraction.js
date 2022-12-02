@@ -10,7 +10,7 @@ const transport = document.querySelector(".transport");
 
 let eachAttraction = (data) =>{
     let result = data.data;
-
+    let len = result.images.length;
     // 待修正
     // IMAGES
     let img = document.createElement("img");
@@ -34,17 +34,21 @@ let eachAttraction = (data) =>{
 
     let content2 = document.createElement("div");
     content2.textContent = result.address;
-    main.insertBefore(content2, address);
+    main.insertBefore(content2, transport);
 
     let content3 = document.createElement("div");
     content3.textContent = result.transport;
     main.appendChild(content3);
 }
 
-async function getEachAttraction(num){
+async function eachAttractionFetch(num){
+    isLoading = true;
+
     let eachAPI = await fetch(`http://54.199.123.84:3000/api/attraction/${num}`);
     let eachData = await eachAPI.json();
     console.log(eachData); 
     eachAttraction(eachData);   
+
+    isLoading = false;
 }
-getEachAttraction(2);
+eachAttractionFetch(4);
