@@ -77,11 +77,11 @@ section{
     width: 45%;
     left: 15px;
 }
-.imgSize{
+.imgSlide{
     width: 100%;
     padding-top: 75%;
 }
-.imgSize > .attractionImg{
+.imgSlide > .attractionImg{
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -107,6 +107,31 @@ section{
     cursor: pointer;
 }
 .arrow img:hover{ opacity:1;}
+
+/* IMAGE - DOT_GROUP */
+.dotgroup{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    opacity: 0.7;
+
+    position: absolute;
+    bottom: 13px;
+}
+.dot{
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid #fff;
+    border-radius: 50%;
+    background-color: #fff;
+    margin: 0 6px;
+    cursor: pointer;
+    transition: background-color 0.6s;
+}
+.dot:hover{
+    background-color: #000;
+}
+
 
 /* --- BOOKING FORM --- */
 /* NAME , MRT AND CATEGORY AREA*/
@@ -255,7 +280,7 @@ footer > p{
 @media (max-width: 1280px){
     .outer{ padding: 10px;}
     section{ width: 90%;}
-    .imgSize{ padding-top: 405px;}
+    .imgSlide{ padding-top: 405px;}
     .infoBox{ width: 48%;}
     hr{ width: 95%;}
     main{ width: 90%;}
@@ -272,7 +297,8 @@ footer > p{
         width: 100%;
         left: 0;
     }
-    .imgSize{ padding-top: 350px;}
+    .imgSlide{ padding-top: 350px;}
+    .dotgroup{ bottom: 10px;}
     .infoBox{
         width: 100%;
         right: 0;
