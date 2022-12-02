@@ -52,3 +52,14 @@ async function eachAttractionFetch(num){
     isLoading = false;
 }
 eachAttractionFetch(4);
+
+// CHANGE PAYMENT
+// const afternoon = document.querySelector("#afternoon");
+// const morning = document.querySelector("#morning");
+// const changeMoney = document.querySelector(".changeMoney")
+// afternoon.addEventListener("click",()=>{
+//     changeMoney.textContent = "新台幣 2500 元"
+// })
+// morning.addEventListener("click",()=>{
+//     changeMoney.textContent = "新台幣 2000 元"
+// })
