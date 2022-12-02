@@ -13,7 +13,7 @@ let eachAttractionFetch = (num) => {
 eachAttractionFetch(10);
 
 
-// CREATE DOM
+// --- CREATE DOM ---
 const imgBox = document.querySelector(".imgBox");
 const arrow = document.querySelector(".arrow");
 const infoBox = document.querySelector(".infoBox");
@@ -29,7 +29,7 @@ let attractionImg = (data) =>{
     // IMAGES
     for(let i = 0; i < len; i++){
         let imgSlide = document.createElement("div");
-        imgSlide.className = "imgSlide";
+        imgSlide.className = "imgSlide fade";
         imgBox.insertBefore(imgSlide, arrow);
 
         let img = document.createElement("img");
@@ -48,39 +48,46 @@ let attractionImg = (data) =>{
          dotGroup.appendChild(dot);
      }
 
-    // SLIDE IMAGES
+    // --- SLIDE IMAGES ---
     let slide = document.querySelectorAll(".imgSlide");
     let dot = document.querySelectorAll(".dot");
     
+    let slideIndex = 1;
+    slideShow(slideIndex);
 
+    function slideShow(n){
+        if (n > slide.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slide.length}
+        for (i = 0; i < slide.length; i++) {
+            slide[i].style.display = "none";
+            dot[i].className = dot[i].className.replace(" active", "");
+        }
+        slide[slideIndex-1].style.display = "block";
+        dot[slideIndex-1].className += " active";
+    }
 
-    
+    // ARROW BUTTON
+    let arrowButton = document.querySelectorAll(".arrow img");
+    arrowButton[0].addEventListener("click",() => {
+        slideShow(slideIndex -= 1);
+    })
+    arrowButton[1].addEventListener("click",() => {
+        slideShow(slideIndex += 1);
+    })
+
+    // DOT BUTTON
+    for(let i = 0; i < dot.length; i++){
+        dot[i].addEventListener("click", () =>{
+            slideShow(slideIndex = i+1);
+        })
+    }
 }
 
-
-
-// SLIDE IMAGE
-// let slideIndex = 1;
-// slideShow(slideIndex);
-
-// let currentSlide = (n) => { slideShow(slideIndex = n);}
-// let clickSlide = (n) => { slideShow(slideIndex += n);}
-
-// function slideShow(n){
-//     if (n > slide.length) {slideIndex = 1}
-//     if (n < 1) {slideIndex = slide.length}
-//     for (i = 0; i < slide.length; i++) {
-//         slide[i].style.display = "none";
-//         dot[i].className = dot[i].className.replace(" active", "");
-//     }
-//     slide[slideIndex-1].style.display = "block";
-//     dot[slideIndex-1].className += " active";
-// }
-
+// INTRODUCTION
 let attractionInformation = (data) =>{
     let result = data.data;
 
-    // ATTRACTION - NAME , MRT AND CATEGORY
+    // NAME , MRT AND CATEGORY
     let name = document.createElement("h1");
     name.innerHTML = result.name;
     infoBox.insertBefore(name, bookingForm);
