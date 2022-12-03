@@ -14,6 +14,7 @@ eachAttractionFetch(10);
 
 
 // --- CREATE DOM ---
+const title = document.querySelector("head title");
 const imgBox = document.querySelector(".imgBox");
 const arrow = document.querySelector(".arrow");
 const infoBox = document.querySelector(".infoBox");
@@ -25,6 +26,9 @@ const transport = document.querySelector(".transport");
 let attractionImg = (data) =>{
     let result = data.data;
     let len = result.images.length;
+
+    // WEBSITE NAME
+    title.innerHTML = result.name;
     
     // IMAGES
     for(let i = 0; i < len; i++){
@@ -60,10 +64,10 @@ let attractionImg = (data) =>{
         if (n < 1) {slideIndex = slide.length}
         for (i = 0; i < slide.length; i++) {
             slide[i].style.display = "none";
-            dot[i].className = dot[i].className.replace(" active", "");
+            dot[i].classList.remove("active");
         }
         slide[slideIndex-1].style.display = "block";
-        dot[slideIndex-1].className += " active";
+        dot[slideIndex-1].classList.add("active");
     }
 
     // ARROW BUTTON
