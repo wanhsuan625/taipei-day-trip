@@ -226,7 +226,7 @@ input[type="date"]{
     margin: 0;
     line-height: 20px;
 }
-.changeMoney{ margin-left: 7px;}
+#changeMoney{ margin-left: 7px;}
 .bookingForm > button{
     width: 154px;
     height: 36px;
@@ -264,6 +264,27 @@ main{
     line-height: 24px;
 }
 
+/* --- TOP BUTTON --- */
+.topButton{
+    display: none;
+    transform: scale(2);
+    border-radius: 50%;
+    border: 1px solid #448899;
+    color: #448899;
+    background-color: #fff;
+    opacity: 0.5;
+    
+    z-index: 2;
+    position: fixed;
+    bottom: 15%;
+    right: 2%;
+}
+.topButton:hover{
+    opacity: 1;
+    color: #fff;
+    background-color: #448899;
+}
+
 /* --- FOOTER --- */
 footer{
     width: 100%;
@@ -292,6 +313,7 @@ footer > p{
     .infoBox{ width: 48%;}
     hr{ width: 95%;}
     main{ width: 90%;}
+    .topButton{ transform: scale(1.8);}
 }
 
 /* LAYOUT BELOW 768px */
@@ -316,4 +338,5 @@ footer > p{
         width: 100%;
         padding: 0 20px;
     }
+    .topButton{ transform: scale(1.5);}
 }

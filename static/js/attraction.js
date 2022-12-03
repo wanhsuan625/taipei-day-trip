@@ -1,5 +1,6 @@
 // WEBSITE ADDRESS
-// let url = location.pathname.split("/")[2];
+let url = location.pathname.split("/")[2];
+
 let eachAttractionFetch = (num) => {
     fetch(`http://54.199.123.84:3000/api/attraction/${num}`)
     .then(response => {
@@ -10,8 +11,7 @@ let eachAttractionFetch = (num) => {
         attractionInformation(data);
     })
 }
-eachAttractionFetch(10);
-
+eachAttractionFetch(url);
 
 // --- CREATE DOM ---
 const title = document.querySelector("head title");
@@ -112,4 +112,23 @@ let attractionInformation = (data) =>{
     let content3 = document.createElement("div");
     content3.innerHTML = result.transport;
     main.appendChild(content3);
+}
+
+// TO TOP-BUTTON
+let topButton = document.querySelector(".topButton");
+
+window.addEventListener("scroll", () => scrollPage());
+topButton.addEventListener("click", () => backTop());
+
+function scrollPage(){
+    if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
+        topButton.style.display = "block";
+    }
+    else{
+        topButton.style.display = "none";
+    }
+}
+function backTop(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }

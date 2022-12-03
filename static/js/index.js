@@ -13,7 +13,7 @@ function getAttraction(data){
     for(let i = 0; i < result.length; i++){
         let attraction = document.createElement("a");
         attraction.id = "attraction";
-        attraction.href = "attraction.html";
+        attraction.href = `http://54.199.123.84:3000/attraction/${result[i].id}`;
         main.appendChild(attraction);
 
         let imgBox = document.createElement("div");
@@ -27,6 +27,7 @@ function getAttraction(data){
         let name = document.createElement("div");
         name.id = "name";
         name.textContent = result[i].name;
+        name.title = result[i].name;
         imgBox.appendChild(name);
 
         let infoBox = document.createElement("div");
@@ -128,3 +129,22 @@ searchInput.addEventListener("click",() => {
     }
 })
 window.addEventListener("mouseup",() => {categoryBox.style.display = "none";})
+
+// TO TOP-BUTTON
+let topButton = document.querySelector(".topButton");
+
+window.addEventListener("scroll", () => scrollPage());
+topButton.addEventListener("click", () => backTop());
+
+function scrollPage(){
+    if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
+        topButton.style.display = "block";
+    }
+    else{
+        topButton.style.display = "none";
+    }
+}
+function backTop(){
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
