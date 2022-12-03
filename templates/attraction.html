@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/static/css/attraction.css">
+    <!-- import Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <!-- import fontawesome -->
+    <script src="https://kit.fontawesome.com/8d2e522741.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <nav>
+            <div class="outer">
+                <a class="title" href="http://54.199.123.84:3000/">台北一日遊</a>
+                <ul class="menu">
+                    <li class="list1"><a href="#">預定行程</a></li>
+                    <li class="list2"><a href="#">登入/註冊</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <section>
+            <div class="imgBox">
+                <div class="arrow">
+                    <img src="/static/image/btn_leftArrow.png" alt="">
+                    <img src="/static/image/btn_rightArrow.png" alt="">
+                </div>
+            </div>
+
+            <div class="infoBox">
+                <div class="bookingForm">
+                    <div>訂購導覽行程</div>
+                    <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
+                    <div style="margin-bottom: 30px;">選擇日期：
+                        <input type="date">
+                    </div>
+                    <div class="time">選擇時間：
+                        <label>
+                            <input type="radio" name="choicetime" onclick="getElementById('changeMoney').innerHTML = '新台幣 2000 元'" checked>
+                            <p>上半天</p>
+                        </label>
+                        <label>
+                            <input type="radio" name="choicetime" onclick="getElementById('changeMoney').innerHTML = '新台幣 2500 元'">
+                            <p>下半天</p>
+                        </label>
+                    </div>
+                    <div>導覽費用：<span id="changeMoney">新台幣 2000 元</span></div>
+                    <button>開始預約行程</button>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+        <main>
+            <div class="headline address">景點地址：</div>
+            <div class="headline transport">交通方式：</div>
+        </main>
+        
+        <button class="topButton"><i class="fa-solid fa-angles-up"></i></button>
+        
+        <footer><p>COPYRIGHT © 2022 台北一日遊</p></footer>
+    </div>
+
+    <script src="/static/js/attraction.js"></script>
+</body>
+</html>
