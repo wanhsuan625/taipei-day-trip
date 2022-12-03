@@ -8,10 +8,12 @@ fetchCategory();
 const main = document.querySelector("main");
 function getAttraction(data){
     let result = data.data;
+    console.log(data);
 
     for(let i = 0; i < result.length; i++){
-        let attraction = document.createElement("div");
+        let attraction = document.createElement("a");
         attraction.id = "attraction";
+        attraction.href = "attraction.html";
         main.appendChild(attraction);
 
         let imgBox = document.createElement("div");
@@ -126,6 +128,3 @@ searchInput.addEventListener("click",() => {
     }
 })
 window.addEventListener("mouseup",() => {categoryBox.style.display = "none";})
-
-
-

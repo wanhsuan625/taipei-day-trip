@@ -159,8 +159,9 @@ main{
     gap: 30px;
 }
 #attraction{
-    border: 1px solid #e3e3e3;
+    border: 2px solid #e3e3e3;
     border-radius: 3%;
+    cursor: pointer;
 }
 #imgBox{
     width: 100%;
@@ -177,8 +178,13 @@ main{
     top: 0;
 
     object-fit: cover;
-    object-position: center;
+    object-position: center center;
     border-radius: 3% 3% 0 0;
+
+    transition: 0.1s;
+}
+#attraction:hover img{
+    transform: scale(1.2);
 }
 #attraction #imgBox #name{
     width: 100%;
@@ -204,6 +210,7 @@ main{
     display: flex;
     justify-content:space-between;
 }
+
 
 /* FOOTER */
 footer{
