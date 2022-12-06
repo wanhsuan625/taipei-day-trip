@@ -1,11 +1,16 @@
+const main = document.querySelector("main");
+const searchInput = document.querySelector(".searchInput");
+const button = document.querySelector("button");
+let nextpage;
+let keyword;
+
 let isLoading = false;
 
-// 初始畫面
+// --- INITIAL PAGE ----------------------------------------
 fetchAttraction(0, "");
 fetchCategory();
 
 // 圖片排版設置
-const main = document.querySelector("main");
 function getAttraction(data){
     let result = data.data;
     console.log(data);
@@ -13,56 +18,54 @@ function getAttraction(data){
     for(let i = 0; i < result.length; i++){
         let attraction = document.createElement("a");
         attraction.id = "attraction";
-        attraction.href = `http://54.199.123.84:3000/attraction/${result[i].id}`;
+        attraction.href = `/attraction/${result[i].id}`;
         main.appendChild(attraction);
+
 
         let imgBox = document.createElement("div");
         imgBox.id = "imgBox";
         attraction.appendChild(imgBox);
-        // 景點圖片
+        // images
         let img = document.createElement("img");
         img.setAttribute("src",result[i].images[0]);
         imgBox.appendChild(img);
-        // 景點名稱
+        // attraction name
         let name = document.createElement("div");
         name.id = "name";
         name.textContent = result[i].name;
         name.title = result[i].name;
         imgBox.appendChild(name);
 
+
         let infoBox = document.createElement("div");
         infoBox.id = "infoBox";
         attraction.appendChild(infoBox);
-        // 捷運站
+        // mrt
         let mrt = document.createElement("div");
         mrt.textContent = result[i].mrt;
         infoBox.appendChild(mrt);
-        // 景點分類
+        // categories
         let category = document.createElement("div");
         category.textContent = result[i].category;
         infoBox.appendChild(category);
     }
 };
 
-let nextpage;
-let keyword;
 async function fetchAttraction(page, keyword){
     isLoading = true;
 
-    let attractionAPI = await fetch(`http://54.199.123.84:3000/api/attractions?page=${page}&keyword=${keyword}`);
+    let attractionAPI = await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
     let attractionData = await attractionAPI.json();
     if(attractionData.data.length === 0){
         main.innerHTML = "查無此景點";
     }
     getAttraction(attractionData);
     nextpage = attractionData.nextPage;
-    console.log(nextpage);
-    console.log(keyword);
 
     isLoading = false;
 };
 
-// Intersection Observer 設定
+// --- Intersection Observer ----------------------------------------
 const options = {
     root : null,
     rootMargin : "50px",
@@ -85,9 +88,7 @@ let observer = new IntersectionObserver(callback, options);
 const footer = document.querySelector("footer");
 observer.observe(footer);
 
-// keyword取值
-const searchInput = document.querySelector(".searchInput");
-let button = document.querySelector("button");
+// --- Get value of KEYWORD ----------------------------------------
 button.addEventListener("click",() => {
     keyword = searchInput.value;
     searchInput.value = "";
@@ -95,7 +96,7 @@ button.addEventListener("click",() => {
     fetchAttraction(0,keyword);
 })
 
-// 搜尋框-景點分類
+// --- Create Categories Box DOM -----------------------------------
 const categoryBox = document.querySelector(".categoryBox");
 function getCategory(data){
     let result = data.data;
@@ -110,14 +111,14 @@ function getCategory(data){
 async function fetchCategory(){
     isLoading = true;
 
-    let categoryAPI = await fetch("http://54.199.123.84:3000/api/categories");
+    let categoryAPI = await fetch("/api/categories");
     let categoryData = await categoryAPI.json();
     getCategory(categoryData);
 
     isLoading = false;
 };
 
-// 點擊 searchinput - 景點分類框的呈現
+// --- Categories Box : CLICK effect -----------------------------------
 searchInput.addEventListener("click",() => {
     categoryBox.style.display = "grid";
     
@@ -129,22 +130,3 @@ searchInput.addEventListener("click",() => {
     }
 })
 window.addEventListener("mouseup",() => {categoryBox.style.display = "none";})
-
-// TO TOP-BUTTON
-let topButton = document.querySelector(".topButton");
-
-window.addEventListener("scroll", () => scrollPage());
-topButton.addEventListener("click", () => backTop());
-
-function scrollPage(){
-    if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
-        topButton.style.display = "block";
-    }
-    else{
-        topButton.style.display = "none";
-    }
-}
-function backTop(){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
