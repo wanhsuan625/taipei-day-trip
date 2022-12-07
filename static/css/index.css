@@ -163,7 +163,7 @@ main{
     }
 }
 
-/* LAYOUT - BELOW 1000px   */
+/* LAYOUT - BELOW 768px   */
 @media (max-width: 768px){
     main{
         grid-template-columns: repeat(2,1fr);
@@ -171,7 +171,7 @@ main{
     }
 }
 
-/* LAYOUT - BELOW 600px  */
+/* LAYOUT - BELOW 480px  */
 @media (max-width: 480px){
     .searchBar input{ width: 75%;}
     .searchIcon{ left: 75%;}
