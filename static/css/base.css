@@ -100,6 +100,110 @@ footer > p{
     justify-content: center;
 }
 
+/* === SIGNIN BOX =================================== */
+.signinBox{
+    width: 340px;
+    height: 275px;
+    background: linear-gradient(90deg,#66AABB,#337788);
+    border-bottom: 265px solid #fff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 60px #AAAAAA;;
+    z-index: 3;
+
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.signupBox{
+    width: 340px;
+    height: 332px;
+    background: linear-gradient(90deg,#66AABB,#337788);
+    border-bottom: 322px solid #fff;
+    border-radius: 6px;
+    box-shadow: 0px 4px 60px #AAAAAA;;
+    z-index: 3;
+
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.closeIcon{
+    position: absolute;
+    right: 17px;
+    top: 27px;
+}
+.signinBox h1, .signupBox h1{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 0 0 18px 0;
+    top: 25px;
+    text-align: center;
+}
+.signinBox label, .signupBox label{
+    top: 25px;
+    left: 15px;
+}
+.signinBox label input, .signupBox label input{
+    width: 310px;
+    height: 47px;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    outline-color: #82c0cf;
+    cursor: pointer;
+    
+    margin-bottom: 10px;
+    padding: 15px;
+}
+.signinBox label button, .signupBox label button{
+    width: 310px;
+    height: 47px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 19px;
+    cursor: pointer;
+
+    background-color: #448899;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.signinBox label button:hover, .signupBox label button:hover{
+    transform: scale(1.01);
+    box-shadow: 1px 2px 5px 1px #AAAAAA;
+}
+.signinBox label button:active, .signupBox label button:active{
+    transform: scale(1) translate(1px,1px);
+}
+.signinBox div, .signupBox div{
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+    display: flex;
+    justify-content: center;
+    top: 28px;
+}
+.signinBox div button, .signupBox div button{
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #666666;
+    background-color: transparent;
+    cursor: pointer;
+}
+.signinBox div button:hover, .signupBox div button:hover{
+    color: #448899;
+}
+.signinBox div button:active, .signupBox div button:active{
+    text-decoration: underline;
+}
+
+
 /* === RWD ========================================== */
 @media (max-width: 1280px){
     nav{ padding: 10px 20px;}
@@ -120,4 +224,5 @@ footer > p{
         opacity: 0.5;
         bottom: 5%;
     }
+    .signinBox, .signupBox{width: 335px;}
 }
