@@ -2,7 +2,7 @@
 let url = location.pathname.split("/")[2];
 
 let eachAttractionFetch = (num) => {
-    fetch(`http://54.199.123.84:3000/api/attraction/${num}`)
+    fetch(`/api/attraction/${num}`)
     .then(response => {
         return response.json();})
     .then(data => {
@@ -13,15 +13,16 @@ let eachAttractionFetch = (num) => {
 }
 eachAttractionFetch(url);
 
-// --- CREATE DOM ---
+// // --- Create DOM of IMG --------------------------------------
 const title = document.querySelector("head title");
 const imgBox = document.querySelector(".imgBox");
 const arrow = document.querySelector(".arrow");
 const infoBox = document.querySelector(".infoBox");
 const bookingForm = document.querySelector(".bookingForm");
 const main = document.querySelector("main");
-const address = document.querySelector(".address");
-const transport = document.querySelector(".transport");
+const headline = document.querySelectorAll(".headline");
+var slide;
+var dot;
 
 let attractionImg = (data) =>{
     let result = data.data;
@@ -52,12 +53,12 @@ let attractionImg = (data) =>{
          dotGroup.appendChild(dot);
      }
 
-    // --- SLIDE IMAGES ---
-    let slide = document.querySelectorAll(".imgSlide");
-    let dot = document.querySelectorAll(".dot");
-    
+    // SLIDE IMAGES
+    slide = document.querySelectorAll(".imgSlide");
+    dot = document.querySelectorAll(".dot");
+
     let slideIndex = 1;
-    slideShow(slideIndex);
+    slideShow(slideIndex); 
 
     function slideShow(n){
         if (n > slide.length) {slideIndex = 1}
@@ -71,7 +72,7 @@ let attractionImg = (data) =>{
     }
 
     // ARROW BUTTON
-    let arrowButton = document.querySelectorAll(".arrow img");
+    const arrowButton = document.querySelectorAll(".arrow img");
     arrowButton[0].addEventListener("click",() => {
         slideShow(slideIndex -= 1);
     })
@@ -87,7 +88,7 @@ let attractionImg = (data) =>{
     }
 }
 
-// INTRODUCTION
+// --- Create DOM of Bottom Information --------------------------------------
 let attractionInformation = (data) =>{
     let result = data.data;
 
@@ -103,32 +104,13 @@ let attractionInformation = (data) =>{
     // INFORMATION
     let content1 = document.createElement("div");
     content1.innerHTML = result.description;
-    main.insertBefore(content1, address);
+    main.insertBefore(content1, headline[0]);
 
     let content2 = document.createElement("div");
     content2.innerHTML = result.address;
-    main.insertBefore(content2, transport);
+    main.insertBefore(content2, headline[1]);
 
     let content3 = document.createElement("div");
     content3.innerHTML = result.transport;
     main.appendChild(content3);
-}
-
-// TO TOP-BUTTON
-let topButton = document.querySelector(".topButton");
-
-window.addEventListener("scroll", () => scrollPage());
-topButton.addEventListener("click", () => backTop());
-
-function scrollPage(){
-    if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
-        topButton.style.display = "block";
-    }
-    else{
-        topButton.style.display = "none";
-    }
-}
-function backTop(){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-}
+};

@@ -10,7 +10,7 @@ let isLoading = false;
 fetchAttraction(0, "");
 fetchCategory();
 
-// 圖片排版設置
+// --- Create main content of Homepage ---------------------
 function getAttraction(data){
     let result = data.data;
     console.log(data);
@@ -65,7 +65,7 @@ async function fetchAttraction(page, keyword){
     isLoading = false;
 };
 
-// --- Intersection Observer ----------------------------------------
+// --- Intersection Observer -------------------------------
 const options = {
     root : null,
     rootMargin : "50px",
@@ -88,7 +88,7 @@ let observer = new IntersectionObserver(callback, options);
 const footer = document.querySelector("footer");
 observer.observe(footer);
 
-// --- Get value of KEYWORD ----------------------------------------
+// --- Get value of KEYWORD --------------------------------
 button.addEventListener("click",() => {
     keyword = searchInput.value;
     searchInput.value = "";
