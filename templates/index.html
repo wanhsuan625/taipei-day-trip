@@ -39,7 +39,9 @@
             <h1>登入會員帳號</h1>
             <label>
                 <input type="email" name="email" placeholder="輸入電子信箱" required>
+                <span class="inEmailError" style="display: none;">你好</span>
                 <input type="password" name="password" placeholder="輸入密碼" required>
+                <span class="inPasswordError" style="display: none;">你好</span>
                 <button>登入帳戶</button>
             </label>
             <div>還沒有帳戶？點此<button>註冊</button></div>
@@ -49,9 +51,12 @@
             <img class="closeIcon" src="/image/icon_close.png" alt="">
             <h1>註冊會員帳號</h1>
             <label>
-                <input type="text" name="name" placeholder="輸入姓名" required>
-                <input type="email" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" name="password" placeholder="輸入密碼" required>
+                <input type="text" id="sinupName" name="name" placeholder="輸入姓名" required>
+                <span class="upNameError" style="display: none;"></span>
+                <input type="email" id="sinupEmail" name="email" placeholder="輸入電子信箱" required>
+                <span class="upEmailError" style="display: none;"></span>
+                <input type="password" id="sinupPassword" name="password" placeholder="輸入密碼 (至少6-20字元)" minlength="6" required>
+                <span class="upPasswordError" style="display: none;"></span>
                 <button type="submit">註冊新帳戶</button>
             </label>
             <div>已經有帳戶？點此<button>登入</button></div>
@@ -63,11 +68,11 @@
         
         <footer><p>COPYRIGHT © 2022 台北一日遊</p></footer>
         <div class="whole" style="display: none;"></div>
-        
+
     </div>
 
     <script src="/js/base.js"></script>
-    <script src="/js/login.js"></script>
+    <script src="/js/user.js"></script>
     <script src="/js/index.js"></script>
 </body>
 </html>

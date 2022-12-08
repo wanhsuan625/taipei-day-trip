@@ -1,6 +1,8 @@
 from flask import *
 from flask_cors import CORS
-from api.attraction import attraction
+from api.attractionAll import attractionAll
+from api.attractionEach import attractionEach
+from api.category import category
 
 app=Flask(
 		__name__,
@@ -11,8 +13,9 @@ app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-app.register_blueprint(attraction)
-
+app.register_blueprint(attractionAll)
+app.register_blueprint(attractionEach)
+app.register_blueprint(category)
 
 # Pages
 @app.route("/")
