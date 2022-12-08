@@ -16,7 +16,9 @@ a{
     text-decoration: none;
     color: #666666;
 }
-.wrapper{width: 100%;}
+.wrapper{
+    width: 100%;
+}
 
 /* === NAVBAR ==========================================*/
 header{
@@ -59,6 +61,9 @@ nav{
     margin-right: 20px;
 }
 .list2{width: 71px;}
+.list1:hover, .list2:hover{
+    transform: scale(1.05);
+}
 
 /* === TOP BUTTON ==========================================*/
 .topButton{
@@ -100,7 +105,8 @@ footer > p{
     justify-content: center;
 }
 
-/* === SIGNIN BOX =================================== */
+
+/* === SIGNIN / SIGNUP BOX =================================== */
 .signinBox{
     width: 340px;
     height: 275px;
@@ -108,7 +114,7 @@ footer > p{
     border-bottom: 265px solid #fff;
     border-radius: 6px;
     box-shadow: 0px 4px 60px #AAAAAA;;
-    z-index: 3;
+    z-index: 4;
 
     position: absolute;
     top: 80px;
@@ -122,7 +128,7 @@ footer > p{
     border-bottom: 322px solid #fff;
     border-radius: 6px;
     box-shadow: 0px 4px 60px #AAAAAA;;
-    z-index: 3;
+    z-index: 4;
 
     position: absolute;
     top: 80px;
@@ -133,15 +139,21 @@ footer > p{
     position: absolute;
     right: 17px;
     top: 27px;
+    cursor: pointer;
+
+    transition: 0.1s;
+}
+.closeIcon:hover{
+    transform: scale(1.1);
 }
 .signinBox h1, .signupBox h1{
+    width: 144px;
     font-weight: 700;
     font-size: 24px;
     line-height: 24px;
     color: #666666;
-    margin: 0 0 18px 0;
+    margin: 0 auto 18px auto;
     top: 25px;
-    text-align: center;
 }
 .signinBox label, .signupBox label{
     top: 25px;
@@ -198,11 +210,18 @@ footer > p{
 }
 .signinBox div button:hover, .signupBox div button:hover{
     color: #448899;
-}
-.signinBox div button:active, .signupBox div button:active{
     text-decoration: underline;
 }
+.whole{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
+    z-index: 3;
 
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 /* === RWD ========================================== */
 @media (max-width: 1280px){
