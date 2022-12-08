@@ -1,18 +1,7 @@
 import json
-import mysql.connector
+import module.connect
 
-dbconfig = {
-    "host":"localhost",
-    "user":"root",
-    "password":"aa22bb33",
-    "database":"taipeidaytrip"
-}
-connection_pool = mysql.connector.pooling.MySQLConnectionPool(
-    pool_name = "my_pool",
-    pool_size = 5,
-    pool_reset_session = True,
-    **dbconfig
-)
+connection_pool = module.connect.db_connection()
 
 with open("taipei-attractions.json","r",encoding="utf-8") as rf:
     data = json.load(rf)

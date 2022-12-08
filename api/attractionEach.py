@@ -2,12 +2,7 @@ from flask import *
 import module.connect
 
 # --- Blueprint -------------------------------------------
-attractionEach = Blueprint(
-                    "attractionEach",
-                    __name__,
-                    static_folder="static",
-                    template_folder="templates"
-                )
+attractionEach = Blueprint("attractionEach", __name__)
 
 
 # --- DATABASE CONNECT ------------------------------------

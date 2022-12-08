@@ -2,12 +2,7 @@ from flask import *
 import module.connect
 
 # --- Blueprint -------------------------------------------
-category = Blueprint(
-				"category",
-				__name__,
-				static_folder="static",
-				template_folder="templates"
-			)
+category = Blueprint("category", __name__)
 
 
 # --- DATABASE CONNECT ------------------------------------
