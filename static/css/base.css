@@ -211,7 +211,8 @@ footer > p{
     color: #448899;
     text-decoration: underline;
 }
-.inEmailError, .inPasswordError, .upNameError, .upEmailError, .upPasswordError{
+/* .inEmailError, .inPasswordError, .upNameError, .upEmailError, .upPasswordError{ */
+.inMessage, .upMessage{
     display: block;
     width: 100%;
     height: 10px;

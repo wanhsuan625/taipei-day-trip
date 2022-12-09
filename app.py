@@ -3,6 +3,7 @@ from flask_cors import CORS
 from api.attractionAll import attractionAll
 from api.attractionEach import attractionEach
 from api.category import category
+from api.user import user
 
 app=Flask(
 		__name__,
@@ -16,6 +17,7 @@ CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.register_blueprint(attractionAll)
 app.register_blueprint(attractionEach)
 app.register_blueprint(category)
+app.register_blueprint(user)
 
 # Pages
 @app.route("/")

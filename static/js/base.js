@@ -5,8 +5,8 @@ let navbar =
         <nav>\
             <a class="title" href="/">台北一日遊</a>\
             <ul class="menu">\
-                <li class="list1"><a href="#">預定行程</a></li>\
-                <li class="list2"><a href="#">登入/註冊</a></li>\
+                <li class="list1">預定行程</li>\
+                <li class="list2">登入/註冊</li>\
             </ul>\
         </nav>\
     </header>';

@@ -3,8 +3,8 @@ const navbar_Button = document.querySelector(".list2");
 const closeIcon = document.querySelectorAll(".closeIcon");
 const signinBox = document.querySelector(".signinBox");
 const signupBox = document.querySelector(".signupBox");
-const signinpButton = document.querySelector(".signinBox div button");
-const signupButton = document.querySelector(".signupBox div button");
+const changeToUp = document.querySelector(".signinBox div button");
+const changeToIn = document.querySelector(".signupBox div button");
 const whole = document.querySelector(".whole")
 
 navbar_Button.addEventListener("click",() => {
@@ -18,39 +18,45 @@ closeIcon.forEach((e) => {
         whole.style.display = "none";
     })
 })
-signinpButton.addEventListener("click", () => {
+changeToUp.addEventListener("click", () => {
     signupBox.style.display = "block";
     signinBox.style.display = "none";
 })
-signupButton.addEventListener("click", () => {
+changeToIn.addEventListener("click", () => {
     signupBox.style.display = "none";
     signinBox.style.display = "block";
 })
 
-// --- SIGNUP : TAKE USER'S INFORMATION -------------------------
-const signupName = document.querySelector("#sinupName");
-const signupEmail = document.querySelector("#sinupEmail");
-const signupPassword = document.querySelector("#signupPassword");
+// --- SIGN_UP : CONFIRM USER'S EMAIL & RESPONSE IT -------------------------
+let upName = document.querySelector("#signupName");
+let upEmail = document.querySelector("#signupEmail");
+let upPassword = document.querySelector("#signupPassword");
+let upMessage = document.querySelector(".upMessage");
+const upButton = document.querySelector(".signupBox label button");
 
-const emailRegxp = "/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/";
-
-
-
-const signupUrl = "/api/user"
-let signupData = {
-    name: signupName.value,
-    email: signupEmail.value,
-    password: signupPassword.value
-}
-signupButton.addEventListener("click",() =>{
-    fetch(signupUrl,{
+upButton.addEventListener("click",(e) =>{
+    fetch("/api/user", {
         method : "POST",
-        headers:{'Content-type':'application/json; charset = UTF-8'},
-        body : JSON.stringify(signupData)
+        headers: {'Content-type':'application/json'},
+        body : JSON.stringify({
+                "name" : upName.value,
+                "email" : upEmail.value,
+                "password" : upPassword.value})
     }).then(response => {
         return response.json()
     }).then(data => {
-
+        if(data.ok == true){
+            upMessage.style.display = "block";
+            upMessage.style.color = "#66AABB";
+            upMessage.textContent = data.message;
+        }
+        upMessage.style.display = "block";
+        upMessage.textContent = data.message;
     })
-})
+});
 
+
+// --- SIGN_IN : TAKE USER'S INFORMATION -------------------------
+let inEmail = document.querySelector("#signinEmail").value;
+let inPassword = document.querySelector("#signinPassword").value;
+const inButton = document.querySelector(".signinBox label button");
