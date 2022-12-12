@@ -108,7 +108,7 @@ navbar_Button.addEventListener("click",() =>{
             return response.json()
         }).then(data => {
             if(data.ok == true){
-                window.location.reload();
+                window.location.reload();  // 登出成功，畫面重載
             }
         })
     }
