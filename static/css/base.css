@@ -55,6 +55,7 @@ nav{
     font-weight: 500;
     color: #666666;
     display: flex;
+    cursor: pointer;
 }
 .list1{
     width: 64px;

@@ -56,13 +56,40 @@
             <div class="headline">景點地址：</div>
             <div class="headline">交通方式：</div>
         </main>
-        
+
+        <div class="signinBox" style="display: none;">
+            <img class="closeIcon" src="/image/icon_close.png" alt="">
+            <h1>登入會員帳號</h1>
+            <label>
+                <input type="email" id="signinEmail" name="email" placeholder="輸入電子信箱" required>
+                <input type="password" id="signinPassword" name="password" placeholder="輸入密碼" required>
+                <span class="inMessage" style="display: none"></span>
+                <button>登入帳戶</button>
+            </label>
+            <div>還沒有帳戶？點此<button>註冊</button></div>
+        </div>
+
+        <div class="signupBox" style="display: none;">
+            <img class="closeIcon" src="/image/icon_close.png" alt="">
+            <h1>註冊會員帳號</h1>
+            <label>
+                <input type="text" id="signupName" name="name" placeholder="輸入姓名" required>
+                <input type="email" id="signupEmail" name="email" placeholder="輸入電子信箱" required>
+                <input type="password" id="signupPassword" name="password" placeholder="輸入密碼" required>
+                <span class="upMessage" style="display: none"></span>
+                <button type="submit">註冊新帳戶</button>
+            </label>
+            <div>已經有帳戶？點此<button>登入</button></div>
+        </div>
         <!-- toTopButton : import from base.js -->
         
         <footer><p>COPYRIGHT © 2022 台北一日遊</p></footer>
+        <div class="whole" style="display: none;"></div>
+
     </div>
 
     <script src="/js/base.js"></script>
+    <script src="/js/user.js"></script>
     <script src="/js/attraction.js"></script>
 </body>
 </html>

@@ -8,8 +8,10 @@ const changeToIn = document.querySelector(".signupBox div button");
 const whole = document.querySelector(".whole")
 
 navbar_Button.addEventListener("click",() => {
-    signinBox.style.display = "block";
-    whole.style.display = "block";
+    if(navbar_Button.innerHTML == "登入/註冊"){
+        signinBox.style.display = "block";
+        whole.style.display = "block";
+    }
 })
 closeIcon.forEach((e) => {
     e.addEventListener("click",() => {
@@ -27,7 +29,7 @@ changeToIn.addEventListener("click", () => {
     signinBox.style.display = "block";
 })
 
-// --- SIGN_UP : CONFIRM USER'S EMAIL & RESPONSE IT -------------------------
+// --- SIGN_UP  --------------------------------------------------
 let upName = document.querySelector("#signupName");
 let upEmail = document.querySelector("#signupEmail");
 let upPassword = document.querySelector("#signupPassword");
@@ -56,7 +58,58 @@ upButton.addEventListener("click",(e) =>{
 });
 
 
-// --- SIGN_IN : TAKE USER'S INFORMATION -------------------------
-let inEmail = document.querySelector("#signinEmail").value;
-let inPassword = document.querySelector("#signinPassword").value;
+// --- SIGN_IN -----------------------------------------------------
+let inEmail = document.querySelector("#signinEmail");
+let inPassword = document.querySelector("#signinPassword");
+let inMessage = document.querySelector(".inMessage");
 const inButton = document.querySelector(".signinBox label button");
+
+inButton.addEventListener("click", ()=> {
+    fetch("/api/user/auth",{
+        method: "PUT",
+        headers: {'Content-type':'application/json'},
+        body : JSON.stringify({
+                "email" : inEmail.value,
+                "password" : inPassword.value})
+    }).then(response => {
+        return response.json();
+    }).then(data =>{
+        if(data.ok == true){
+            location.reload();  // 登入成功，重新載入
+        }
+        inMessage.style.display = "block";
+        inMessage.textContent = data.message;
+    })
+})
+
+// --- CONTAIN LOGIN STATUS ---------------------------------------
+window.addEventListener("load", () =>{
+    fetch("/api/user/auth",{
+        method: "GET",
+        headers: {'Content-type':'application/json'}
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        if(data.data !== null){
+            navbar_Button.innerHTML = "登出系統";
+        }
+        return
+    })
+})
+
+// --- SINGN_OUT ------------------------------------------------------
+navbar_Button.addEventListener("click",() =>{
+    if(navbar_Button.innerHTML == "登出系統"){
+        fetch("/api/user/auth",{
+            method: "DELETE",
+            headers: {'Content-type':'application/json'}
+        })
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            if(data.ok == true){
+                window.location.reload();
+            }
+        })
+    }
+})
