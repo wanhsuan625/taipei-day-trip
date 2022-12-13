@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+<!-- HEAD -------------------------------------------------- -->
+{% block head %}
+<link rel="stylesheet" href="/css/index.css">
+<title>預約行程</title>
+{% endblock %}
+
+<!-- BODY -------------------------------------------------- -->
+{% block body %}
+<div class="book_headline">您好，Bonnie，待預約的行程如下：</div>
+<article class="select_view_box">
+    <figure class="img_box">
+        <img src="https://www.travel.taipei/d_upload_ttn/sceneadmin/image/A0/B0/C0/D315/E70/F65/1e0951fb-069f-4b13-b5ca-2d09df1d3d90.JPG" ,alt="">
+    </figure>
+    
+    <section class="book_info_box">
+        <h1>台北一日遊：新北投溫泉區</h1>
+        <div class="book_detail"><span>日期：</span>2021-04-23</div>
+        <div class="book_detail"><span>時間：</span>早上8點至下午2點</div>
+        <div class="book_detail"><span>費用：</span>新台幣 2000元</div>
+        <div class="book_detail"><span>地點：</span>臺北市北投區中山路、光明路沿線</div>
+        <div></div>
+    </section>
+</article>
+
+<hr>
+
+<div class="contact_box">
+    <div>您的聯絡資訊</div>
+    <label>
+        <span class="contact_detail">聯絡姓名：</span><input type="text" name="name" id="name">
+        <span class="contact_detail">連絡信箱：</span><input type="email" name="email" id="email">
+        <span class="contact_detail">手機號碼：</span><input type="number" name="phone" id="phone">
+    </label>
+    <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+</div>
+
+<hr>
+
+<div class="credit_card_box">
+    <div>信用卡付款資訊</div>
+    <label>
+        <span class="credit_card_detail">卡片號碼：</span><input type="number" pattern="[0-9]{13,16}" name="card" id="card">
+        <span class="credit_card_detail">過期時間：</span><input type="month" name="date" id="date">
+        <span class="credit_card_detail">驗證密碼：</span><input type="number" name="verify" id="verify">
+    </label>
+</div>
+
+<hr>
+
+<div class="total_price">總價：新台幣 2000元</div>
+<button>確認訂購並付款</button>
+{% endblock %}
