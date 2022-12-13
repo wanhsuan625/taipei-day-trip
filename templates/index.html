@@ -1,75 +1,31 @@
-<!DOCTYPE html>
-<html lang="zh-Hans-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taipei Trip 台北一日遊</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <!-- import Noto Sans TC -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <!-- import fontawesome -->
-    <script src="https://kit.fontawesome.com/8d2e522741.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navbar : import from base.js -->
-        
-        <div class="searchContainer">
-            <img src="/image/welcome.png" class="backImg" alt="">
-            <div class="searchBox">
-                <h1>輕鬆享受台北一日悠閒</h1>
-                <p>探索每個角落，體驗城市的深度旅遊行程</p>
-                <div class="searchBar">
-                    <input type="text" class="searchInput" placeholder="輸入景點名稱查詢">
-                    <button class="searchIcon">
-                        <img src="/image/icon_search.png" alt="">
-                    </button>
-                </div>
-                <div class="categoryBox"></div>
-            </div>
+{% extends "base.html" %}
+
+<!-- HEAD -------------------------------------------------- -->
+{% block head %}
+<link rel="stylesheet" href="/css/index.css">
+<title>Taipei Trip 台北一日遊</title>
+{% endblock %}
+
+<!-- BODY -------------------------------------------------- -->
+{% block body%}
+<div class="search_container">
+    <img src="/image/welcome.png" class="back_img" alt="">
+    <div class="search_box">
+        <h1>輕鬆享受台北一日悠閒</h1>
+        <p>探索每個角落，體驗城市的深度旅遊行程</p>
+        <div class="search_bar">
+            <input type="text" class="search_input" placeholder="輸入景點名稱查詢">
+            <button class="search_icon">
+                <img src="/image/icon_search.png" alt="">
+            </button>
         </div>
-
-        <div class="signinBox" style="display: none;">
-            <img class="closeIcon" src="/image/icon_close.png" alt="">
-            <h1>登入會員帳號</h1>
-            <label>
-                <input type="email" id="signinEmail" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" id="signinPassword" name="password" placeholder="輸入密碼" required>
-                <span class="inMessage" style="display: none"></span>
-                <button>登入帳戶</button>
-            </label>
-            <div>還沒有帳戶？點此<button>註冊</button></div>
-        </div>
-
-        <div class="signupBox" style="display: none;">
-            <img class="closeIcon" src="/image/icon_close.png" alt="">
-            <h1>註冊會員帳號</h1>
-            <label>
-                <input type="text" id="signupName" name="name" placeholder="輸入姓名" required>
-                <input type="email" id="signupEmail" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" id="signupPassword" name="password" placeholder="輸入密碼" required>
-                <span class="upMessage" style="display: none"></span>
-                <button type="submit">註冊新帳戶</button>
-            </label>
-            <div>已經有帳戶？點此<button>登入</button></div>
-        </div>
-
-        <main></main>
-
-        <!-- toTopButton : import from base.js -->
-        
-        <footer><p>COPYRIGHT © 2022 台北一日遊</p></footer>
-        <div class="whole" style="display: none;"></div>
-
+        <div class="category_box"></div>
     </div>
+</div>
 
-    <script src="/js/base.js"></script>
-    <script src="/js/user.js"></script>
-    <script src="/js/index.js"></script>
-</body>
-</html>
+<main></main>
+{% endblock %}
+
+{% block script %}
+<script src="/js/index.js"></script>
+{% endblock %}

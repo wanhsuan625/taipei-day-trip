@@ -4,22 +4,22 @@ hr{
 }
 /* --- IMAGE ---------------------------------------------------------- */
 /* ADJECT IMAGE SIZE */
-section{
+main{
     width: 1200px;
     margin: 40px auto;
     display: flex;
     justify-content: space-between;
 }
-.imgBox{
+.img_box{
     width: 45%;
     left: 15px;
 }
-.imgSlide{
+.img_slide{
     width: 100%;
     padding-top: 75%;
     display: none;
 }
-.imgSlide > .attractionImg{
+.img_slide > .attraction_img{
     width: 100%;
     height: 100%;
     border-radius: 10px;
@@ -31,7 +31,7 @@ section{
 }
 
 /* IMAGE - ARROW */
-.imgBox > .arrow{
+.img_box > .arrow{
     width: 100%;
     padding: 0px 10px;
     display: flex;
@@ -47,7 +47,7 @@ section{
 .arrow img:hover{ opacity:1;}
 
 /* IMAGE DOT_GROUP */
-.dotGroup{
+.dot_group{
     width: 100%;
     display: flex;
     justify-content: center;
@@ -80,18 +80,18 @@ to {opacity: 1}
 
 /* --- BOOKING FORM ------------------------------------------------------*/
 /* NAME , MRT AND CATEGORY AREA*/
-.infoBox{
+.info_box{
     width: 50%;
     right: 15px;
     color: #666666;
 }
-.infoBox > h1{
+.info_box > h1{
     height: 33px;
     margin: 0 0 15px 0;
     font-weight: 700;
     font-size: 24px;
 }
-.infoBox > p{
+.info_box > p{
     height: 22px;
     margin: 0 0 20px 0;
     font-weight: 500;
@@ -99,19 +99,19 @@ to {opacity: 1}
 }
 
 /* BOOKING AREA */
-.bookingForm{
+.booking_form{
     background-color: #E8E8E8;
     border-radius: 5px;
     padding: 15px 20px;
 }
-.bookingForm > div{
+.booking_form > div{
     height: 22px;
     font-weight: 700;
     font-size: 16px;
     line-height: 22px;
     margin-bottom: 15px;
 }
-.bookingForm p, span{
+.booking_form p, span{
     font-weight: 500;
     font-size: 16px;
     margin-bottom: 15px;
@@ -163,8 +163,8 @@ input[type="date"]{
     margin: 0;
     line-height: 20px;
 }
-#changeMoney{ margin-left: 7px;}
-.bookingForm > button{
+#change_money{ margin-left: 7px;}
+.booking_form > button{
     width: 154px;
     height: 36px;
     padding: 10px 20px;
@@ -182,7 +182,7 @@ input[type="date"]{
 }
 
 /* --- ATTRACTION INFORMATION AREA --------------------------------------*/
-main{
+section{
     width: 1200px;
     margin: 0 auto;
     margin-bottom: 80px;
@@ -204,32 +204,32 @@ main{
 /* --- RWD SETTING ------------------------------------------------------*/
 /* LAYOUT BELOW 1280px */
 @media (max-width: 1280px){
-    section{ width: 90%;}
-    .imgSlide{ padding-top: 405px;}
-    .infoBox{ width: 48%;}
-    hr{ width: 95%;}
     main{ width: 90%;}
+    .img_slide{ padding-top: 405px;}
+    .info_box{ width: 48%;}
+    hr{ width: 95%;}
+    section{ width: 90%;}
 }
 
 /* LAYOUT BELOW 768px */
 @media (max-width:768px){
-    section{
+    main{
         width: 100%;
         display: block;
         margin: 0 0 40px 0;
     }
-    .imgBox{
+    .img_box{
         width: 100%;
         left: 0;
     }
-    .imgSlide{ padding-top: 350px;}
-    .dotGroup{ bottom: 10px;}
-    .infoBox{
+    .img_slide{ padding-top: 350px;}
+    .dot_group{ bottom: 10px;}
+    .info_box{
         width: 100%;
         right: 0;
         padding: 20px 10px 0 10px;
     }
-    main{
+    section{
         width: 100%;
         padding: 0 20px;
     }

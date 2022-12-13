@@ -1,5 +1,5 @@
 const main = document.querySelector("main");
-const searchInput = document.querySelector(".searchInput");
+const search_input = document.querySelector(".search_input");
 const button = document.querySelector("button");
 let nextpage;
 let keyword;
@@ -22,32 +22,32 @@ function getAttraction(data){
         main.appendChild(attraction);
 
 
-        let imgBox = document.createElement("div");
-        imgBox.id = "imgBox";
-        attraction.appendChild(imgBox);
+        let img_box = document.createElement("div");
+        img_box.id = "img_box";
+        attraction.appendChild(img_box);
         // images
         let img = document.createElement("img");
         img.setAttribute("src",result[i].images[0]);
-        imgBox.appendChild(img);
+        img_box.appendChild(img);
         // attraction name
         let name = document.createElement("div");
         name.id = "name";
         name.textContent = result[i].name;
         name.title = result[i].name;
-        imgBox.appendChild(name);
+        img_box.appendChild(name);
 
 
-        let infoBox = document.createElement("div");
-        infoBox.id = "infoBox";
-        attraction.appendChild(infoBox);
+        let info_box = document.createElement("div");
+        info_box.id = "info_box";
+        attraction.appendChild(info_box);
         // mrt
         let mrt = document.createElement("div");
         mrt.textContent = result[i].mrt;
-        infoBox.appendChild(mrt);
+        info_box.appendChild(mrt);
         // categories
         let category = document.createElement("div");
         category.textContent = result[i].category;
-        infoBox.appendChild(category);
+        info_box.appendChild(category);
     }
 };
 
@@ -90,14 +90,14 @@ observer.observe(footer);
 
 // --- Get value of KEYWORD --------------------------------
 button.addEventListener("click",() => {
-    keyword = searchInput.value;
-    searchInput.value = "";
+    keyword = search_input.value;
+    search_input.value = "";
     main.innerHTML = "";           // 清除畫面
     fetchAttraction(0,keyword);
 })
 
 // --- Create Categories Box DOM -----------------------------------
-const categoryBox = document.querySelector(".categoryBox");
+const category_box = document.querySelector(".category_box");
 function getCategory(data){
     let result = data.data;
 
@@ -105,7 +105,7 @@ function getCategory(data){
         let category = document.createElement("div");
         category.className = "category";
         category.textContent = result[i];
-        categoryBox.appendChild(category);
+        category_box.appendChild(category);
     }
 };
 async function fetchCategory(){
@@ -119,14 +119,14 @@ async function fetchCategory(){
 };
 
 // --- Categories Box : CLICK effect -----------------------------------
-searchInput.addEventListener("click",() => {
-    categoryBox.style.display = "grid";
+search_input.addEventListener("click",() => {
+    category_box.style.display = "grid";
     
     let category = document.querySelectorAll(".category");
     for(let i = 0; i < category.length; i++){
         category[i].addEventListener("click",() => {
-            searchInput.value = category[i].innerHTML;
+            search_input.value = category[i].innerHTML;
         })
     }
 })
-window.addEventListener("mouseup",() => {categoryBox.style.display = "none";})
+window.addEventListener("mouseup",() => {category_box.style.display = "none";})

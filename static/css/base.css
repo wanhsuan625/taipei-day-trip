@@ -16,9 +16,7 @@ a{
     text-decoration: none;
     color: #666666;
 }
-.wrapper{
-    width: 100%;
-}
+.wrapper{ width: 100%;}
 
 /* === NAVBAR ==========================================*/
 header{
@@ -57,17 +55,146 @@ nav{
     display: flex;
     cursor: pointer;
 }
-.list1{
+.list_1{
     width: 64px;
     margin-right: 20px;
 }
-.list2{width: 71px;}
-.list1:hover, .list2:hover{
+.list_2{width: 71px;}
+.list_1:hover, .list_2:hover{
     transform: scale(1.05);
 }
 
+
+
+/* === SIGNIN / SIGNUP BOX =================================== */
+.sign_in_box{
+    width: 340px;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(90deg,#66AABB,#337788) border-box;
+    border-radius: 5px;
+    border-top: 10px solid transparent;
+    box-shadow: 0px 4px 60px #AAAAAA;;
+    z-index: 4;
+
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.sign_up_box{
+    width: 340px;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(90deg,#66AABB,#337788) border-box;
+    border-radius: 5px;
+    border-top: 10px solid transparent;
+    box-shadow: 0px 4px 60px #AAAAAA;;
+    z-index: 4;
+
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.close_icon{
+    position: absolute;
+    right: 17px;
+    top: 15px;
+    cursor: pointer;
+
+    transition: 0.1s;
+}
+.close_icon:hover{
+    transform: scale(1.1);
+}
+.sign_in_box h1, .sign_up_box h1{
+    width: 144px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: #666666;
+    margin: 0 auto 18px auto;
+    top: 15px;
+}
+.sign_in_box label, .sign_up_box label{
+    top: 15px;
+    left: 15px;
+}
+.sign_in_box label input, .sign_up_box label input{
+    width: 310px;
+    height: 47px;
+    font-size: 15px;
+    font-weight: 500;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    outline-color: #82c0cf;
+    cursor: pointer;
+    
+    margin-bottom: 10px;
+    padding: 15px;
+}
+.sign_in_box label button, .sign_up_box label button{
+    width: 310px;
+    height: 47px;
+    color: #fff;
+    font-weight: 400;
+    font-size: 19px;
+    cursor: pointer;
+
+    background-color: #448899;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.sign_in_box label button:hover, .sign_up_box label button:hover{
+    transform: scale(1.01);
+    box-shadow: 1px 2px 5px 1px #AAAAAA;
+}
+.sign_in_box label button:active, .sign_up_box label button:active{
+    transform: scale(1) translate(1px,1px);
+}
+.sign_in_box div, .sign_up_box div{
+    font-weight: 500;
+    font-size: 16px;
+    color: #666666;
+    margin: 18px 0 20px 0;
+    text-align: center;
+}
+.sign_in_box div button, .sign_up_box div button{
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: #448899;
+    background-color: transparent;
+    cursor: pointer;
+}
+.sign_in_box div button:hover, .sign_up_box div button:hover{
+    text-decoration: underline;
+}
+/* .inEmailError, .inPasswordError, .upNameError, .upEmailError, .upPasswordError{ */
+.sign_in_message, .sign_up_message{
+    display: block;
+    width: 100%;
+    height: 10px;
+    font-size: 15px;
+    color: red;
+
+    top: -7px;
+    left: 9px;
+    margin-bottom: 4px;
+}
+.whole{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
+    z-index: 3;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* === TOP BUTTON ==========================================*/
-.topButton{
+.top_button{
     display: none;
     transform: scale(2);
     border-radius: 50%;
@@ -80,7 +207,7 @@ nav{
     bottom: 15%;
     right: 2%;
 }
-.topButton:hover{
+.top_button:hover{
     color: #fff;
     background-color: #448899;
     opacity: 1;
@@ -106,154 +233,25 @@ footer > p{
     justify-content: center;
 }
 
-
-/* === SIGNIN / SIGNUP BOX =================================== */
-.signinBox{
-    width: 340px;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(90deg,#66AABB,#337788) border-box;
-    border-radius: 5px;
-    border-top: 10px solid transparent;
-    box-shadow: 0px 4px 60px #AAAAAA;;
-    z-index: 4;
-
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.signupBox{
-    width: 340px;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(90deg,#66AABB,#337788) border-box;
-    border-radius: 5px;
-    border-top: 10px solid transparent;
-    box-shadow: 0px 4px 60px #AAAAAA;;
-    z-index: 4;
-
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.closeIcon{
-    position: absolute;
-    right: 17px;
-    top: 15px;
-    cursor: pointer;
-
-    transition: 0.1s;
-}
-.closeIcon:hover{
-    transform: scale(1.1);
-}
-.signinBox h1, .signupBox h1{
-    width: 144px;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 24px;
-    color: #666666;
-    margin: 0 auto 18px auto;
-    top: 15px;
-}
-.signinBox label, .signupBox label{
-    top: 15px;
-    left: 15px;
-}
-.signinBox label input, .signupBox label input{
-    width: 310px;
-    height: 47px;
-    font-size: 15px;
-    font-weight: 500;
-    border: 1px solid #CCCCCC;
-    border-radius: 5px;
-    outline-color: #82c0cf;
-    cursor: pointer;
-    
-    margin-bottom: 10px;
-    padding: 15px;
-}
-.signinBox label button, .signupBox label button{
-    width: 310px;
-    height: 47px;
-    color: #fff;
-    font-weight: 400;
-    font-size: 19px;
-    cursor: pointer;
-
-    background-color: #448899;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-.signinBox label button:hover, .signupBox label button:hover{
-    transform: scale(1.01);
-    box-shadow: 1px 2px 5px 1px #AAAAAA;
-}
-.signinBox label button:active, .signupBox label button:active{
-    transform: scale(1) translate(1px,1px);
-}
-.signinBox div, .signupBox div{
-    font-weight: 500;
-    font-size: 16px;
-    color: #666666;
-    margin: 18px 0 20px 0;
-    text-align: center;
-}
-.signinBox div button, .signupBox div button{
-    border: none;
-    margin: 0;
-    padding: 0;
-    color: #666666;
-    background-color: transparent;
-    cursor: pointer;
-}
-.signinBox div button:hover, .signupBox div button:hover{
-    color: #448899;
-    text-decoration: underline;
-}
-/* .inEmailError, .inPasswordError, .upNameError, .upEmailError, .upPasswordError{ */
-.inMessage, .upMessage{
-    display: block;
-    width: 100%;
-    height: 10px;
-    font-size: 15px;
-    color: red;
-
-    top: -7px;
-    left: 9px;
-    margin-bottom: 4px;
-}
-.whole{
-    width: 100%;
-    height: 100%;
-    background-color: rgb(0, 0, 0, 0.4);
-    z-index: 3;
-
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-/* === RWD ========================================== */
+/* === RWD ============================================= */
 @media (max-width: 1280px){
     nav{ padding: 10px 20px;}
-    .topButton{
+    .top_button{
         transform: scale(1.8);
         opacity: 0.7;
     }
 }
 @media (max-width: 768px){
     nav{ padding: 10px;}
-    .topButton{
+    .top_button{
         transform: scale(1.5);
         bottom: 10%;
     }
 }
 @media (max-width: 480px){
-    .topButton{
+    .top_button{
         opacity: 0.5;
         bottom: 5%;
     }
-    .signinBox, .signupBox{width: 335px;}
+    .sign_in_box, .sign_up_box{width: 335px;}
 }

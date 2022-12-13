@@ -1,95 +1,52 @@
-<!DOCTYPE html>
-<html lang="zh-Hans-TW">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/base.css">
-    <link rel="stylesheet" href="/css/attraction.css">
-    <!-- import Noto Sans TC -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <!-- import fontawesome -->
-    <script src="https://kit.fontawesome.com/8d2e522741.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div class="wrapper">
-        <!-- Navbar : import from base.js -->
-        
-        <section>
-            <div class="imgBox">
-                <div class="arrow">
-                    <img src="/image/btn_leftArrow.png" alt="">
-                    <img src="/image/btn_rightArrow.png" alt="">
-                </div>
-            </div>
+{% extends "base.html" %}
 
-            <div class="infoBox">
-                <div class="bookingForm">
-                    <div>訂購導覽行程</div>
-                    <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
-                    <div style="margin-bottom: 30px;">選擇日期：
-                        <input type="date">
-                    </div>
-                    <div class="time">選擇時間：
-                        <label>
-                            <input type="radio" name="choicetime" onclick="getElementById('changeMoney').innerHTML = '新台幣 2000 元'" checked>
-                            <p>上半天</p>
-                        </label>
-                        <label>
-                            <input type="radio" name="choicetime" onclick="getElementById('changeMoney').innerHTML = '新台幣 2500 元'">
-                            <p>下半天</p>
-                        </label>
-                    </div>
-                    <div>導覽費用：<span id="changeMoney">新台幣 2000 元</span></div>
-                    <button>開始預約行程</button>
-                </div>
-            </div>
-        </section>
+<!-- HEAD -------------------------------------------------- -->
+{% block head %}
+<title></title>
+<link rel="stylesheet" href="/css/attraction.css">
+{% endblock %}
 
-        <hr>
-
-        <main>
-            <div class="headline">景點地址：</div>
-            <div class="headline">交通方式：</div>
-        </main>
-
-        <div class="signinBox" style="display: none;">
-            <img class="closeIcon" src="/image/icon_close.png" alt="">
-            <h1>登入會員帳號</h1>
-            <label>
-                <input type="email" id="signinEmail" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" id="signinPassword" name="password" placeholder="輸入密碼" required>
-                <span class="inMessage" style="display: none"></span>
-                <button>登入帳戶</button>
-            </label>
-            <div>還沒有帳戶？點此<button>註冊</button></div>
+<!-- BODY -------------------------------------------------- -->
+{% block body %}
+<main>
+    <div class="img_box">
+        <div class="arrow">
+            <img src="/image/btn_leftArrow.png" alt="">
+            <img src="/image/btn_rightArrow.png" alt="">
         </div>
-
-        <div class="signupBox" style="display: none;">
-            <img class="closeIcon" src="/image/icon_close.png" alt="">
-            <h1>註冊會員帳號</h1>
-            <label>
-                <input type="text" id="signupName" name="name" placeholder="輸入姓名" required>
-                <input type="email" id="signupEmail" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" id="signupPassword" name="password" placeholder="輸入密碼" required>
-                <span class="upMessage" style="display: none"></span>
-                <button type="submit">註冊新帳戶</button>
-            </label>
-            <div>已經有帳戶？點此<button>登入</button></div>
-        </div>
-        <!-- toTopButton : import from base.js -->
-        
-        <footer><p>COPYRIGHT © 2022 台北一日遊</p></footer>
-        <div class="whole" style="display: none;"></div>
-
     </div>
 
-    <script src="/js/base.js"></script>
-    <script src="/js/user.js"></script>
-    <script src="/js/attraction.js"></script>
-</body>
-</html>
+    <div class="info_box">
+        <div class="booking_form">
+            <div>訂購導覽行程</div>
+            <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
+            <div style="margin-bottom: 30px;">選擇日期：
+                <input type="date">
+            </div>
+            <div class="time">選擇時間：
+                <label>
+                    <input type="radio" name="choicetime" onclick="getElementById('change_money').innerHTML = '新台幣 2000 元'" checked>
+                    <p>上半天</p>
+                </label>
+                <label>
+                    <input type="radio" name="choicetime" onclick="getElementById('change_money').innerHTML = '新台幣 2500 元'">
+                    <p>下半天</p>
+                </label>
+            </div>
+            <div>導覽費用：<span id="change_money">新台幣 2000 元</span></div>
+            <button>開始預約行程</button>
+        </div>
+    </div>
+</main>
+
+<hr>
+
+<section>
+    <div class="headline">景點地址：</div>
+    <div class="headline">交通方式：</div>
+</section>
+{% endblock %}
+
+{% block script %}
+<script src="/js/attraction.js"></script>
+{% endblock %}
