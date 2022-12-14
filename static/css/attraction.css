@@ -176,6 +176,14 @@ input[type="date"]{
     font-size: 19px;
     line-height: 16px;
 }
+.booking_form > button:hover{
+    transform: scale(1.01);
+    box-shadow: 1px 2px 5px 1px #AAAAAA;
+}
+.booking_form > button:active{
+    transform: scale(1) translate(1px,1px);
+}
+
 
 /* --- ATTRACTION INFORMATION AREA --------------------------------------*/
 section{

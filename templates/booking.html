@@ -2,53 +2,111 @@
 
 <!-- HEAD -------------------------------------------------- -->
 {% block head %}
-<link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/booking.css">
 <title>預約行程</title>
+<!-- Cleave.js v1.1.1 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.1.0/cleave.min.js"></script>
 {% endblock %}
 
 <!-- BODY -------------------------------------------------- -->
 {% block body %}
-<div class="book_headline">您好，Bonnie，待預約的行程如下：</div>
-<article class="select_view_box">
-    <figure class="img_box">
-        <img src="https://www.travel.taipei/d_upload_ttn/sceneadmin/image/A0/B0/C0/D315/E70/F65/1e0951fb-069f-4b13-b5ca-2d09df1d3d90.JPG" ,alt="">
-    </figure>
-    
-    <section class="book_info_box">
-        <h1>台北一日遊：新北投溫泉區</h1>
-        <div class="book_detail"><span>日期：</span>2021-04-23</div>
-        <div class="book_detail"><span>時間：</span>早上8點至下午2點</div>
-        <div class="book_detail"><span>費用：</span>新台幣 2000元</div>
-        <div class="book_detail"><span>地點：</span>臺北市北投區中山路、光明路沿線</div>
-        <div></div>
-    </section>
-</article>
+<main>
+    <!-- // ININERARY -->
+    <div class="book_headline">您好，Bonnie，待預約的行程如下：</div>
+    <article class="itinerary_container">
+        <img class="book_img" src="https://www.travel.taipei/d_upload_ttn/sceneadmin/image/A0/B0/C0/D315/E70/F65/1e0951fb-069f-4b13-b5ca-2d09df1d3d90.JPG" ,alt="">
 
-<hr>
+        <section class="book_info_container">
+            <h1>台北一日遊：新北投溫泉區</h1>
+            <div class="book_detail"><span>日期：</span>2021-04-23</div>
+            <div class="book_detail"><span>時間：</span>早上8點至下午2點</div>
+            <div class="book_detail"><span>費用：</span>新台幣 2000元</div>
+            <div class="book_detail"><span>地點：</span>臺北市北投區中山路、光明路沿線</div>
+            <div></div>
+        </section>
 
-<div class="contact_box">
-    <div>您的聯絡資訊</div>
-    <label>
-        <span class="contact_detail">聯絡姓名：</span><input type="text" name="name" id="name">
-        <span class="contact_detail">連絡信箱：</span><input type="email" name="email" id="email">
-        <span class="contact_detail">手機號碼：</span><input type="number" name="phone" id="phone">
-    </label>
-    <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
-</div>
+        <img class="delete_icon" src="/image/icon_delete.png" alt="">
+    </article>
+    <!-- END ININERARY -->
 
-<hr>
+    <hr>
 
-<div class="credit_card_box">
-    <div>信用卡付款資訊</div>
-    <label>
-        <span class="credit_card_detail">卡片號碼：</span><input type="number" pattern="[0-9]{13,16}" name="card" id="card">
-        <span class="credit_card_detail">過期時間：</span><input type="month" name="date" id="date">
-        <span class="credit_card_detail">驗證密碼：</span><input type="number" name="verify" id="verify">
-    </label>
-</div>
+    <!-- // CONTACT INFOMATION -->
+    <div class="contact_container">
+        <div class="contact_headline">您的聯絡資訊</div>
+        
+        <label class="contact_detail">聯絡姓名：
+            <input required
+            type="text"
+            name="name"
+            id="name">
+        </label><br>
 
-<hr>
+        <label class="contact_detail">連絡信箱：
+            <input required
+            type="email"
+            inputmode="email"
+            name="email"
+            id="email">
+        </label><br>
+        
+        <label class="contact_detail">手機號碼：
+            <input required
+            type="tel"
+            inputmode="tel"
+            name="phone"
+            id="phone">
+        </label>
 
-<div class="total_price">總價：新台幣 2000元</div>
-<button>確認訂購並付款</button>
+        <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+    </div>
+    <!-- END CONTACT INFOMATION -->
+
+    <hr>
+
+    <!-- // CREDIT CARD -->
+    <div class="credit_container">
+        <div class="credit_headline">信用卡付款資訊</div>
+
+        <label class="credit_detail">卡片號碼：
+            <input required
+            type="tel"
+            inputmode="numeric"
+            name="creditNumber"
+            id="creditNumber"
+            placeholder="xxxx xxxx xxxx xxxx">
+        </label><br>
+
+        <label class="credit_detail">過期時間：
+            <input required
+            type="text"
+            name="creditExpire"
+            id="creditExpire"
+            placeholder="MM/YY">
+        </label><br>
+
+        <label class="credit_detail">驗證密碼：
+            <input required
+            type="password"
+            inputmode="numeric"
+            name="creditCvv"
+            id="creditCvv"
+            placeholder="CVV"
+            onkeyup="value=value.replace(/\D/g,'')"
+            minlength="3"
+            maxlength="4">
+        </label>
+    </div>
+    <!-- END CREDIT CARD -->
+
+    <hr>
+    <div class="confirm_container">
+        <div class="total_price">總價：新台幣 2000元</div>
+        <button class="pay_button">確認訂購並付款</button>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="/js/booking.js"></script>
 {% endblock %}
