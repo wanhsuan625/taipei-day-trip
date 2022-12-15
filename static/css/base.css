@@ -83,7 +83,7 @@ nav{
     box-shadow: 0px 4px 60px #AAAAAA;;
     z-index: 4;
 
-    position: absolute;
+    position: fixed;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
@@ -97,7 +97,7 @@ nav{
     box-shadow: 0px 4px 60px #AAAAAA;;
     z-index: 4;
 
-    position: absolute;
+    position: fixed;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
@@ -260,6 +260,7 @@ footer > p{
     .top_button{
         opacity: 0.5;
         bottom: 5%;
+        transform: scale(1.2);
     }
     .sign_in_box, .sign_up_box{width: 335px;}
 }

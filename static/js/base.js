@@ -1,5 +1,6 @@
 // --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
-const navbar_button = document.querySelector(".list_2");
+const nav_signInButton = document.querySelector(".list_2");
+const nav_bookingButton = document.querySelector(".list_1");
 const close_icon = document.querySelectorAll(".close_icon");
 const sign_in_box = document.querySelector(".sign_in_box");
 const sign_up_box = document.querySelector(".sign_up_box");
@@ -7,12 +8,7 @@ const change_to_signup = document.querySelector(".sign_in_box div button");
 const change_to_signin = document.querySelector(".sign_up_box div button");
 const whole = document.querySelector(".whole")
 
-navbar_button.addEventListener("click",() => {
-    if(navbar_button.innerHTML == "登入/註冊"){
-        sign_in_box.style.display = "block";
-        whole.style.display = "block";
-    }
-})
+//   登入框、註冊框上的所有按鈕效果
 close_icon.forEach((e) => {
     e.addEventListener("click",() => {
         sign_in_box.style.display = "none";
@@ -29,6 +25,23 @@ change_to_signin.addEventListener("click", () => {
     sign_in_box.style.display = "block";
 })
 
+//   未登入狀態
+nav_signInButton.addEventListener("click",() => {outOfService()})
+nav_bookingButton.addEventListener("click", () => {outOfService()})
+
+function outOfService(){
+    if (document.cookie == ""){
+        sign_in_box.style.display = "block";
+        whole.style.display = "block";
+    }
+}
+
+//   登入狀態
+nav_bookingButton.addEventListener("click",() => {
+    if(document.cookie != ""){
+        document.location.href = "/booking";
+    }
+})
 
 // --- SIGN_UP  --------------------------------------------------
 let sign_up_name = document.querySelector("#sign_up_name");
@@ -97,7 +110,7 @@ window.addEventListener("load", () =>{
         return response.json()
     }).then(data => {
         if(data.data !== null){
-            navbar_button.innerHTML = "登出系統";
+            nav_signInButton.innerHTML = "登出系統";
         }
         return
     })
@@ -105,8 +118,8 @@ window.addEventListener("load", () =>{
 
 
 // --- SINGN_OUT ------------------------------------------------------
-navbar_button.addEventListener("click",() =>{
-    if(navbar_button.innerHTML == "登出系統"){
+nav_signInButton.addEventListener("click",() =>{
+    if(document.cookie != ""){
         fetch("/api/user/auth",{
             method: "DELETE",
             headers: {'Content-type':'application/json'}
@@ -122,7 +135,7 @@ navbar_button.addEventListener("click",() =>{
 })
 
 
-// --- SETTING TO_TOP_BUYYON EFFECT ------------------------------------------------
+// --- SETTING TO_TOP_BUTTON EFFECT ------------------------------------------------
 let top_button = document.querySelector(".top_button");
 
 window.addEventListener("scroll", () => scrollPage());

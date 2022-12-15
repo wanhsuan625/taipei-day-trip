@@ -1,5 +1,5 @@
 // --- WEBSITE ADDRESS ---------------------------------------
-let url = location.pathname.split("/")[2];
+let attractionID = location.pathname.split("/")[2];
 
 let eachAttractionFetch = (num) => {
     fetch(`/api/attraction/${num}`)
@@ -11,9 +11,10 @@ let eachAttractionFetch = (num) => {
         attractionInformation(data);
     })
 }
-eachAttractionFetch(url);
+eachAttractionFetch(attractionID);
 
-// --- Create DOM of IMG --------------------------------------
+
+// --- CREATE DOM OF IMG --------------------------------------
 const title = document.querySelector("head title");
 const img_box = document.querySelector(".img_box");
 const arrow = document.querySelector(".arrow");
@@ -90,7 +91,80 @@ arrowButton[1].addEventListener("click",() => {
 })
 
 
-// --- Create DOM of Bottom Information --------------------------------------
+// --- LIMIT BOOKING_DATE -----------------------------------------
+const bookingDate = document.getElementById("bookingDate");
+
+let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+if(month < 10){ month = `0${month}`};
+let day = date.getDate();
+if(day < 10){ day = `0${day}`};
+
+let today = `${year}-${month}-${day}`;
+bookingDate.setAttribute("min", today);   // 不可選過去的時間
+
+//   時段、價格取值
+const morning = document.getElementById("morning");
+let time;
+let price;
+
+function selectTime(){
+    if(morning.checked){
+        time = "morning";
+        price = "2000";}
+    else{
+        time = "afternoon";
+        price = "2500";}
+}
+
+
+// --- BOOKING ITINERARY BUTTON -----------------------------------------------
+const itineraryButton = document.querySelector(".booking_form button");
+const errorMessage = document.querySelector(".error_message");
+
+itineraryButton.addEventListener("click", () => {
+    if(document.cookie == ""){
+        sign_in_box.style.display = "block";
+        whole.style.display = "block";
+    }
+    else{
+        if(bookingDate.value == ""){
+            bookingDate.style.border = "2px solid red";
+            bookingDate.style.borderRadius = "5px";
+            errorMessage.style.display = "inline";
+        }
+        // ****若有登入&day有值，則傳送資料給booking page***
+        else{
+            bookingPostFetch();
+        }
+    }   
+})
+
+let bookingPostFetch = () => {
+    let selectDay = bookingDate.value;
+    selectTime();
+
+    fetch("/api/booking",{
+        method: "POST",
+        headers: {'Content-type':'application/json'},
+        body: JSON.stringify({
+            "attractionId": attractionID,
+            "date": selectDay,
+            "time": time,
+            "price": price})
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        if(data.ok == true){
+            console.log(data);
+            // window.location.href = "/booking";
+        }
+    })
+}
+
+
+// --- CREATE DOM OF BOTTOM INFORMATION --------------------------------------
 let attractionInformation = (data) =>{
     let result = data.data;
 
@@ -100,7 +174,6 @@ let attractionInformation = (data) =>{
     info_box.insertBefore(name, booking_form);
     
     let site = document.createElement("p");
-    console.log(result.mrt);
     if(result.mrt == null){
         site.innerHTML = result.category;}
     else{

@@ -1,5 +1,7 @@
+// --- CHECK LOGIN STATEMENT -------------------------------
 
-// --- CREDIT CARD FORMAT --------------------------------------------
+
+// --- CREDIT CARD -----------------------------------------
 let cleaveCreditNumber = new Cleave("#creditNumber", {
     creditCard: true,
     delimiter: " ",

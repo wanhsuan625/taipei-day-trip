@@ -21,26 +21,32 @@
             <div>訂購導覽行程</div>
             <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
             <div style="margin-bottom: 30px;">選擇日期：
-                <input type="date">
-                <!-- 可以選擇min，不可選取已過的時間點 -->
+                <input
+                 type="date"
+                 id="bookingDate">
+                 <span class="error_message" style="display: none;">
+                    <i>*必填─請選擇行程日期</i>
+                </span>
             </div>
             <div class="time">選擇時間：
                 <label>
                     <input checked
                      type="radio"
                      name="choicetime"
-                     onclick="getElementById('change_money').innerHTML = '新台幣 2000 元'">
+                     id="morning"
+                     onclick="getElementById('change_money').innerHTML = '2000'">
                     <p>上半天</p>
                 </label>
                 <label>
                     <input
                      type="radio"
                      name="choicetime"
-                     onclick="getElementById('change_money').innerHTML = '新台幣 2500 元'">
+                     id="afternoon"
+                     onclick="getElementById('change_money').innerHTML = '2500'">
                     <p>下半天</p>
                 </label>
             </div>
-            <div>導覽費用：<span id="change_money">新台幣 2000 元</span></div>
+            <div>導覽費用：<span>新台幣<span id="change_money">2000</span> 元</span></div>
             <button>開始預約行程</button>
         </div>
     </div>
