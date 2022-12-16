@@ -1,3 +1,11 @@
+// --- BOOKING PAGE- CHECK LOGIN STATEMENT ----------------------------
+// if(document.location.pathname == "/booking"){
+//     console.log(document.cookie);
+//     if(document.cookie == ""){
+//         document.location.href = "/";
+//     }
+// }
+
 // --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
 const nav_signInButton = document.querySelector(".list_2");
 const nav_bookingButton = document.querySelector(".list_1");
@@ -25,7 +33,7 @@ change_to_signin.addEventListener("click", () => {
     sign_in_box.style.display = "block";
 })
 
-//   未登入狀態
+//   未登入狀態 - NAVBAR上的按鈕
 nav_signInButton.addEventListener("click",() => {outOfService()})
 nav_bookingButton.addEventListener("click", () => {outOfService()})
 
