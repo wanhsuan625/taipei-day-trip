@@ -125,19 +125,15 @@ const errorMessage = document.querySelector(".error_message");
 
 itineraryButton.addEventListener("click", () => {
     if(document.cookie == ""){
-        sign_in_box.style.display = "block";
-        whole.style.display = "block";
-    }
+    sign_in_box.style.display = "block";
+    whole.style.display = "block"; }
     else{
         if(bookingDate.value == ""){
             bookingDate.style.border = "2px solid red";
             bookingDate.style.borderRadius = "5px";
             errorMessage.style.display = "inline";
         }
-        // ****若有登入&day有值，則傳送資料給booking page***
-        else{
-            bookingPostFetch();
-        }
+        else{ bookingPostFetch();}
     }   
 })
 
@@ -157,9 +153,7 @@ let bookingPostFetch = () => {
         return response.json()
     }).then(data => {
         if(data.ok == true){
-            console.log(data);
-            // window.location.href = "/booking";
-        }
+            window.location.href = "/booking";}
     })
 }
 
