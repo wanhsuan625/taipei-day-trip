@@ -121,17 +121,17 @@ function selectTime(){
 
 // --- BOOKING ITINERARY BUTTON -----------------------------------------------
 const itineraryButton = document.querySelector(".booking_form button");
-const errorMessage = document.querySelector(".error_message");
+const bookingError = document.querySelector(".error_message");
 
 itineraryButton.addEventListener("click", () => {
     if(document.cookie == ""){
-    sign_in_box.style.display = "block";
+    signInContainer.style.display = "block";
     whole.style.display = "block"; }
     else{
         if(bookingDate.value == ""){
             bookingDate.style.border = "2px solid red";
             bookingDate.style.borderRadius = "5px";
-            errorMessage.style.display = "inline";
+            bookingError.style.display = "inline";
         }
         else{ bookingPostFetch();}
     }   

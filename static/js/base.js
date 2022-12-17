@@ -9,37 +9,70 @@
 // --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
 const nav_signInButton = document.querySelector(".list_2");
 const nav_bookingButton = document.querySelector(".list_1");
-const close_icon = document.querySelectorAll(".close_icon");
-const sign_in_box = document.querySelector(".sign_in_box");
-const sign_up_box = document.querySelector(".sign_up_box");
-const change_to_signup = document.querySelector(".sign_in_box div button");
-const change_to_signin = document.querySelector(".sign_up_box div button");
-const whole = document.querySelector(".whole")
+const closeIcon = document.querySelectorAll(".close_icon");
+const signInContainer = document.querySelector(".sign_in_container");
+const signUpContainer = document.querySelector(".sign_up_container");
+const change_to_signup = document.querySelector(".switch_signUp button");
+const change_to_signin = document.querySelector(".switch_signIn button");
+const whole = document.querySelector(".whole");
+
+let signUpName = document.querySelector("#signUpName");
+let signUpEmail = document.querySelector("#signUpEmail");
+let signUpPassword = document.querySelector("#signUpPassword");
+const signUpButton = document.querySelector(".sign_up_box button");
+
+let signInEmail = document.querySelector("#signInEmail");
+let signInPassword = document.querySelector("#signInPassword");
+const signInButton = document.querySelector(".sign_in_box button");
 
 //   登入框、註冊框上的所有按鈕效果
-close_icon.forEach((e) => {
+closeIcon.forEach((e) => {
     e.addEventListener("click",() => {
-        sign_in_box.style.display = "none";
-        sign_up_box.style.display = "none";
+        signinInfoClear();
+        signupInfoClear();
+        signInContainer.style.display = "none";
+        signUpContainer.style.display = "none";
         whole.style.display = "none";
     })
 })
 change_to_signup.addEventListener("click", () => {
-    sign_up_box.style.display = "block";
-    sign_in_box.style.display = "none";
+    signinInfoClear();
+    signUpContainer.style.display = "block";
+    signInContainer.style.display = "none";
 })
 change_to_signin.addEventListener("click", () => {
-    sign_up_box.style.display = "none";
-    sign_in_box.style.display = "block";
+    signupInfoClear();
+    signUpContainer.style.display = "none";
+    signInContainer.style.display = "block";
 })
 
+let signupInfoClear = () => {
+    signUpName.value = "";
+    signUpEmail.value = "";
+    signUpPassword.value = "";
+    signUpName.style.border = "";
+    signUpEmail.style.border = "";
+    signUpPassword.style.border = "";
+    upNameError.style.display = "none";
+    upEmailError.style.display = "none";
+    upPasswordError.style.display = "none";
+}
+let signinInfoClear = () => {
+    signInEmail.value = "";
+    signInPassword.value = "";
+    signInEmail.style.border = "";
+    signInPassword.style.border = "";
+    inEmailError.style.display = "none";
+    inPasswordError.style.display = "none";
+}
+
 //   未登入狀態 - NAVBAR上的按鈕
-nav_signInButton.addEventListener("click",() => {outOfService()})
-nav_bookingButton.addEventListener("click", () => {outOfService()})
+nav_signInButton.addEventListener("click",() => { outOfService()});
+nav_bookingButton.addEventListener("click", () => { outOfService()});
 
 function outOfService(){
     if (document.cookie == ""){
-        sign_in_box.style.display = "block";
+        signInContainer.style.display = "block";
         whole.style.display = "block";
     }
 }
@@ -52,59 +85,133 @@ nav_bookingButton.addEventListener("click",() => {
 })
 
 // --- SIGN_UP  --------------------------------------------------
-let sign_up_name = document.querySelector("#sign_up_name");
-let sign_up_email = document.querySelector("#sign_up_email");
-let sign_up_password = document.querySelector("#sign_up_password");
-let sign_up_message = document.querySelector(".sign_up_message");
-const sign_up_button = document.querySelector(".sign_up_box label button");
+// reg
+const regEmail = new RegExp("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
+const regPassword = new RegExp("\\w{4,19}");
 
-sign_up_button.addEventListener("click",() => {signUpFetch()});
+function errorMessage(input, element, message){
+    input.style.outline = "none";
+    input.style.border = "2px solid red";
+    element.style.display = "block";
+    element.textContent = message;
+}
+
+// 註冊資訊 - 正則表達式
+let upNameError = document.querySelector(".up_name_error");
+let upEmailError = document.querySelector(".up_email_error");
+let upPasswordError = document.querySelector(".up_password_error");
+
+signUpName.addEventListener("input", () => {
+    if (signUpName.value == ""){
+        errorMessage(signUpName, upNameError, "此欄位必填")
+    }
+    else{
+        signUpName.style.border = "";
+        upNameError.style.display = "none";
+    }
+})
+
+signUpEmail.addEventListener("input", () => {
+    if (signUpEmail.value == ""){
+        errorMessage(signUpEmail, upEmailError, "此欄位必填")
+    }
+    else if(!regEmail.test(signUpEmail.value)) {
+        errorMessage(signUpEmail, upEmailError, "格式有誤，請重新輸入")
+    }
+    else{
+        signUpEmail.style.border = "";
+        upEmailError.style.display = "none";
+    }
+})
+
+signUpPassword.addEventListener("input", () => {
+    if (signUpPassword.value == ""){
+        errorMessage(signUpPassword, upPasswordError, "此欄位必填");
+    }
+    else if(!regPassword.test(signUpPassword.value)) {
+        errorMessage(signUpPassword, upPasswordError, "密碼長度最短不得低於4碼");
+    }
+    else{
+        signUpPassword.style.border = "";
+        upPasswordError.style.display = "none";
+    }
+})
+
+
+// 傳送 SIGN_UP 資料
+signUpButton.addEventListener("click",() => { signUpFetch()});
 
 let signUpFetch = () => {
     fetch("/api/user", {
         method : "POST",
         headers: {'Content-type':'application/json'},
         body : JSON.stringify({
-                "name" : sign_up_name.value,
-                "email" : sign_up_email.value,
-                "password" : sign_up_password.value})
+                "name" : signUpName.value,
+                "email" : signUpEmail.value,
+                "password" : signUpPassword.value})
     }).then(response => {
         return response.json()
     }).then(data => {
         if(data.ok == true){
-            sign_up_message.style.display = "block";
-            sign_up_message.style.color = "#66AABB";
-            sign_up_message.textContent = data.message;
+            upPasswordError.style.display = "block";
+            upPasswordError.style.color = "#66AABB";
+            upPasswordError.textContent = data.message;
         }
-        sign_up_message.style.display = "block";
-        sign_up_message.textContent = data.message;
+        upPasswordError.style.display = "block";
+        upPasswordError.textContent = data.message;
     })
 }
 
 
 // --- SIGN_IN -----------------------------------------------------
-let sign_in_email = document.querySelector("#sign_in_email");
-let sign_in_password = document.querySelector("#sign_in_password");
-let sign_in_message = document.querySelector(".sign_in_message");
-const sign_in_button = document.querySelector(".sign_in_box label button");
+// 登入資訊 - 正則表達式
+let inEmailError = document.querySelector(".in_email_error");
+let inPasswordError = document.querySelector(".in_password_error");
 
-sign_in_button.addEventListener("click", ()=> {signInFetch()});
+signInEmail.addEventListener("input", () => {
+    if (signInEmail.value == ""){
+        errorMessage(signInEmail, inEmailError, "此欄位必填")
+    }
+    else if(!regEmail.test(signInEmail.value)) {
+        errorMessage(signInEmail, inEmailError, "格式有誤，請重新輸入")
+    }
+    else{
+        signInEmail.style.border = "";
+        inEmailError.style.display = "none";
+    }
+})
+
+signInPassword.addEventListener("input", () => {
+    if (signInPassword.value == ""){
+        errorMessage(signInPassword, inPasswordError, "此欄位必填");
+    }
+    else if(!regPassword.test(signInPassword.value)) {
+        errorMessage(signInPassword, inPasswordError, "密碼長度最短不得低於4碼");
+    }
+    else{
+        signInPassword.style.border = "";
+        inPasswordError.style.display = "none";
+    }
+})
+
+// 傳送 SIGN_IN 資料
+signInButton.addEventListener("click", ()=> { signInFetch()});
 
 let signInFetch = () => {
     fetch("/api/user/auth",{
         method: "PUT",
         headers: {'Content-type':'application/json'},
         body : JSON.stringify({
-                "email" : sign_in_email.value,
-                "password" : sign_in_password.value})
+                "email" : signInEmail.value,
+                "password" : signInPassword.value})
     }).then(response => {
         return response.json();
     }).then(data =>{
         if(data.ok == true){
             location.reload();  // 登入成功，重新載入
         }
-        sign_in_message.style.display = "block";
-        sign_in_message.textContent = data.message;
+        inPasswordError.style.display = "block";
+        inPasswordError.textContent = data.message;
     })
 }
 
@@ -144,17 +251,17 @@ nav_signInButton.addEventListener("click",() =>{
 
 
 // --- SETTING TO_TOP_BUTTON EFFECT ------------------------------------------------
-let top_button = document.querySelector(".top_button");
+let topButton = document.querySelector(".top_button");
 
 window.addEventListener("scroll", () => scrollPage());
-top_button.addEventListener("click", () => backTop());
+topButton.addEventListener("click", () => backTop());
 
 function scrollPage(){
     if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
-        top_button.style.display = "block";
+        topButton.style.display = "block";
     }
     else{
-        top_button.style.display = "none";
+        topButton.style.display = "none";
     }
 }
 function backTop(){

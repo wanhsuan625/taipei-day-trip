@@ -74,7 +74,7 @@ nav{
 
 
 /* === SIGNIN / SIGNUP BOX =================================== */
-.sign_in_box{
+.sign_in_container{
     width: 340px;
     background: linear-gradient(white, white) padding-box,
                 linear-gradient(90deg,#66AABB,#337788) border-box;
@@ -88,7 +88,7 @@ nav{
     left: 50%;
     transform: translateX(-50%);
 }
-.sign_up_box{
+.sign_up_container{
     width: 340px;
     background: linear-gradient(white, white) padding-box,
                 linear-gradient(90deg,#66AABB,#337788) border-box;
@@ -113,7 +113,7 @@ nav{
 .close_icon:hover{
     transform: scale(1.1);
 }
-.sign_in_box h1, .sign_up_box h1{
+.sign_in_container h1, .sign_up_container h1{
     width: 144px;
     font-weight: 700;
     font-size: 24px;
@@ -122,24 +122,23 @@ nav{
     margin: 0 auto 18px auto;
     top: 15px;
 }
-.sign_in_box label, .sign_up_box label{
+.sign_in_box, .sign_up_box{
     top: 15px;
     left: 15px;
 }
-.sign_in_box label input, .sign_up_box label input{
+.sign_in_box input, .sign_up_box input{
     width: 310px;
     height: 47px;
     font-size: 15px;
     font-weight: 500;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
-    outline-color: #82c0cf;
     cursor: pointer;
     
     margin-bottom: 10px;
     padding: 15px;
 }
-.sign_in_box label button, .sign_up_box label button{
+.sign_in_box button, .sign_up_box button{
     width: 310px;
     height: 47px;
     color: #fff;
@@ -152,21 +151,22 @@ nav{
     border-radius: 5px;
     margin-bottom: 10px;
 }
-.sign_in_box label button:hover, .sign_up_box label button:hover{
+.sign_in_box button:hover, .sign_up_box button:hover{
     transform: scale(1.01);
     box-shadow: 1px 2px 5px 1px #AAAAAA;
 }
-.sign_in_box label button:active, .sign_up_box label button:active{
+.sign_in_box button:active, .sign_up_box button:active{
     transform: scale(1) translate(1px,1px);
 }
-.sign_in_box div, .sign_up_box div{
+
+.switch_signUp, .switch_signIn{
     font-weight: 500;
     font-size: 16px;
     color: #666666;
     margin: 18px 0 20px 0;
     text-align: center;
 }
-.sign_in_box div button, .sign_up_box div button{
+.switch_signUp button, .switch_signIn button{
     border: none;
     margin: 0;
     padding: 0;
@@ -174,11 +174,10 @@ nav{
     background-color: transparent;
     cursor: pointer;
 }
-.sign_in_box div button:hover, .sign_up_box div button:hover{
+.switch_signUp button:hover, .switch_signIn button:hover{
     text-decoration: underline;
 }
-/* .inEmailError, .inPasswordError, .upNameError, .upEmailError, .upPasswordError{ */
-.sign_in_message, .sign_up_message{
+.in_email_error, .in_password_error, .up_name_error, .up_email_error, .up_password_error{
     display: block;
     width: 100%;
     height: 10px;
@@ -202,6 +201,8 @@ nav{
 
 /* === TOP BUTTON ==========================================*/
 .top_button{
+    width: 25px;
+    height: 25px;
     display: none;
     transform: scale(2);
     border-radius: 50%;
@@ -213,6 +214,10 @@ nav{
     position: fixed;
     bottom: 15%;
     right: 2%;
+}
+.top_button i{
+    right: 1.2px;
+    bottom: 0.8px;
 }
 .top_button:hover{
     color: #fff;
@@ -260,7 +265,6 @@ footer > p{
     .top_button{
         opacity: 0.5;
         bottom: 5%;
-        transform: scale(1.2);
     }
-    .sign_in_box, .sign_up_box{width: 335px;}
+    .sign_in_container, .sign_up_container{width: 335px;}
 }

@@ -34,32 +34,63 @@
         {% block body%}{% endblock %}
 
 
-        <!-- //SIGN_UP BOX -->
-        <div class="sign_in_box" style="display: none;">
+        <!-- //SIGN_IN BOX -->
+        <div class="sign_in_container" style="display: none;">
             <img class="close_icon" src="/image/icon_close.png" alt="">
             <h1>登入會員帳號</h1>
-            <label>
-                <input type="email" id="sign_in_email" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" id="sign_in_password" name="password" placeholder="輸入密碼" required>
-                <span class="sign_in_message" style="display: none"></span>
-                <button>登入帳戶</button>
-            </label>
-            <div>還沒有帳戶？<button>點此註冊</button></div>
-        </div>
-        <!-- END SIGN_UP BOX -->
 
-        <!-- //SIGN_IN BOX -->
-        <div class="sign_up_box" style="display: none;">
+            <div class = "sign_in_box">
+                <input required
+                 type="email"
+                 id="signInEmail"
+                 name="email"
+                 placeholder="輸入電子信箱" >
+                <span class="in_email_error" style="display: none"></span>
+                
+                <input  required
+                 type="password"
+                 id="signInPassword"
+                 name="password"
+                 placeholder="輸入密碼" >
+                <span class="in_password_error" style="display: none"></span>
+
+                <button>登入帳戶</button>
+            </div>
+            <div class="switch_signUp">還沒有帳戶？<button>點此註冊</button></div>
+        </div>
+        <!-- END SIGN_IN BOX -->
+
+        <!-- //SIGN_UP BOX -->
+        <div class="sign_up_container" style="display: none;">
             <img class="close_icon" src="/image/icon_close.png" alt="">
             <h1>註冊會員帳號</h1>
-            <label>
-                <input type="text" id="sign_up_name" name="name" placeholder="輸入姓名" required>
-                <input type="email" id="sign_up_email" name="email" placeholder="輸入電子信箱" required>
-                <input type="password" id="sign_up_password" name="password" placeholder="輸入密碼" required>
-                <span class="sign_up_message" style="display: none"></span>
+
+            <div class="sign_up_box">
+                <input required
+                 type="text"
+                 id="signUpName"
+                 name="name"
+                 placeholder="輸入姓名" >
+                <span class="up_name_error" style="display: none"></span>
+
+                <input required
+                 type="email"
+                 id="signUpEmail"
+                 name="email"
+                 placeholder="輸入電子信箱" >
+                <span class="up_email_error" style="display: none"></span>
+
+                
+                 <input required
+                 type="password"
+                 id="signUpPassword"
+                 name="password"
+                 placeholder="輸入密碼 (密碼長度可為4至20個字元)" >
+                <span class="up_password_error" style="display: none"></span>
+
                 <button type="submit">註冊新帳戶</button>
-            </label>
-            <div>已經有帳戶？<button>點此登入</button></div>
+            </div>
+            <div class="switch_signIn">已經有帳戶？<button>點此登入</button></div>
         </div>
         <!-- END SIGN_UP BOX -->
 
