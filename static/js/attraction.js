@@ -1,5 +1,5 @@
-// WEBSITE ADDRESS
-let url = location.pathname.split("/")[2];
+// --- WEBSITE ADDRESS ---------------------------------------
+let attractionID = location.pathname.split("/")[2];
 
 let eachAttractionFetch = (num) => {
     fetch(`/api/attraction/${num}`)
@@ -11,18 +11,20 @@ let eachAttractionFetch = (num) => {
         attractionInformation(data);
     })
 }
-eachAttractionFetch(url);
+eachAttractionFetch(attractionID);
 
-// // --- Create DOM of IMG --------------------------------------
+
+// --- CREATE DOM OF IMG --------------------------------------
 const title = document.querySelector("head title");
-const imgBox = document.querySelector(".imgBox");
+const img_box = document.querySelector(".img_box");
 const arrow = document.querySelector(".arrow");
-const infoBox = document.querySelector(".infoBox");
-const bookingForm = document.querySelector(".bookingForm");
-const main = document.querySelector("main");
+const info_box = document.querySelector(".info_box");
+const booking_form = document.querySelector(".booking_form");
+const section = document.querySelector("section");
 const headline = document.querySelectorAll(".headline");
 var slide;
 var dot;
+var slideIndex;
 
 let attractionImg = (data) =>{
     let result = data.data;
@@ -33,52 +35,32 @@ let attractionImg = (data) =>{
     
     // IMAGES
     for(let i = 0; i < len; i++){
-        let imgSlide = document.createElement("div");
-        imgSlide.className = "imgSlide fade";
-        imgBox.insertBefore(imgSlide, arrow);
+        let img_slide = document.createElement("div");
+        img_slide.className = "img_slide fade";
+        img_box.insertBefore(img_slide, arrow);
 
         let img = document.createElement("img");
-        img.className = "attractionImg";
+        img.className = "attraction_img";
         img.src = result.images[i];
-        imgSlide.appendChild(img);
+        img_slide.appendChild(img);
     }
 
      // BOTTOM DOT
-     let dotGroup = document.createElement("div");
-     dotGroup.className = "dotGroup";
-     imgBox.appendChild(dotGroup);
+     let dot_group = document.createElement("div");
+     dot_group.className = "dot_group";
+     img_box.appendChild(dot_group);
      for(let i = 0; i < len; i++){
-         let dot = dotGroup.appendChild(document.createElement("div"));
+         let dot = dot_group.appendChild(document.createElement("div"));
          dot.className = "dot";
-         dotGroup.appendChild(dot);
+         dot_group.appendChild(dot);
      }
 
     // SLIDE IMAGES
-    slide = document.querySelectorAll(".imgSlide");
+    slide = document.querySelectorAll(".img_slide");
     dot = document.querySelectorAll(".dot");
 
-    let slideIndex = 1;
+    slideIndex = 1;
     slideShow(slideIndex); 
-
-    function slideShow(n){
-        if (n > slide.length) {slideIndex = 1}
-        if (n < 1) {slideIndex = slide.length}
-        for (i = 0; i < slide.length; i++) {
-            slide[i].style.display = "none";
-            dot[i].classList.remove("active");
-        }
-        slide[slideIndex-1].style.display = "block";
-        dot[slideIndex-1].classList.add("active");
-    }
-
-    // ARROW BUTTON
-    const arrowButton = document.querySelectorAll(".arrow img");
-    arrowButton[0].addEventListener("click",() => {
-        slideShow(slideIndex -= 1);
-    })
-    arrowButton[1].addEventListener("click",() => {
-        slideShow(slideIndex += 1);
-    })
 
     // DOT BUTTON
     for(let i = 0; i < dot.length; i++){
@@ -88,29 +70,120 @@ let attractionImg = (data) =>{
     }
 }
 
-// --- Create DOM of Bottom Information --------------------------------------
+function slideShow(n){
+    if (n > slide.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slide.length}
+    for (i = 0; i < slide.length; i++) {
+        slide[i].style.display = "none";
+        dot[i].classList.remove("active");
+    }
+    slide[slideIndex-1].style.display = "block";
+    dot[slideIndex-1].classList.add("active");
+}
+
+// ARROW BUTTON
+const arrowButton = document.querySelectorAll(".arrow img");
+arrowButton[0].addEventListener("click",() => {
+    slideShow(slideIndex -= 1);
+})
+arrowButton[1].addEventListener("click",() => {
+    slideShow(slideIndex += 1);
+})
+
+
+// --- LIMIT BOOKING_DATE -----------------------------------------
+const bookingDate = document.getElementById("bookingDate");
+
+let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+if(month < 10){ month = `0${month}`};
+let day = date.getDate();
+if(day < 10){ day = `0${day}`};
+
+let today = `${year}-${month}-${day}`;
+bookingDate.setAttribute("min", today);   // 不可選過去的時間
+
+//   時段、價格取值
+const morning = document.getElementById("morning");
+let time;
+let price;
+
+function selectTime(){
+    if(morning.checked){
+        time = "morning";
+        price = "2000";}
+    else{
+        time = "afternoon";
+        price = "2500";}
+}
+
+
+// --- BOOKING ITINERARY BUTTON -----------------------------------------------
+const itineraryButton = document.querySelector(".booking_form button");
+const bookingError = document.querySelector(".error_message");
+
+itineraryButton.addEventListener("click", () => {
+    if(document.cookie == ""){
+    signInContainer.style.display = "block";
+    whole.style.display = "block"; }
+    else{
+        if(bookingDate.value == ""){
+            bookingDate.style.border = "2px solid red";
+            bookingDate.style.borderRadius = "5px";
+            bookingError.style.display = "inline";
+        }
+        else{ bookingPostFetch();}
+    }   
+})
+
+let bookingPostFetch = () => {
+    let selectDay = bookingDate.value;
+    selectTime();
+
+    fetch("/api/booking",{
+        method: "POST",
+        headers: {'Content-type':'application/json'},
+        body: JSON.stringify({
+            "attractionId": attractionID,
+            "date": selectDay,
+            "time": time,
+            "price": price})
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        if(data.ok == true){
+            window.location.href = "/booking";}
+    })
+}
+
+
+// --- CREATE DOM OF BOTTOM INFORMATION --------------------------------------
 let attractionInformation = (data) =>{
     let result = data.data;
 
     // NAME , MRT AND CATEGORY
     let name = document.createElement("h1");
     name.innerHTML = result.name;
-    infoBox.insertBefore(name, bookingForm);
+    info_box.insertBefore(name, booking_form);
     
     let site = document.createElement("p");
-    site.innerHTML = result.category + " at " + result.mrt;
-    infoBox.insertBefore(site, bookingForm);
+    if(result.mrt == null){
+        site.innerHTML = result.category;}
+    else{
+        site.innerHTML = result.category + " at " + result.mrt;}
+    info_box.insertBefore(site, booking_form);
 
     // INFORMATION
     let content1 = document.createElement("div");
     content1.innerHTML = result.description;
-    main.insertBefore(content1, headline[0]);
+    section.insertBefore(content1, headline[0]);
 
     let content2 = document.createElement("div");
     content2.innerHTML = result.address;
-    main.insertBefore(content2, headline[1]);
+    section.insertBefore(content2, headline[1]);
 
     let content3 = document.createElement("div");
     content3.innerHTML = result.transport;
-    main.appendChild(content3);
+    section.appendChild(content3);
 };

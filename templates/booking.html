@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+<!-- HEAD -------------------------------------------------- -->
+{% block head %}
+<link rel="stylesheet" href="/css/booking.css">
+<title>預約行程</title>
+<!-- Cleave.js v1.1.1 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.1.0/cleave.min.js"></script>
+{% endblock %}
+
+<!-- BODY -------------------------------------------------- -->
+{% block body %}
+<!-- BOOK_HEADLINE -->
+<main>
+    <!-- END ITINERARY -->
+
+    <hr>
+
+    <!-- // CONTACT INFOMATION -->
+    <div class="contact_container">
+        <div class="contact_headline">您的聯絡資訊</div>
+        
+        <label class="contact_detail">聯絡姓名：
+            <input required
+            type="text"
+            name="name"
+            id="name">
+        </label><br>
+
+        <label class="contact_detail">連絡信箱：
+            <input required
+            type="email"
+            inputmode="email"
+            name="email"
+            id="email">
+        </label><br>
+        
+        <label class="contact_detail">手機號碼：
+            <input required
+            type="tel"
+            inputmode="tel"
+            name="phone"
+            id="phone">
+        </label>
+
+        <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+    </div>
+    <!-- END CONTACT INFOMATION -->
+
+    <hr>
+
+    <!-- // CREDIT CARD -->
+    <div class="credit_container">
+        <div class="credit_headline">信用卡付款資訊</div>
+
+        <label class="credit_detail">卡片號碼：
+            <input required
+            type="tel"
+            inputmode="numeric"
+            name="creditNumber"
+            id="creditNumber"
+            placeholder="xxxx xxxx xxxx xxxx">
+        </label><br>
+
+        <label class="credit_detail">過期時間：
+            <input required
+            type="text"
+            name="creditExpire"
+            id="creditExpire"
+            placeholder="MM/YY">
+        </label><br>
+
+        <label class="credit_detail">驗證密碼：
+            <input required
+            type="password"
+            inputmode="numeric"
+            name="creditCvv"
+            id="creditCvv"
+            placeholder="CVV"
+            onkeyup="value=value.replace(/\D/g,'')"
+            minlength="3"
+            maxlength="4">
+        </label>
+    </div>
+    <!-- END CREDIT CARD -->
+
+    <hr>
+    <div class="confirm_container">
+        <div class="total_price"></div>
+        <button class="pay_button">確認訂購並付款</button>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="/js/booking.js"></script>
+{% endblock %}

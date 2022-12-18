@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/base.css">
+
+    {% block head %}{% endblock %}
+    
+    <!-- import Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <!-- import fontawesome -->
+    <script src="https://kit.fontawesome.com/8d2e522741.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- //NAVBAR -->
+        <header>
+            <nav>
+                <a class="title" href="/">台北一日遊</a>
+                <ul class="menu">
+                    <li class="list_1">預定行程</li>
+                    <li class="list_2">登入/註冊</li>
+                </ul>
+            </nav>
+        </header>
+        <!-- END NAVBAR -->
+
+
+        {% block body%}{% endblock %}
+
+
+        <!-- //SIGN_IN BOX -->
+        <div class="sign_in_container" style="display: none;">
+            <img class="close_icon" src="/image/icon_close.png" alt="">
+            <h1>登入會員帳號</h1>
+
+            <div class = "sign_in_box">
+                <input required
+                 type="email"
+                 id="signInEmail"
+                 name="email"
+                 placeholder="輸入電子信箱" >
+                <span class="in_email_error" style="display: none"></span>
+                
+                <input  required
+                 type="password"
+                 id="signInPassword"
+                 name="password"
+                 placeholder="輸入密碼" >
+                <span class="in_password_error" style="display: none"></span>
+
+                <button>登入帳戶</button>
+            </div>
+            <div class="switch_signUp">還沒有帳戶？<button>點此註冊</button></div>
+        </div>
+        <!-- END SIGN_IN BOX -->
+
+        <!-- //SIGN_UP BOX -->
+        <div class="sign_up_container" style="display: none;">
+            <img class="close_icon" src="/image/icon_close.png" alt="">
+            <h1>註冊會員帳號</h1>
+
+            <div class="sign_up_box">
+                <input required
+                 type="text"
+                 id="signUpName"
+                 name="name"
+                 placeholder="輸入姓名" >
+                <span class="up_name_error" style="display: none"></span>
+
+                <input required
+                 type="email"
+                 id="signUpEmail"
+                 name="email"
+                 placeholder="輸入電子信箱" >
+                <span class="up_email_error" style="display: none"></span>
+
+                
+                 <input required
+                 type="password"
+                 id="signUpPassword"
+                 name="password"
+                 placeholder="輸入密碼 (密碼長度可為4至20個字元)" >
+                <span class="up_password_error" style="display: none"></span>
+
+                <button type="submit">註冊新帳戶</button>
+            </div>
+            <div class="switch_signIn">已經有帳戶？<button>點此登入</button></div>
+        </div>
+        <!-- END SIGN_UP BOX -->
+
+        <!-- //SIGN_IN_UP BACKGROUND EFFECT-->
+        <div class="whole" style="display: none;"></div>
+        <!-- END SIGN_IN_UP BACKGROUND EFFECT-->
+        
+        <!-- //TO_TOP_BUTTON -->
+        <button class="top_button"><i class="fa-solid fa-angles-up"></i></button>
+        <!-- END TO_TOP_BUTTON -->
+        
+        <!-- //FOOTER -->
+        <footer><p>COPYRIGHT © 2022 台北一日遊</p></footer>
+        <!-- END FOOTER -->
+
+    </div>
+
+    <script src="/js/base.js"></script>
+    {% block script%}{% endblock %}
+</body>
+</html>
