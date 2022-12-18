@@ -85,6 +85,28 @@ nav_bookingButton.addEventListener("click",() => {
 })
 
 // --- SIGN_UP  --------------------------------------------------
+// 密碼可見
+let secretEye = document.querySelectorAll(".input_eye");
+let eyeClick = true;
+secretEye.forEach((e) => {
+    e.addEventListener("click", () => {
+        if(eyeClick){
+            e.classList.remove("fa-eye-slash");
+            e.classList.add("fa-eye");
+            signInPassword.type = "text";
+            signUpPassword.type = "text";
+            eyeClick = false;
+        }
+        else{
+            e.classList.remove("fa-eye");
+            e.classList.add("fa-eye-slash");
+            signInPassword.type = "password";
+            signUpPassword.type = "password";
+            eyeClick = true;
+        }
+    })
+})
+
 // reg
 const regEmail = new RegExp("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
 const regPassword = new RegExp("\\w{4,19}");

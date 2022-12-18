@@ -54,7 +54,8 @@ nav{
     color: #448899;
 }
 .menu{
-    height: 14px;
+    height: 54px;
+    align-items: center;
     font-size: 16px;
     line-height: 13px;
     font-weight: 500;
@@ -62,13 +63,12 @@ nav{
     display: flex;
     cursor: pointer;
 }
-.list_1{
-    width: 64px;
-    margin-right: 20px;
+.list{
+    padding: 20.5px 10px;
 }
-.list_2{width: 71px;}
-.list_1:hover, .list_2:hover{
-    transform: scale(1.05);
+.list:hover{
+    color: #fff;
+    background-color:#79a3ad;
 }
 
 
@@ -124,19 +124,42 @@ nav{
 }
 .sign_in_box, .sign_up_box{
     top: 15px;
-    left: 15px;
+    text-align: center;
 }
-.sign_in_box input, .sign_up_box input{
+.sign_input{
     width: 310px;
     height: 47px;
     font-size: 15px;
     font-weight: 500;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: text;
     
     margin-bottom: 10px;
     padding: 15px;
+    padding-left: 43px;
+}
+.sign_input:hover{
+    border: 2px solid #8f8f8f;
+}
+.input_image{              /* fontawesome 圖片視為字體 */
+    color: #757575;
+    font-size: 21px;
+    
+    position: absolute;
+    top: 14px;
+    left: 27px;
+    z-index: 5;
+}
+.input_eye{
+    color: #757575;
+    font-size: 17px;
+    cursor: pointer;
+    
+    position: absolute;
+    top: 15px;
+    right: 27px;
+    z-index: 5;
 }
 .sign_in_box button, .sign_up_box button{
     width: 310px;
@@ -158,7 +181,6 @@ nav{
 .sign_in_box button:active, .sign_up_box button:active{
     transform: scale(1) translate(1px,1px);
 }
-
 .switch_signUp, .switch_signIn{
     font-weight: 500;
     font-size: 16px;
@@ -183,9 +205,10 @@ nav{
     height: 10px;
     font-size: 15px;
     color: red;
+    text-align: left;
 
     top: -7px;
-    left: 9px;
+    left: 30px;
     margin-bottom: 4px;
 }
 .whole{

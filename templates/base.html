@@ -23,8 +23,8 @@
             <nav>
                 <a class="title" href="/">台北一日遊</a>
                 <ul class="menu">
-                    <li class="list_1">預定行程</li>
-                    <li class="list_2">登入/註冊</li>
+                    <li class="list list_1">預定行程</li>
+                    <li class="list list_2">登入/註冊</li>
                 </ul>
             </nav>
         </header>
@@ -38,21 +38,29 @@
         <div class="sign_in_container" style="display: none;">
             <img class="close_icon" src="/image/icon_close.png" alt="">
             <h1>登入會員帳號</h1>
-
             <div class = "sign_in_box">
-                <input required
-                 type="email"
-                 id="signInEmail"
-                 name="email"
-                 placeholder="輸入電子信箱" >
-                <span class="in_email_error" style="display: none"></span>
-                
-                <input  required
-                 type="password"
-                 id="signInPassword"
-                 name="password"
-                 placeholder="輸入密碼" >
-                <span class="in_password_error" style="display: none"></span>
+                <div class="input_group">
+                    <i class="fa-solid fa-envelope input_image"></i>
+                    <input required
+                    type="email"
+                    id="signInEmail"
+                    class="sign_input"
+                    name="email"
+                    placeholder="輸入電子信箱" >
+                    <span class="in_email_error" style="display: none"></span>
+                </div>
+
+                <div class="input_group">
+                    <i class="fa-solid fa-key input_image"></i>
+                    <input  required
+                    type="password"
+                    id="signInPassword"
+                    class="sign_input"
+                    name="password"
+                    placeholder="輸入密碼" >
+                    <i class="fa-regular fa-eye-slash input_eye"></i>
+                    <span class="in_password_error" style="display: none"></span>
+                </div>
 
                 <button>登入帳戶</button>
             </div>
@@ -64,29 +72,41 @@
         <div class="sign_up_container" style="display: none;">
             <img class="close_icon" src="/image/icon_close.png" alt="">
             <h1>註冊會員帳號</h1>
-
             <div class="sign_up_box">
-                <input required
-                 type="text"
-                 id="signUpName"
-                 name="name"
-                 placeholder="輸入姓名" >
-                <span class="up_name_error" style="display: none"></span>
+                <div class="input_group">
+                    <i class="fa-solid fa-user input_image"></i>
+                    <input required
+                    type="text"
+                    id="signUpName"
+                    class="sign_input"
+                    name="name"
+                    placeholder="輸入姓名" >
+                    <span class="up_name_error" style="display: none"></span>
+                </div>
 
-                <input required
-                 type="email"
-                 id="signUpEmail"
-                 name="email"
-                 placeholder="輸入電子信箱" >
-                <span class="up_email_error" style="display: none"></span>
+                <div class="input_group">
+                    <i class="fa-solid fa-envelope input_image"></i>
+                    <input required
+                    type="email"
+                    id="signUpEmail"
+                    class="sign_input"
+                    name="email"
+                    placeholder="輸入電子信箱" >
+                    <span class="up_email_error" style="display: none"></span>
+                </div>
 
-                
-                 <input required
-                 type="password"
-                 id="signUpPassword"
-                 name="password"
-                 placeholder="輸入密碼 (密碼長度可為4至20個字元)" >
-                <span class="up_password_error" style="display: none"></span>
+
+                <div class="input_group">
+                    <i class="fa-solid fa-key input_image"></i>
+                    <input required
+                    type="password"
+                    id="signUpPassword"
+                    class="sign_input"
+                    name="password"
+                    placeholder="輸入密碼" >
+                    <i class="fa-regular fa-eye-slash input_eye"></i>
+                    <span class="up_password_error" style="display: none"></span>
+                </div>
 
                 <button type="submit">註冊新帳戶</button>
             </div>
