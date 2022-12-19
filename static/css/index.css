@@ -169,6 +169,8 @@ main{
         grid-template-columns: repeat(2,1fr);
         gap: 20px;
     }
+    .search_bar input{ width: 370px;}
+    .search_icon{ left: 370px}
 }
 
 /* LAYOUT - BELOW 480px  */

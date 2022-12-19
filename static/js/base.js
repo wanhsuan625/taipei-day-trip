@@ -1,12 +1,28 @@
-// --- BOOKING PAGE- CHECK LOGIN STATEMENT ----------------------------
-// if(document.location.pathname == "/booking"){
-//     console.log(document.cookie);
-//     if(document.cookie == ""){
-//         document.location.href = "/";
-//     }
-// }
+// --- NAVBAR__RWD SETTING : SCREEN BELOW 480 px ----------------------
+const nav_listIcon = document.querySelector(".list_icon_i");
+const nav_menu = document.querySelectorAll(".menu .list");
+let iconCheck = true;
+
+nav_listIcon.addEventListener("click",() => {
+    if(iconCheck){
+        nav_listIcon.classList.remove("fa-bars");
+        nav_listIcon.classList.add("fa-xmark");
+        nav_menu.forEach((e) => {e.style.display = "block"});
+        
+        iconCheck = false;
+    }
+    else{
+        nav_listIcon.classList.remove("fa-xmark");
+        nav_listIcon.classList.add("fa-bars");
+        nav_menu.forEach((e) => {e.style.display = "none"});
+
+        iconCheck = true;
+    }
+})
+
 
 // --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
+const header = document.querySelector("header");
 const nav_signInButton = document.querySelector(".list_2");
 const nav_bookingButton = document.querySelector(".list_1");
 const closeIcon = document.querySelectorAll(".close_icon");
@@ -278,9 +294,11 @@ topButton.addEventListener("click", () => backTop());
 function scrollPage(){
     if(document.body.scrollTop > 30 || document.documentElement.scrollTop > 30){
         topButton.style.display = "block";
+        header.style.boxShadow = "0px 3px 10px #757575" ;
     }
     else{
         topButton.style.display = "none";
+        header.style.boxShadow = "none";
     }
 }
 function backTop(){
