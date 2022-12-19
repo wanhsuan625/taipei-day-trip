@@ -6,6 +6,7 @@ let bookHeadline = document.createElement("div");
 bookHeadline.className = "book_headline";
 let inputName = document.getElementById("name");
 let inputEmail = document.getElementById("email");
+const contactSyncButton = document.querySelector("#contactSync");
 const totalPrice = document.querySelector(".total_price");
 const footer = document.querySelector("footer");
 
@@ -17,8 +18,17 @@ fetch("/api/user/auth")
     bookHeadline.textContent = `您好，${result_user.name}，待預約的行程如下：`;
     main.insertAdjacentElement("beforebegin", bookHeadline);
 
-    inputName.value = result_user.name;
-    inputEmail.value = result_user.email;
+    // CONTACT AREA - USER'S INFORMATION
+    contactSyncButton.addEventListener("click", () => {
+        if(contactSyncButton.checked){
+            inputName.value = result_user.name;
+            inputEmail.value = result_user.email;
+        }
+        else{
+            inputName.value = "";
+            inputEmail.value = "";
+        }
+    })
 })
 
 // ITINERARY AREA

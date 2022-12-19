@@ -88,6 +88,23 @@ main{
     margin-top: 5px;
     font-weight: 700;
 }
+.checkbox{
+    position: absolute;
+    top: 5px;
+    left: 125px;
+}
+input[type="checkbox"]{
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    display: inline-block;
+    accent-color: #448899;
+    top: 2px;
+}
+.contact_imfomation{
+    font-size: 14px;
+    cursor: pointer;
+}
 
 
 /* --- CONFIRM AREA ----------------------------------------------------------------------- */

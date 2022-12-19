@@ -207,9 +207,6 @@ signInPassword.addEventListener("input", () => {
     if (signInPassword.value == ""){
         errorMessage(signInPassword, inPasswordError, "此欄位必填");
     }
-    else if(!regPassword.test(signInPassword.value)) {
-        errorMessage(signInPassword, inPasswordError, "密碼長度最短不得低於4碼");
-    }
     else{
         signInPassword.style.border = "";
         inPasswordError.style.display = "none";
