@@ -46,14 +46,14 @@ nav{
     justify-content: space-between;
     align-items: center;
 }
-.title{
+.nav__title{
     display: block;
     font-size: 30px;
     line-height: 34px;
     font-weight: 700;
     color: #448899;
 }
-.menu{
+.nav__menu{
     height: 54px;
     align-items: center;
     font-size: 16px;
@@ -63,18 +63,18 @@ nav{
     display: flex;
     cursor: pointer;
 }
-.list{
-    padding: 20.5px 10px;
+.menu__item{
+    padding: 21px 10px;
 }
-.list:hover{
+.menu__item:hover{
     color: #fff;
     background-color:#79a3ad;
 }
-.list_icon{
+.nav__bars-container{
     display: none;
     cursor: pointer;
 }
-.list_icon_i{
+.bars{
     font-size: 22px;
     color: #448899;
     margin: 5px;
@@ -82,7 +82,7 @@ nav{
 
 
 /* === SIGNIN / SIGNUP BOX =================================== */
-.sign_in_container{
+.sign-container{
     width: 340px;
     background: linear-gradient(white, white) padding-box,
                 linear-gradient(90deg,#66AABB,#337788) border-box;
@@ -96,21 +96,7 @@ nav{
     left: 50%;
     transform: translateX(-50%);
 }
-.sign_up_container{
-    width: 340px;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(90deg,#66AABB,#337788) border-box;
-    border-radius: 5px;
-    border-top: 10px solid transparent;
-    box-shadow: 0px 4px 60px #AAAAAA;;
-    z-index: 4;
-
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.close_icon{
+.sign__close-icon{
     position: absolute;
     right: 17px;
     top: 15px;
@@ -118,10 +104,10 @@ nav{
 
     transition: 0.1s;
 }
-.close_icon:hover{
+.sign__close_icon:hover{
     transform: scale(1.1);
 }
-.sign_in_container h1, .sign_up_container h1{
+.sign__title{
     width: 144px;
     font-weight: 700;
     font-size: 24px;
@@ -131,11 +117,11 @@ nav{
     top: 15px;
     cursor: default;
 }
-.sign_in_box, .sign_up_box{
+.sign__box{
     top: 15px;
     text-align: center;
 }
-.sign_input{
+.input-group__input{
     width: 310px;
     height: 47px;
     font-size: 15px;
@@ -148,10 +134,10 @@ nav{
     padding: 15px;
     padding-left: 43px;
 }
-.sign_input:hover{
+.input-group__input:hover{
     border: 2px solid #8f8f8f;
 }
-.input_image{              /* fontawesome 圖片視為字體 */
+.input-group__image{              /* fontawesome 圖片視為字體 */
     color: #757575;
     font-size: 21px;
     
@@ -160,7 +146,7 @@ nav{
     left: 27px;
     z-index: 5;
 }
-.input_eye{
+.input-group__password-eye{
     color: #757575;
     font-size: 17px;
     cursor: pointer;
@@ -170,7 +156,19 @@ nav{
     right: 27px;
     z-index: 5;
 }
-.sign_in_box button, .sign_up_box button{
+.input-group__error-message{
+    display: block;
+    width: 100%;
+    height: 10px;
+    font-size: 15px;
+    color: red;
+    text-align: left;
+
+    top: -7px;
+    left: 30px;
+    margin-bottom: 4px;
+}
+.sign__button{
     width: 310px;
     height: 47px;
     color: #fff;
@@ -183,14 +181,10 @@ nav{
     border-radius: 5px;
     margin-bottom: 10px;
 }
-.sign_in_box button:hover, .sign_up_box button:hover{
-    transform: scale(1.01);
-    box-shadow: 1px 2px 5px 1px #AAAAAA;
+.sign__button:hover{
+    background-color: #337788;
 }
-.sign_in_box button:active, .sign_up_box button:active{
-    transform: scale(1) translate(1px,1px);
-}
-.switch_signUp, .switch_signIn{
+.sign__switch{
     font-weight: 500;
     font-size: 16px;
     color: #666666;
@@ -198,7 +192,7 @@ nav{
     text-align: center;
     cursor: default;
 }
-.switch_signUp button, .switch_signIn button{
+.sign__switch__button{
     border: none;
     margin: 0;
     padding: 0;
@@ -206,22 +200,10 @@ nav{
     background-color: transparent;
     cursor: pointer;
 }
-.switch_signUp button:hover, .switch_signIn button:hover{
+.sign__switch__button:hover{
     text-decoration: underline;
 }
-.in_email_error, .in_password_error, .up_name_error, .up_email_error, .up_password_error{
-    display: block;
-    width: 100%;
-    height: 10px;
-    font-size: 15px;
-    color: red;
-    text-align: left;
-
-    top: -7px;
-    left: 30px;
-    margin-bottom: 4px;
-}
-.whole{
+.black-screen{
     width: 100%;
     height: 100%;
     background-color: rgb(0, 0, 0, 0.4);
@@ -233,7 +215,7 @@ nav{
 }
 
 /* === TOP BUTTON ==========================================*/
-.top_button{
+.top-button{
     width: 25px;
     height: 25px;
     display: none;
@@ -248,11 +230,11 @@ nav{
     bottom: 15%;
     right: 2%;
 }
-.top_button i{
+.top-button i{
     right: 1.2px;
     bottom: 0.8px;
 }
-.top_button:hover{
+.top-button:hover{
     color: #fff;
     background-color: #448899;
     opacity: 1;
@@ -282,7 +264,7 @@ footer > p{
 @media (max-width: 1280px){
     nav{ padding: 10px 20px;}
     hr{ width: 95%;}
-    .top_button{
+    .top-button{
         transform: scale(1.8);
         opacity: 0.7;
     }
@@ -290,21 +272,21 @@ footer > p{
 
 @media (max-width: 768px){
     nav{ padding: 10px;}
-    .top_button{
+    .top-button{
         transform: scale(1.5);
         bottom: 10%;
     }
 }
 
 @media (max-width: 480px){
-    .top_button{
+    .top-button{
         opacity: 0.5;
         bottom: 5%;
     }
-    .sign_in_container, .sign_up_container{width: 335px;}
+    .sign-container{ width: 335px;}
 
     /* 開合選單設定 */
-    .menu{
+    .nav__menu{
         width: 100%;
         text-align: center;
         display: block;
@@ -312,16 +294,19 @@ footer > p{
         position: absolute;
         top: 54px;
         left: 0;
+        
+        height: 0;
+        overflow: hidden;
+        transition: height 0.2s ease-out;
     }
-    .list{
-        display: none;
+    .menu__item{
         color: #fff;
         border-bottom: 1px solid #e8e8e8;
         background-color: #66AABB;
         opacity: 0.9;
     }
-    .list:hover{
+    .menu__item:hover{
         background-color: #448899;
         opacity: 1;}
-    .list_icon{ display: block;}
+    .nav__bars-container{ display: block;}
 }

@@ -1,45 +1,45 @@
 // --- NAVBAR__RWD SETTING : SCREEN BELOW 480 px ----------------------
-const nav_listIcon = document.querySelector(".list_icon_i");
-const nav_menu = document.querySelectorAll(".menu .list");
-let iconCheck = true;
+const nav_bars = document.querySelector("#bars");
+const nav_menu = document.querySelector(".nav__menu");
+let barsClick = true;
 
-nav_listIcon.addEventListener("click",() => {
-    if(iconCheck){
-        nav_listIcon.classList.remove("fa-bars");
-        nav_listIcon.classList.add("fa-xmark");
-        nav_menu.forEach((e) => {e.style.display = "block"});
-        
-        iconCheck = false;
+nav_bars.addEventListener("click",() => {
+    if(barsClick){
+        nav_bars.classList.remove("fa-bars");
+        nav_bars.classList.add("fa-xmark");
+        nav_menu.style = `height: ${nav_menu.scrollHeight}px`;
+
+        barsClick = false;
     }
     else{
-        nav_listIcon.classList.remove("fa-xmark");
-        nav_listIcon.classList.add("fa-bars");
-        nav_menu.forEach((e) => {e.style.display = "none"});
+        nav_bars.classList.remove("fa-xmark");
+        nav_bars.classList.add("fa-bars");
+        nav_menu.style = "height: 0px";
 
-        iconCheck = true;
+        barsClick = true;
     }
 })
 
 
 // --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
 const header = document.querySelector("header");
-const nav_signInButton = document.querySelector(".list_2");
-const nav_bookingButton = document.querySelector(".list_1");
-const closeIcon = document.querySelectorAll(".close_icon");
-const signInContainer = document.querySelector(".sign_in_container");
-const signUpContainer = document.querySelector(".sign_up_container");
-const change_to_signup = document.querySelector(".switch_signUp button");
-const change_to_signin = document.querySelector(".switch_signIn button");
-const whole = document.querySelector(".whole");
+const nav_signInButton = document.querySelector("#menuSignButton");
+const nav_bookingButton = document.querySelector("#menuBookingButton");
+const signInContainer = document.querySelector("#signInContainer");
+const signUpContainer = document.querySelector("#signUpContainer");
+const closeIcon = document.querySelectorAll(".sign__close-icon");
+const switchTosignUp = document.querySelector(".switch-to-signUp");
+const switchTosignIn = document.querySelector(".switch-to-signIn");
+const blackScreen = document.querySelector(".black-screen");
 
 let signUpName = document.querySelector("#signUpName");
 let signUpEmail = document.querySelector("#signUpEmail");
 let signUpPassword = document.querySelector("#signUpPassword");
-const signUpButton = document.querySelector(".sign_up_box button");
+const signUpButton = document.querySelector("#signUpButton");
 
 let signInEmail = document.querySelector("#signInEmail");
 let signInPassword = document.querySelector("#signInPassword");
-const signInButton = document.querySelector(".sign_in_box button");
+const signInButton = document.querySelector("#signInButton");
 
 //   登入框、註冊框上的所有按鈕效果
 closeIcon.forEach((e) => {
@@ -48,15 +48,15 @@ closeIcon.forEach((e) => {
         signupInfoClear();
         signInContainer.style.display = "none";
         signUpContainer.style.display = "none";
-        whole.style.display = "none";
+        blackScreen.style.display = "none";
     })
 })
-change_to_signup.addEventListener("click", () => {
+switchTosignUp.addEventListener("click", () => {
     signinInfoClear();
     signUpContainer.style.display = "block";
     signInContainer.style.display = "none";
 })
-change_to_signin.addEventListener("click", () => {
+switchTosignIn.addEventListener("click", () => {
     signupInfoClear();
     signUpContainer.style.display = "none";
     signInContainer.style.display = "block";
@@ -89,7 +89,7 @@ nav_bookingButton.addEventListener("click", () => { outOfService()});
 function outOfService(){
     if (document.cookie == ""){
         signInContainer.style.display = "block";
-        whole.style.display = "block";
+        blackScreen.style.display = "block";
     }
 }
 
@@ -102,7 +102,7 @@ nav_bookingButton.addEventListener("click",() => {
 
 // --- SIGN_UP  --------------------------------------------------
 // 密碼可見
-let secretEye = document.querySelectorAll(".input_eye");
+let secretEye = document.querySelectorAll(".input-group__password-eye");
 let eyeClick = true;
 secretEye.forEach((e) => {
     e.addEventListener("click", () => {
@@ -135,9 +135,9 @@ function errorMessage(input, element, message){
 }
 
 // 註冊資訊 - 正則表達式
-let upNameError = document.querySelector(".up_name_error");
-let upEmailError = document.querySelector(".up_email_error");
-let upPasswordError = document.querySelector(".up_password_error");
+let upNameError = document.querySelector("#signUpNameError");
+let upEmailError = document.querySelector("#signUpEmailError");
+let upPasswordError = document.querySelector("#signInPasswordError");
 
 signUpName.addEventListener("input", () => {
     if (signUpName.value == ""){
@@ -203,8 +203,8 @@ let signUpFetch = () => {
 
 // --- SIGN_IN -----------------------------------------------------
 // 登入資訊 - 正則表達式
-let inEmailError = document.querySelector(".in_email_error");
-let inPasswordError = document.querySelector(".in_password_error");
+let inEmailError = document.querySelector("#signInEmailError");
+let inPasswordError = document.querySelector("#signInPasswordError");
 
 signInEmail.addEventListener("input", () => {
     if (signInEmail.value == ""){
@@ -286,7 +286,7 @@ nav_signInButton.addEventListener("click",() =>{
 
 
 // --- SETTING TO_TOP_BUTTON EFFECT ------------------------------------------------
-let topButton = document.querySelector(".top_button");
+let topButton = document.querySelector(".top-button");
 
 window.addEventListener("scroll", () => scrollPage());
 topButton.addEventListener("click", () => backTop());
