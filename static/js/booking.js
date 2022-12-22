@@ -2,12 +2,12 @@ fetchBooking();
 
 // --- CREATE DOM OF BOOKING PAGE -------------------------------------------------------------
 const main = document.querySelector("main");
-let bookHeadline = document.createElement("div");
-bookHeadline.className = "book_headline";
-let inputName = document.getElementById("name");
-let inputEmail = document.getElementById("email");
+let bookingHeadline = document.createElement("div");
+bookingHeadline.className = "booking__headline";
+let contactName = document.getElementById("contactName");
+let contactEmail = document.getElementById("contactEmail");
 const contactSyncButton = document.querySelector("#contactSync");
-const totalPrice = document.querySelector(".total_price");
+const totalPrice = document.querySelector(".confirm__price");
 const footer = document.querySelector("footer");
 
 // USER INFORMATION
@@ -15,18 +15,18 @@ fetch("/api/user/auth")
 .then(response => {return response.json();})
 .then(data => {
     let result_user = data.data;
-    bookHeadline.textContent = `您好，${result_user.name}，待預約的行程如下：`;
-    main.insertAdjacentElement("beforebegin", bookHeadline);
+    bookingHeadline.textContent = `您好，${result_user.name}，待預約的行程如下：`;
+    main.insertAdjacentElement("beforebegin", bookingHeadline);
 
     // CONTACT AREA - USER'S INFORMATION
     contactSyncButton.addEventListener("click", () => {
         if(contactSyncButton.checked){
-            inputName.value = result_user.name;
-            inputEmail.value = result_user.email;
+            contactName.value = result_user.name;
+            contactEmail.value = result_user.email;
         }
         else{
-            inputName.value = "";
-            inputEmail.value = "";
+            contactName.value = "";
+            contactEmail.value = "";
         }
     })
 })
@@ -46,7 +46,7 @@ async function fetchBooking(){
 let DOMof_NoBooking = () => {
     main.innerHTML = "";
     let article = document.createElement("article");
-    article.className = "book_container nobooking";
+    article.className = "booking-container no-booking";
     article.textContent = "目前沒有任何待預定的行程";
     main.appendChild(article);
 
@@ -66,24 +66,24 @@ let DOMofBooking = (data) => {
         time = "下午1點至晚上6點";
     }
 
-    let bookingContent = `<article class="book_container">
-                            <img class="book_img" src=${result_attraction["image"]} ,alt="">
+    let bookingContent = `<article class="booking-container">
+                            <img class="booking__img" src=${result_attraction["image"]} ,alt="">
 
-                            <section class="book_info_container">
+                            <section class="booking__info-box">
                                 <h1>台北一日遊：${result_attraction["name"]}</h1>
-                                <div class="book_detail"><span>日期：</span>${result["date"]}</div>
-                                <div class="book_detail"><span>時間：</span>${time}</div>
-                                <div class="book_detail"><span>費用：</span>新台幣 ${result["price"]}元</div>
-                                <div class="book_detail"><span>地點：</span>${result_attraction["address"]}</div>
+                                <div class="booking__detail"><span>日期：</span>${result["date"]}</div>
+                                <div class="booking__detail"><span>時間：</span>${time}</div>
+                                <div class="booking__detail"><span>費用：</span>新台幣 ${result["price"]}元</div>
+                                <div class="booking__detail"><span>地點：</span>${result_attraction["address"]}</div>
                             </section>
 
-                            <img class="delete_icon" src="/image/icon_delete.png" alt="">
+                            <img class="delete-icon" src="/image/icon_delete.png" alt="">
                         </article>`
 
     main.insertAdjacentHTML("afterbegin", bookingContent);
 
     // DELETE ITINERARY
-    const deleteIcon = document.querySelector(".delete_icon");
+    const deleteIcon = document.querySelector(".delete-icon");
     deleteIcon.addEventListener("click", () => {
         fetchDeletItinerary();
         location.reload();
@@ -109,11 +109,3 @@ let fetchDeletItinerary = () => {
 
 
 // --- CREDIT CARD ------------------------------------------------------------------------
-let cleaveCreditNumber = new Cleave("#creditNumber", {
-    creditCard: true,
-    delimiter: " ",
-});
-let cleaveExpire = new Cleave("#creditExpire", {
-    date: true,
-    datePattern: ["m", "y"],
-});
