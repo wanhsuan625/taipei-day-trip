@@ -81,11 +81,15 @@ to {opacity: 1}
     right: 15px;
     color: #666666;
 }
-.info-box > h1{
+.info-box__headline{
+    display: inline;
     height: 33px;
-    margin: 0 0 15px 0;
     font-weight: 700;
     font-size: 24px;
+    line-height: 33px;
+}
+.info-box > p{
+    margin: 15px 0;
 }
 
 /* BOOKING AREA */

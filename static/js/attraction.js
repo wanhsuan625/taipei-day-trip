@@ -164,10 +164,12 @@ let attractionInformation = (data) =>{
 
     // NAME , MRT AND CATEGORY
     let name = document.createElement("h1");
+    name.className = "info-box__headline";
     name.innerHTML = result.name;
     infoBox.insertBefore(name, bookingForm);
     
     let site = document.createElement("p");
+    site.className = "info-box__sub-headline";
     if(result.mrt == null){
         site.innerHTML = result.category;}
     else{
