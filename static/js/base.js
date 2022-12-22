@@ -104,6 +104,7 @@ nav_bookingButton.addEventListener("click",() => {
 // 密碼可見
 let secretEye = document.querySelectorAll(".input-group__password-eye");
 let eyeClick = true;
+
 secretEye.forEach((e) => {
     e.addEventListener("click", () => {
         if(eyeClick){
@@ -137,7 +138,7 @@ function errorMessage(input, element, message){
 // 註冊資訊 - 正則表達式
 let upNameError = document.querySelector("#signUpNameError");
 let upEmailError = document.querySelector("#signUpEmailError");
-let upPasswordError = document.querySelector("#signInPasswordError");
+let upPasswordError = document.querySelector("#signUpPasswordError");
 
 signUpName.addEventListener("input", () => {
     if (signUpName.value == ""){

@@ -1,6 +1,6 @@
 const main = document.querySelector("main");
-const search_input = document.querySelector(".search_input");
-const button = document.querySelector("button");
+const searchInput = document.querySelector(".search-box__input");
+const searchButton = document.querySelector(".search-box__icon");
 let nextpage;
 let keyword;
 
@@ -17,37 +17,37 @@ function getAttraction(data){
 
     for(let i = 0; i < result.length; i++){
         let attraction = document.createElement("a");
-        attraction.id = "attraction";
+        attraction.className = "attraction";
         attraction.href = `/attraction/${result[i].id}`;
         main.appendChild(attraction);
 
 
-        let img_box = document.createElement("div");
-        img_box.id = "img_box";
-        attraction.appendChild(img_box);
+        let imgBox = document.createElement("div");
+        imgBox.className = "attraction__img-box";
+        attraction.appendChild(imgBox);
         // images
         let img = document.createElement("img");
         img.setAttribute("src",result[i].images[0]);
-        img_box.appendChild(img);
+        imgBox.appendChild(img);
         // attraction name
         let name = document.createElement("div");
-        name.id = "name";
+        name.className = "name";
         name.textContent = result[i].name;
         name.title = result[i].name;
-        img_box.appendChild(name);
+        imgBox.appendChild(name);
 
 
-        let info_box = document.createElement("div");
-        info_box.id = "info_box";
-        attraction.appendChild(info_box);
+        let infoBox = document.createElement("div");
+        infoBox.className = "attraction__info-box";
+        attraction.appendChild(infoBox);
         // mrt
         let mrt = document.createElement("div");
         mrt.textContent = result[i].mrt;
-        info_box.appendChild(mrt);
+        infoBox.appendChild(mrt);
         // categories
         let category = document.createElement("div");
         category.textContent = result[i].category;
-        info_box.appendChild(category);
+        infoBox.appendChild(category);
     }
 };
 
@@ -89,15 +89,15 @@ const footer = document.querySelector("footer");
 observer.observe(footer);
 
 // --- Get value of KEYWORD --------------------------------
-button.addEventListener("click",() => {
-    keyword = search_input.value;
-    search_input.value = "";
+searchButton.addEventListener("click",() => {
+    keyword = searchInput.value;
+    searchInput.value = "";
     main.innerHTML = "";           // 清除畫面
     fetchAttraction(0,keyword);
 })
 
 // --- Create Categories Box DOM -----------------------------------
-const category_box = document.querySelector(".category_box");
+const categoryBox = document.querySelector(".category-box");
 function getCategory(data){
     let result = data.data;
 
@@ -105,7 +105,7 @@ function getCategory(data){
         let category = document.createElement("div");
         category.className = "category";
         category.textContent = result[i];
-        category_box.appendChild(category);
+        categoryBox.appendChild(category);
     }
 };
 async function fetchCategory(){
@@ -119,14 +119,14 @@ async function fetchCategory(){
 };
 
 // --- Categories Box : CLICK effect -----------------------------------
-search_input.addEventListener("click",() => {
-    category_box.style.display = "grid";
+searchInput.addEventListener("click",() => {
+    categoryBox.style.display = "grid";
     
     let category = document.querySelectorAll(".category");
     for(let i = 0; i < category.length; i++){
         category[i].addEventListener("click",() => {
-            search_input.value = category[i].innerHTML;
+            searchInput.value = category[i].innerHTML;
         })
     }
 })
-window.addEventListener("mouseup",() => {category_box.style.display = "none";})
+window.addEventListener("mouseup",() => {categoryBox.style.display = "none";})

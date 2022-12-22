@@ -1,3 +1,4 @@
+@import url("color.css");
 *{
     position: relative;
     box-sizing: border-box;
@@ -14,7 +15,7 @@ ul{
 }
 a{
     text-decoration: none;
-    color: #666666;
+    color: var(--secondary);
 }
 hr{
     width: 1200px;
@@ -29,8 +30,8 @@ input:-webkit-autofill {
 header{
     width: 100%;
     height: 54px;
-    background-color:#ffff;
-    border-bottom: 1px solid #E8E8E8;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--secondary-light);
     
     display: flex;
     justify-content: center;
@@ -51,7 +52,7 @@ nav{
     font-size: 30px;
     line-height: 34px;
     font-weight: 700;
-    color: #448899;
+    color: var(--primary);
 }
 .nav__menu{
     height: 54px;
@@ -59,7 +60,7 @@ nav{
     font-size: 16px;
     line-height: 13px;
     font-weight: 500;
-    color: #666666;
+    color: var(--secondary);
     display: flex;
     cursor: pointer;
 }
@@ -67,8 +68,8 @@ nav{
     padding: 21px 10px;
 }
 .menu__item:hover{
-    color: #fff;
-    background-color:#79a3ad;
+    color: var(--white);
+    background-color:var(--primary-light);
 }
 .nav__bars-container{
     display: none;
@@ -76,7 +77,7 @@ nav{
 }
 .bars{
     font-size: 22px;
-    color: #448899;
+    color: var(--primary);
     margin: 5px;
 }
 
@@ -85,7 +86,7 @@ nav{
 .sign-container{
     width: 340px;
     background: linear-gradient(white, white) padding-box,
-                linear-gradient(90deg,#66AABB,#337788) border-box;
+                linear-gradient(90deg,var(--primary-light),var(--primary-dark)) border-box;
     border-radius: 5px;
     border-top: 10px solid transparent;
     box-shadow: 0px 4px 60px #AAAAAA;;
@@ -112,7 +113,7 @@ nav{
     font-weight: 700;
     font-size: 24px;
     line-height: 24px;
-    color: #666666;
+    color: var(--secondary);
     margin: 0 auto 18px auto;
     top: 15px;
     cursor: default;
@@ -138,7 +139,7 @@ nav{
     border: 2px solid #8f8f8f;
 }
 .input-group__image{              /* fontawesome 圖片視為字體 */
-    color: #757575;
+    color: var(--secondary-dark);
     font-size: 21px;
     
     position: absolute;
@@ -147,7 +148,7 @@ nav{
     z-index: 5;
 }
 .input-group__password-eye{
-    color: #757575;
+    color: var(--secondary-dark);
     font-size: 17px;
     cursor: pointer;
     
@@ -161,7 +162,7 @@ nav{
     width: 100%;
     height: 10px;
     font-size: 15px;
-    color: red;
+    color: var(--error);
     text-align: left;
 
     top: -7px;
@@ -171,23 +172,23 @@ nav{
 .sign__button{
     width: 310px;
     height: 47px;
-    color: #fff;
+    color: var(--white);
     font-weight: 400;
     font-size: 19px;
     cursor: pointer;
 
-    background-color: #448899;
+    background-color: var(--primary);
     border: none;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 .sign__button:hover{
-    background-color: #337788;
+    background-color: var(--primary-dark);
 }
 .sign__switch{
     font-weight: 500;
     font-size: 16px;
-    color: #666666;
+    color: var(--secondary);
     margin: 18px 0 20px 0;
     text-align: center;
     cursor: default;
@@ -196,7 +197,7 @@ nav{
     border: none;
     margin: 0;
     padding: 0;
-    color: #448899;
+    color: var(--primary);
     background-color: transparent;
     cursor: pointer;
 }
@@ -221,9 +222,9 @@ nav{
     display: none;
     transform: scale(2);
     border-radius: 50%;
-    border: 1px solid #448899;
-    color: #448899;
-    background-color: #fff;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background-color: var(--white);
     
     z-index: 2;
     position: fixed;
@@ -235,8 +236,8 @@ nav{
     bottom: 0.8px;
 }
 .top-button:hover{
-    color: #fff;
-    background-color: #448899;
+    color: var(--white);
+    background-color: var(--primary);
     opacity: 1;
 }
 
@@ -244,7 +245,7 @@ nav{
 footer{
     width: 100%;
     height: 104px;
-    background-color: #757575;
+    background-color: var(--secondary-dark);
     display: flex;
 }
 footer > p{
@@ -253,7 +254,7 @@ footer > p{
     font-size: 16px;
     font-weight: 700;
     line-height: 13px;
-    color: #ffff;
+    color: var(--white);
 
     display: flex;
     align-items: center;
@@ -300,13 +301,14 @@ footer > p{
         transition: height 0.2s ease-out;
     }
     .menu__item{
-        color: #fff;
-        border-bottom: 1px solid #e8e8e8;
-        background-color: #66AABB;
+        color: var(--white);
+        border-bottom: 1px solid var(--secondary-light);
+        background-color: var(--primary-light);
         opacity: 0.9;
     }
     .menu__item:hover{
-        background-color: #448899;
-        opacity: 1;}
+        background-color: var(--primary);
+        opacity: 1;
+    }
     .nav__bars-container{ display: block;}
 }

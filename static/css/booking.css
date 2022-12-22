@@ -1,5 +1,6 @@
+@import url(color.css);
 hr{
-    border: 1px solid #E8E8E8;
+    border: 1px solid var(--secondary-light);
     margin: 42px auto;
 }
 input{
@@ -8,9 +9,9 @@ input{
     color: #000000;
     margin-bottom: 15px;
     padding: 10px;
-    border: 1px solid #E8E8E8;
+    border: 1px solid var(--secondary-light);
     border-radius: 5px;
-    outline-color: #82c0cf;
+    outline-color: var(--primary-light);
     cursor: pointer;
 }
 /* 去除 輸入內容 後的背景色 */
@@ -23,7 +24,7 @@ input:-webkit-autofill {
 .book_headline{
     width: 1000px;
     height: 27px;
-    color: #666666;
+    color: var(--secondary);
     font-size: 19px;
     font-weight: 700;
     margin: 40px auto 30px auto;
@@ -31,7 +32,7 @@ input:-webkit-autofill {
 main{
     width: 1200px;
     margin: 0 auto 62px auto;
-    color: #666666;
+    color: var(--secondary);
 }
 .book_container{
     width: 980px;
@@ -44,7 +45,7 @@ main{
     margin-right: 30px;
 }
 .book_info_container h1{
-    color: #448899;
+    color: var(--primary);
     height: 14px;
     font-size: 16px;
     font-weight: 700;
@@ -98,7 +99,7 @@ input[type="checkbox"]{
     height: 15px;
     margin: 0;
     display: inline-block;
-    accent-color: #448899;
+    accent-color: var(--primary);
     top: 2px;
 }
 .contact_imfomation{
@@ -129,8 +130,8 @@ input[type="checkbox"]{
     font-size: 16px;
     line-height: 16px;
     padding: 10px 20px;
-    color: #fff;
-    background-color: #448899;
+    color: var(--white);
+    background-color: var(--primary);
     border: none;
     border-radius: 5px;
 }

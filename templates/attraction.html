@@ -9,54 +9,56 @@
 <!-- BODY -------------------------------------------------- -->
 {% block body %}
 <main>
-    <div class="img_box">
+    <div class="img-box">
         <div class="arrow">
-            <img src="/image/btn_leftArrow.png" alt="">
-            <img src="/image/btn_rightArrow.png" alt="">
+            <img class="arrow__icon" src="/image/btn_leftArrow.png" alt="">
+            <img class="arrow__icon" src="/image/btn_rightArrow.png" alt="">
         </div>
     </div>
 
-    <div class="info_box">
-        <div class="booking_form">
-            <div>訂購導覽行程</div>
+    <div class="info-box">
+        <div class="booking-form">
+            <div class="booking-form__title">訂購導覽行程</div>
             <p>以此景點為中心的一日行程，帶您探索城市角落故事</p>
-            <div style="margin-bottom: 30px;">選擇日期：
+            <div class="booking-form__opt">選擇日期：
                 <input
                  type="date"
                  id="bookingDate">
-                 <span class="error_message" style="display: none;">
+                 <span class="booking-form__error-message" style="display: none;">
                     <i>*必填─請選擇行程日期</i>
                 </span>
             </div>
-            <div class="time">選擇時間：
-                <label>
+            <div class="booking-form__opt time">選擇時間：
+                <label class="time__label">
                     <input checked
                      type="radio"
                      name="choicetime"
                      id="morning"
+                     class="time__radio"
                      onclick="getElementById('change_money').innerHTML = '2000'">
                     <p>上半天</p>
                 </label>
-                <label>
+                <label class="time__label">
                     <input
                      type="radio"
                      name="choicetime"
                      id="afternoon"
+                     class="time__radio"
                      onclick="getElementById('change_money').innerHTML = '2500'">
                     <p>下半天</p>
                 </label>
             </div>
-            <div>導覽費用：<span>新台幣<span id="change_money">2000</span> 元</span></div>
-            <button>開始預約行程</button>
+            <div class="booking-form__opt">導覽費用：<span>新台幣<span id="change_money">2000</span> 元</span></div>
+            <button class="booking-form__button">開始預約行程</button>
         </div>
     </div>
 </main>
 
 <hr>
 
-<section>
-    <div class="headline">景點地址：</div>
-    <div class="headline">交通方式：</div>
+<section class="section">
+    <div class="section__headline">景點地址：</div>
+    <div class="section__headline">交通方式：</div>
 </section>
 {% endblock %}
 
