@@ -4,8 +4,7 @@
 {% block head %}
 <link rel="stylesheet" href="/css/booking.css">
 <title>預約行程</title>
-<!-- Cleave.js v1.1.1 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.1.0/cleave.min.js"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
 {% endblock %}
 
 <!-- BODY -------------------------------------------------- -->
@@ -33,7 +32,7 @@
              type="text"
              name="name"
              id="contactName">
-        </label><br>
+        </label>
 
         <label class="contact__detail">連絡信箱：
             <input required
@@ -41,7 +40,7 @@
              inputmode="email"
              name="email"
              id="contactEmail">
-        </label><br>
+        </label>
         
         <label class="contact__detail">手機號碼：
             <input required
@@ -61,26 +60,28 @@
     <div class="credit-container">
         <div class="credit__headline">信用卡付款資訊</div>
 
+        <div class="credit__detail">卡片號碼：
+            <div class="tpfield" id="card-number"></div>
+        </div>
         
+        <div class="credit__detail">過期時間：
+            <div class="tpfield" id="card-expiration-date"></div>
+        </div>
+
+        <div class="credit__detail">驗證密碼：
+            <div class="tpfield" id="card-ccv"></div>
+        </div>
     </div>
     <!-- END CREDIT CARD -->
 
     <hr>
     <div class="confirm-container">
         <div class="confirm__price"></div>
-        <button class="confirm__button">確認訂購並付款</button>
+        <button class="confirm__button" disabled>確認訂購並付款</button>
     </div>
 </main>
 {% endblock %}
 
 {% block script %}
 <script src="/js/booking.js"></script>
-<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
-<script>
-    TPDirect.setupSDK(
-        126971,
-        'app_bmhD4ubStRHqvzB6Q2RZ9xUJV3hXSwyLrgsMAhV234DQRhdqSwQKGfSc6nzR',
-        'sandbox'
-    )
-</script>
 {% endblock %}

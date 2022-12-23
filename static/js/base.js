@@ -1,3 +1,19 @@
+// --- CONTAIN LOGIN STATUS ---------------------------------------
+window.addEventListener("load", () =>{
+    fetch("/api/user/auth",{
+        method: "GET",
+        headers: {'Content-type':'application/json'}
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        if(data.data !== null){
+            nav_signInButton.innerHTML = "登出系統";
+        }
+        return
+    })
+})
+
+
 // --- NAVBAR__RWD SETTING : SCREEN BELOW 480 px ----------------------
 const nav_bars = document.querySelector("#bars");
 const nav_menu = document.querySelector(".nav__menu");
@@ -29,7 +45,7 @@ const signInContainer = document.querySelector("#signInContainer");
 const signUpContainer = document.querySelector("#signUpContainer");
 const closeIcon = document.querySelectorAll(".sign__close-icon");
 const switchTosignUp = document.querySelector(".switch-to-signUp");
-const switchTosignIn = document.querySelector(".switch-to-signIn");
+const switchTosignIn = document.querySelectorAll(".switch-to-signIn");
 const blackScreen = document.querySelector(".black-screen");
 
 let signUpName = document.querySelector("#signUpName");
@@ -41,6 +57,9 @@ let signInEmail = document.querySelector("#signInEmail");
 let signInPassword = document.querySelector("#signInPassword");
 const signInButton = document.querySelector("#signInButton");
 
+const signUpSuccess = document.querySelector("#signUpSuccess");
+const signInSuccess = document.querySelector("#signInSuccess");
+
 //   登入框、註冊框上的所有按鈕效果
 closeIcon.forEach((e) => {
     e.addEventListener("click",() => {
@@ -48,6 +67,7 @@ closeIcon.forEach((e) => {
         signupInfoClear();
         signInContainer.style.display = "none";
         signUpContainer.style.display = "none";
+        signUpSuccess.style.display = "none";
         blackScreen.style.display = "none";
     })
 })
@@ -56,10 +76,14 @@ switchTosignUp.addEventListener("click", () => {
     signUpContainer.style.display = "block";
     signInContainer.style.display = "none";
 })
-switchTosignIn.addEventListener("click", () => {
-    signupInfoClear();
-    signUpContainer.style.display = "none";
-    signInContainer.style.display = "block";
+switchTosignIn.forEach((e) => {
+    e.addEventListener("click", () => {
+        signupInfoClear();
+        signUpContainer.style.display = "none";
+        signUpSuccess.style.display = "none";
+        signInContainer.style.display = "block";
+        blackScreen.style.display = "block";
+    })
 })
 
 let signupInfoClear = () => {
@@ -192,12 +216,14 @@ let signUpFetch = () => {
         return response.json()
     }).then(data => {
         if(data.ok == true){
+            // 註冊成功畫面
+            signUpContainer.style.display = "none";
+            signUpSuccess.style.display = "block";
+        }
+        else{
             upPasswordError.style.display = "block";
-            upPasswordError.style.color = "#66AABB";
             upPasswordError.textContent = data.message;
         }
-        upPasswordError.style.display = "block";
-        upPasswordError.textContent = data.message;
     })
 }
 
@@ -232,7 +258,6 @@ signInPassword.addEventListener("input", () => {
 
 // 傳送 SIGN_IN 資料
 signInButton.addEventListener("click", ()=> { signInFetch()});
-
 let signInFetch = () => {
     fetch("/api/user/auth",{
         method: "PUT",
@@ -244,28 +269,17 @@ let signInFetch = () => {
         return response.json();
     }).then(data =>{
         if(data.ok == true){
-            location.reload();  // 登入成功，重新載入
+            // 登入成功畫面
+            signInContainer.style.display = "none";
+            signInSuccess.style.display = "block";
+            setTimeout( function() {
+                location.reload()
+            }, 2000);
         }
         inPasswordError.style.display = "block";
         inPasswordError.textContent = data.message;
     })
 }
-
-
-// --- CONTAIN LOGIN STATUS ---------------------------------------
-window.addEventListener("load", () =>{
-    fetch("/api/user/auth",{
-        method: "GET",
-        headers: {'Content-type':'application/json'}
-    }).then(response => {
-        return response.json()
-    }).then(data => {
-        if(data.data !== null){
-            nav_signInButton.innerHTML = "登出系統";
-        }
-        return
-    })
-})
 
 
 // --- SINGN_OUT ------------------------------------------------------

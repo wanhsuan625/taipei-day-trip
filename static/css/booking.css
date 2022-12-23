@@ -7,12 +7,11 @@ input{
     width: 200px;
     height: 38px;
     color: #000000;
-    margin-bottom: 15px;
     padding: 10px;
     border: 1px solid var(--secondary-light);
     border-radius: 5px;
-    outline-color: var(--primary-light);
-    cursor: pointer;
+    outline: none;
+    cursor: text;
 }
 /* 去除 輸入內容 後的背景色 */
 input:-webkit-autofill { 
@@ -39,6 +38,17 @@ main{
     margin: 0 auto;
     display: flex;
 }
+.black-background::after{
+    content: "";
+    width: 106%;
+    height: 110%;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+
+    position: absolute;
+    top: -5%;
+    left: -3%;
+}
 .booking__img{
     width: 250px;
     height: 200px;
@@ -59,7 +69,7 @@ main{
     font-weight: 500;
 }
 .booking__detail span{ font-weight: 700;}
-.delete-icon{
+.booking__delete-icon{
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -68,6 +78,41 @@ main{
     right: 0;
 }
 
+/* DELETE BOX */
+.booking__delete-container{
+    min-width: 180px;
+    padding: 15px;
+    border: 2px solid var(--secondary-light);
+    border-radius: 5px;
+    background-color: var(--white);
+
+    position: absolute ;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1;
+    display: none;
+}
+.delete__titel{
+    font-size: 18px;
+}
+.delete__button-box{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-around;
+}
+.delete__button{
+    border: none;
+    cursor: pointer;
+    padding: 7px 12px;
+    border-radius: 3px;
+    color: var(--white);
+}
+.delete-yes{ background-color: var(--primary);}
+.delete-yes:hover{ background-color: var(--primary-light);}
+.delete-no{ background-color: var(--secondary);}
+.delete-no:hover{ background-color: #a7a7a7;}
 
 /* --- USER INFORMATION & CREDIT CARD --------------------------------------------------- */
 .contact-container, .credit-container{
@@ -80,13 +125,16 @@ main{
     height: 16px;
     margin-bottom: 24px;
 }
-.contact__detail, .credit_detail{
+.contact__detail, .credit__detail{
+    display: flex;
+    align-items: center;
     font-size: 16px;
     font-weight: 500;
+    margin-bottom: 15px;
 }
 .contact__notice{
     margin:0;
-    margin-top: 5px;
+    padding-top: 5px;
     font-weight: 700;
 }
 .contact__sync-box{
@@ -105,6 +153,17 @@ input[type="checkbox"]{
 .contact__sync-info{
     font-size: 14px;
     cursor: pointer;
+}
+
+
+/* --- TAPPAY CSS SETTING ---------------------------------------------------------------- */
+.tpfield {
+    display: inline-block;
+    width: 200px;
+    height: 38px;
+    padding: 10px;
+    border: 1px solid var(--secondary-light);
+    border-radius: 5px;
 }
 
 
@@ -163,6 +222,7 @@ input[type="checkbox"]{
         width: 100%;
         margin: 2px 0 62px 0;
     }
+    hr{margin: 20px auto 30px auto;}
     .booking-container{
         display: block;
         margin-top: 5px;
@@ -170,12 +230,18 @@ input[type="checkbox"]{
     }
     .booking__img{ 
         width: 100%;
-        height: 320px;
-        margin: 0;
+        height: 300px;
+        margin: 10px 0;
+        border-radius: 5px;
+    }
+    .booking__detail:last-child{
+        margin-bottom: 10px;
     }
     .no-booking{ margin-top: 30px;}
+    .booking-container::after{ top: 0;}
 }
 @media (max-width: 480px){
+    .booking__headline{ margin-top: 30px;}
     main{ padding: 0 10px;}
     hr,
     .booking-container,
@@ -185,5 +251,8 @@ input[type="checkbox"]{
     .booking__headline{
         width: 100%;
         padding-left: 10px;}
-    .booking_img{ height: 256px;}
+    .booking__img{
+        height: 200px;
+        margin: 28px 0;
+    }
 }

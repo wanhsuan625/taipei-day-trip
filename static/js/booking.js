@@ -6,6 +6,7 @@ let bookingHeadline = document.createElement("div");
 bookingHeadline.className = "booking__headline";
 let contactName = document.getElementById("contactName");
 let contactEmail = document.getElementById("contactEmail");
+let contactPhone = document.getElementById("contactPhone");
 const contactSyncButton = document.querySelector("#contactSync");
 const totalPrice = document.querySelector(".confirm__price");
 const footer = document.querySelector("footer");
@@ -77,14 +78,38 @@ let DOMofBooking = (data) => {
                                 <div class="booking__detail"><span>地點：</span>${result_attraction["address"]}</div>
                             </section>
 
-                            <img class="delete-icon" src="/image/icon_delete.png" alt="">
+                            <img class="booking__delete-icon" src="/image/icon_delete.png" alt="">
+                            <div class="booking__delete-container">
+                                <div class="delete__titel">確定取消此行程？</div>
+                                <div class="delete__button-box">
+                                    <button class="delete__button delete-yes">是</button>
+                                    <button class="delete__button delete-no">否</button>
+                                </div>
+                            </div>
                         </article>`
 
     main.insertAdjacentHTML("afterbegin", bookingContent);
 
     // DELETE ITINERARY
-    const deleteIcon = document.querySelector(".delete-icon");
+    // 確認是否刪除    
+    const deleteIcon = document.querySelector(".booking__delete-icon");
+    const deleteContainer = document.querySelector(".booking__delete-container");
+    const deleteYes = document.querySelector(".delete-yes");
+    const deleteNo = document.querySelector(".delete-no");
+    const bookingContainer = document.querySelector(".booking-container")
+
     deleteIcon.addEventListener("click", () => {
+        deleteContainer.style.display = "block";
+        bookingContainer.classList.add("black-background");        
+    })
+
+    // 不選擇取消
+    deleteNo.addEventListener("click", () => {
+        deleteContainer.style.display = "none";
+        bookingContainer.classList.remove("black-background");
+    })
+    // 選擇取消
+    deleteYes.addEventListener("click", () => {
         fetchDeletItinerary();
         location.reload();
     });
@@ -109,3 +134,48 @@ let fetchDeletItinerary = () => {
 
 
 // --- CREDIT CARD ------------------------------------------------------------------------
+TPDirect.setupSDK(
+    126971,
+    "app_bmhD4ubStRHqvzB6Q2RZ9xUJV3hXSwyLrgsMAhV234DQRhdqSwQKGfSc6nzR",
+    "sandbox"
+)
+
+let fields = {
+    number: {
+        element: "#card-number",
+        placeholder: "**** **** **** ****"
+    },
+    expirationDate: {
+        element: "#card-expiration-date",
+        placeholder: "MM / YY"
+    },
+    ccv: {
+        element: "#card-ccv",
+        placeholder: "ccv"
+    }
+}
+TPDirect.card.setup({
+    fields: fields,
+    styles: {
+        "input": {
+            "color": "gray",
+            "font-size": "16px",
+        },
+        ":focus": { "color": "#666666"},
+        ".valid": { "color": "#448899"},
+        '.invalid': { "color": "red"},
+        
+        // Media queries
+        // Note that these apply to the iframe, not the root window.
+        "@media screen and (max-width: 400px)": {
+            "input": { "color": "orange"}
+        }
+    },
+    // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
+    isMaskCreditCardNumber: true,
+    maskCreditCardNumberRange: {
+        beginIndex: 6,
+        endIndex: 11
+    }
+})
+

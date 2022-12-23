@@ -117,6 +117,7 @@ nav{
     margin: 0 auto 18px auto;
     top: 15px;
     cursor: default;
+    text-align: center;
 }
 .sign__box{
     top: 15px;
@@ -214,6 +215,41 @@ nav{
     top: 0;
     left: 0;
 }
+/* 登入/註冊成功 */
+.sign-success{
+    width: 280px;
+}
+.sign-success__icon{
+    font-size: 50px;
+    color: var(--primary);
+    margin-bottom: 20px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.sign-success__title{
+    font-size: 22px;
+    padding-bottom: 15px;
+}
+.sign-success__content{
+    font-size: 16px;
+    color: var(--primary-light);
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+    font-weight: lighter;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.sign-success__button{
+    background-color: var(--white);
+    border: none;
+    cursor: pointer;
+    
+    left: 50%;
+    transform: translate(-50%);
+}
+
 
 /* === TOP BUTTON ==========================================*/
 .top-button{
@@ -285,6 +321,7 @@ footer > p{
         bottom: 5%;
     }
     .sign-container{ width: 335px;}
+    .sign-success{ width: 280px;}
 
     /* 開合選單設定 */
     .nav__menu{
