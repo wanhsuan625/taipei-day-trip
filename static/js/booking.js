@@ -4,11 +4,17 @@ fetchBooking();
 const main = document.querySelector("main");
 let bookingHeadline = document.createElement("div");
 bookingHeadline.className = "booking__headline";
-let contactName = document.getElementById("contactName");
-let contactEmail = document.getElementById("contactEmail");
-let contactPhone = document.getElementById("contactPhone");
+
 const contactSyncButton = document.querySelector("#contactSync");
-const totalPrice = document.querySelector(".confirm__price");
+let contactName = document.querySelector("#contactName");
+let contactNameError = document.querySelector("#contactNameError");
+let contactEmail = document.querySelector("#contactEmail");
+let contactEmailError = document.querySelector("#contactEmailError");
+let contactPhone = document.querySelector("#contactPhone");
+let contactPhoneError = document.querySelector("#contactPhoneError");
+
+const confirmPrice = document.querySelector(".confirm__price");
+const confirmButton = document.querySelector(".confirm__button");
 const footer = document.querySelector("footer");
 
 // USER INFORMATION
@@ -89,7 +95,10 @@ let DOMofBooking = (data) => {
                         </article>`
 
     main.insertAdjacentHTML("afterbegin", bookingContent);
-
+    
+    // TOTAL PRICE
+    confirmPrice.textContent = `總價：新台幣 ${result["price"]} 元`;
+    
     // DELETE ITINERARY
     // 確認是否刪除    
     const deleteIcon = document.querySelector(".booking__delete-icon");
@@ -114,8 +123,7 @@ let DOMofBooking = (data) => {
         location.reload();
     });
 
-    // TOTAL PRICE
-    totalPrice.textContent = `總價：新台幣 ${result["price"]} 元`;
+    
 }
 
 let fetchDeletItinerary = () => {
@@ -131,6 +139,54 @@ let fetchDeletItinerary = () => {
         return
     })
 }
+
+
+// --- VALIDITY CONTACT INFORMATION ----------------------------------------------------------------
+const regPhone = new RegExp("((?=(09))[0-9]{10})$");
+
+function invalid(input, element, message){
+    input.classList.add("invalid");
+    element.style.display = "block";
+    element.textContent = message;
+}
+function valid(input, element){
+    input.classList.remove("invalid");
+    input.classList.add("valid");
+    element.style.display = "none";
+}
+
+contactName.addEventListener("change", () => {
+    if (contactName.value == ""){
+        invalid(contactName, contactNameError, "此欄必填");
+    }
+    else {
+        valid(contactName, contactNameError);
+    }
+})
+
+contactEmail.addEventListener("change", () =>{
+    if (contactEmail.value == ""){
+        invalid(contactEmail, contactEmailError, "⚠ 此欄必填");
+    }
+    else if(!regEmail.test(contactEmail.value)) {
+        invalid(contactEmail, contactEmailError, "⚠ 格式有誤，請重新輸入");
+    }
+    else{
+        valid(contactEmail, contactEmailError);
+    }
+})
+
+contactPhone.addEventListener("change", () =>{
+    if (contactPhone.value == ""){
+        invalid(contactPhone, contactPhoneError, "⚠ 此欄必填");
+    }
+    else if(!regPhone.test(contactPhone.value)) {
+        invalid(contactPhone, contactPhoneError, "⚠ 格式有誤，請重新輸入");
+    }
+    else{
+        valid(contactPhone, contactPhoneError);
+    }
+})
 
 
 // --- CREDIT CARD ------------------------------------------------------------------------
@@ -164,18 +220,41 @@ TPDirect.card.setup({
         ":focus": { "color": "#666666"},
         ".valid": { "color": "#448899"},
         '.invalid': { "color": "red"},
-        
-        // Media queries
-        // Note that these apply to the iframe, not the root window.
-        "@media screen and (max-width: 400px)": {
-            "input": { "color": "orange"}
-        }
     },
+
     // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
     isMaskCreditCardNumber: true,
     maskCreditCardNumberRange: {
         beginIndex: 6,
         endIndex: 11
     }
+})
+
+
+confirmButton.addEventListener("click", (event) => {
+    event.preventDefault()
+
+    // 取得 TapPay Fields 的 status
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus();
+
+
+
+    // 確認是否可以 getPrime
+    // if (tappayStatus.canGetPrime === false) {
+    //     console.log("can not get prime");
+    //     return
+    // }
+
+    // Get prime
+    // TPDirect.card.getPrime((result) => {
+    //     if (result.status !== 0) {
+    //         console.log("get prime error " + result.msg);
+    //         return
+    //     }
+    //     console.log("get prime 成功，prime: " + result.card.prime);
+
+        // send prime to your server, to pay with Pay by Prime API .
+        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+    // })
 })
 

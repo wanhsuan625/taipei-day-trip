@@ -166,7 +166,7 @@ let upPasswordError = document.querySelector("#signUpPasswordError");
 
 signUpName.addEventListener("input", () => {
     if (signUpName.value == ""){
-        errorMessage(signUpName, upNameError, "此欄位必填")
+        errorMessage(signUpName, upNameError, "⚠ 此欄位必填")
     }
     else{
         signUpName.style.border = "";
@@ -176,10 +176,10 @@ signUpName.addEventListener("input", () => {
 
 signUpEmail.addEventListener("input", () => {
     if (signUpEmail.value == ""){
-        errorMessage(signUpEmail, upEmailError, "此欄位必填")
+        errorMessage(signUpEmail, upEmailError, "⚠ 此欄位必填")
     }
     else if(!regEmail.test(signUpEmail.value)) {
-        errorMessage(signUpEmail, upEmailError, "格式有誤，請重新輸入")
+        errorMessage(signUpEmail, upEmailError, "⚠ 格式有誤，請重新輸入")
     }
     else{
         signUpEmail.style.border = "";
@@ -189,10 +189,10 @@ signUpEmail.addEventListener("input", () => {
 
 signUpPassword.addEventListener("input", () => {
     if (signUpPassword.value == ""){
-        errorMessage(signUpPassword, upPasswordError, "此欄位必填");
+        errorMessage(signUpPassword, upPasswordError, "⚠ 此欄位必填");
     }
     else if(!regPassword.test(signUpPassword.value)) {
-        errorMessage(signUpPassword, upPasswordError, "密碼長度最短不得低於4碼");
+        errorMessage(signUpPassword, upPasswordError, "⚠ 密碼長度最短不得低於4碼");
     }
     else{
         signUpPassword.style.border = "";
