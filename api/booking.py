@@ -1,11 +1,13 @@
 from flask import *
 import jwt
 from module import connect
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
+jwt_key = os.getenv("jwt_key")
 
 booking = Blueprint("booking" ,__name__)
-jwt_key = "secret"
-
 
 # --- DATABASE CONNECT --------------------------------------------------
 connection_pool = connect.db_connection()
