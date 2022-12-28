@@ -30,8 +30,6 @@ sqlorder_table = "CREATE TABLE IF NOT EXISTS `orders`( \
                     `contact_email` VARCHAR(255) not null,\
                     `contact_phone` VARCHAR(255) not null,\
                     `status` BIGINT,\
-                    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\
-                    `updated_at` TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,\
                     FOREIGN KEY(user_id) REFERENCES users(id),\
                     FOREIGN KEY(attraction_id) REFERENCES travel(id)\
                     );"
