@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+<!-- HEAD -------------------------------------------------- -->
+{% block head %}
+<link rel="stylesheet" href="/css/thankyou.css">
+<title>訂購完成</title>
+{% endblock %}
+
+<!-- BODY -------------------------------------------------- -->
+{% block body %}
+<main>
+    <div class="booking-success__container">
+        <div class="booking-success__box">
+            <i class="fa-solid fa-calendar-check booking-success__icon"></i>
+            <h1 class="booking-success__title">訂單完成</h1>
+        </div>
+        <p class="booking-success__content">訂單編號 ─ <span>1234567890</span></p>
+        <p class="booking-success__content">可至會員中心查詢歷史訂單</p>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

@@ -114,6 +114,72 @@ main{
 .delete-no{ background-color: var(--secondary);}
 .delete-no:hover{ background-color: #a7a7a7;}
 
+
+/* --- ERROR AREA ----------------------------------------------------------------------- */
+.failPay-container{
+    width: 280px;
+    background: var(--white);
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px #AAAAAA;;
+    z-index: 4;
+
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.failPay__icon{
+    font-size: 50px;
+    color: rgb(251, 80, 80);
+    margin-bottom: 20px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.failPay__title{
+    width: 144px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+    color: var(--secondary);
+    margin: 0 auto 18px auto;
+    top: 15px;
+    cursor: default;
+    text-align: center;
+}
+.failPay__box{
+    width: 250px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    
+    display: flex;
+    justify-content: space-around;
+}
+.failPay__button{
+    width: 100px;
+    padding: 8px;
+    background-color: #939393;
+    color: var(--white);
+    cursor: pointer;
+    border-radius: 5px;
+    border: 0;
+}
+.failPay__button:hover{
+    background-color: var(--primary-light);
+}
+.black-screen{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
+    z-index: 3;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 /* --- USER INFORMATION & CREDIT CARD --------------------------------------------------- */
 .contact-container, .credit-container{
     width: 980px;
@@ -154,7 +220,7 @@ input[type="checkbox"]{
     font-size: 14px;
     cursor: pointer;
 }
-.contact__error-message{
+.contact__error-message, .credit__error-message{
     display: block;
     width: 100%;
     height: 10px;
@@ -166,6 +232,14 @@ input[type="checkbox"]{
     left: 93px;
     margin-bottom: 1px;
 }
+.contact__info.invalid{
+    border: 1.5px solid var(--error);
+    color: var(--error);
+}
+.contact__info.valid{
+    color: var(--primary-light);
+}
+
 
 /* --- TAPPAY CSS SETTING ---------------------------------------------------------------- */
 .tpfield {
@@ -180,13 +254,7 @@ input[type="checkbox"]{
     border: 1.8px solid #000;
     outline: 0;
 }
-.contact__info.valid{
-    color: var(--primary-light);
-}
-.contact__info.invalid{
-    color: var(--error);
-    border: 1.5px solid var(--error)
-}
+
 
 /* --- CONFIRM AREA ----------------------------------------------------------------------- */
 .confirm-container{

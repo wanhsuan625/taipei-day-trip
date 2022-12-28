@@ -34,7 +34,7 @@
              class="contact__info"
              id="contactName">
         </label>
-        <span class="contact__error-message" id="contactNameError" style="display: none"></span>
+        <span class="contact__error-message" id="contactNameError" style="display: none;"></span>
 
         <label class="contact__detail">連絡信箱：
             <input required
@@ -44,7 +44,7 @@
              class="contact__info"
              id="contactEmail">
         </label>
-        <span class="contact__error-message" id="contactEmailError" style="display: none"></span>
+        <span class="contact__error-message" id="contactEmailError" style="display: none;"></span>
         
         <label class="contact__detail">手機號碼：
             <input required
@@ -54,7 +54,7 @@
              class="contact__info"
              id="contactPhone">
         </label>
-        <span class="contact__error-message" id="contactPhoneError" style="display: none"></span>
+        <span class="contact__error-message" id="contactPhoneError" style="display: none;"></span>
 
         <p class="contact__notice">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
     </div>
@@ -69,6 +69,7 @@
         <div class="credit__detail">卡片號碼：
             <div class="tpfield" id="card-number"></div>
         </div>
+        <span class="credit__error-message" id="creditCardError"></span>
         
         <div class="credit__detail">過期時間：
             <div class="tpfield" id="card-expiration-date"></div>
@@ -85,7 +86,20 @@
         <div class="confirm__price"></div>
         <button type="submit" class="confirm__button">確認訂購並付款</button>
     </div>
+
+    <!-- //FAIL TO PAY  -->
+    <div class="failPay-container" style="display: none;">
+        <i class="fa-solid fa-circle-xmark failPay__icon"></i>
+        <div class="failPay__title">付款失敗</div>
+        <div class="failPay__box">
+            <button class="failPay__button to-home">首頁</button>
+            <button class="failPay__button to-booking">預購頁面</button>
+        </div>
+    </div>
+    <!-- END FAIL TO PAY -->
+
 </main>
+<div class="black-screen" style="display: none"></div>
 {% endblock %}
 
 {% block script %}

@@ -13,9 +13,23 @@ let contactEmailError = document.querySelector("#contactEmailError");
 let contactPhone = document.querySelector("#contactPhone");
 let contactPhoneError = document.querySelector("#contactPhoneError");
 
+let creditCardError = document.querySelector("#creditCardError");
 const confirmPrice = document.querySelector(".confirm__price");
 const confirmButton = document.querySelector(".confirm__button");
 const footer = document.querySelector("footer");
+
+const failPay = document.querySelector(".failPay-container");
+const failPay_home = document.querySelector(".to-home");
+const failPay_booking = document.querySelector(".to-booking");
+
+// --- ORDER VARIABLE -------------------------------------------------------------------------
+let orderId;
+let orderName;
+let orderAddress;
+let orderImage;
+let orderDate;
+let orderTime;
+let orderPrice;
 
 // USER INFORMATION
 fetch("/api/user/auth")
@@ -29,7 +43,9 @@ fetch("/api/user/auth")
     contactSyncButton.addEventListener("click", () => {
         if(contactSyncButton.checked){
             contactName.value = result_user.name;
+            contactName.style.color = "#448899";
             contactEmail.value = result_user.email;
+            contactEmail.style.color = "#448899";
         }
         else{
             contactName.value = "";
@@ -43,14 +59,12 @@ async function fetchBooking(){
     let bookingData = await fetch("/api/booking").then(response => {return response.json()});
 
     if(bookingData.data == null){
-        DOMof_NoBooking();
-    }
+        DOMof_No_Booking();}
     else{
-        DOMofBooking(bookingData);
-    }
+        DOMofBooking(bookingData);}
 }
 
-let DOMof_NoBooking = () => {
+let DOMof_No_Booking = () => {
     main.innerHTML = "";
     let article = document.createElement("article");
     article.className = "booking-container no-booking";
@@ -112,18 +126,25 @@ let DOMofBooking = (data) => {
         bookingContainer.classList.add("black-background");        
     })
 
-    // 不選擇取消
+    // 不取消行程
     deleteNo.addEventListener("click", () => {
         deleteContainer.style.display = "none";
         bookingContainer.classList.remove("black-background");
     })
-    // 選擇取消
+    // 取消行程
     deleteYes.addEventListener("click", () => {
         fetchDeletItinerary();
         location.reload();
-    });
+    })
 
-    
+    // 訂單取資料
+    orderId = result_attraction["id"];
+    orderName = result_attraction["name"];
+    orderAddress = result_attraction["address"];
+    orderImage = result_attraction["image"];
+    orderDate = result["date"];
+    orderTime = result["time"];
+    orderPrice = result["price"];
 }
 
 let fetchDeletItinerary = () => {
@@ -134,7 +155,7 @@ let fetchDeletItinerary = () => {
         return response.json()
     }).then(data => {
         if (data.ok == "true") {
-            DOMof_NoBooking();
+            DOMof_No_Booking();
         }
         return
     })
@@ -157,7 +178,7 @@ function valid(input, element){
 
 contactName.addEventListener("change", () => {
     if (contactName.value == ""){
-        invalid(contactName, contactNameError, "此欄必填");
+        invalid(contactName, contactNameError, "⚠ 此欄必填");
     }
     else {
         valid(contactName, contactNameError);
@@ -231,30 +252,75 @@ TPDirect.card.setup({
 })
 
 
-confirmButton.addEventListener("click", (event) => {
-    event.preventDefault()
-
+confirmButton.addEventListener("click", () => {
     // 取得 TapPay Fields 的 status
     const tappayStatus = TPDirect.card.getTappayFieldsStatus();
 
-
-
-    // 確認是否可以 getPrime
-    // if (tappayStatus.canGetPrime === false) {
-    //     console.log("can not get prime");
-    //     return
-    // }
-
+    if (contactName.value != "" && contactEmail.value != "" && contactPhone.value != ""){
+        // 確認是否可以 getPrime
+        if (tappayStatus.canGetPrime === false) {
+            console.log("456456");
+            creditCardError.style.display = "block";
+            creditCardError.textContent = "⚠ 信用卡資料有誤，請重新填寫";
+            return
+        }
+    }else{
+        if(contactName.value == ""){
+            invalid(contactName, contactNameError, "⚠ 此欄必填");}
+        if(contactEmail.value == ""){
+            invalid(contactEmail, contactEmailError, "⚠ 此欄必填");}
+        if(contactPhone.value == ""){
+            invalid(contactPhone, contactPhoneError, "⚠ 此欄必填");}       
+        return
+    }
+    
     // Get prime
-    // TPDirect.card.getPrime((result) => {
-    //     if (result.status !== 0) {
-    //         console.log("get prime error " + result.msg);
-    //         return
-    //     }
-    //     console.log("get prime 成功，prime: " + result.card.prime);
+    TPDirect.card.getPrime((result) => {
+        if (result.status !== 0) {
+            // failPay.style.display = "block";
+            return
+        }
+        prime = result.card.prime;
+
+        fetch("/api/order",{
+            method: "POST",
+            headers: {"Content-Type:": "application/json"},
+            body: JSON.stringify({
+                    "prime": prime,
+                    "order": {
+                        "price": orderPrice,
+                        "trip": {
+                            "attraction": {
+                                "id": orderId,
+                                "name": orderName,
+                                "address": orderAddress,
+                                "image": orderImage
+                            },
+                            "date": orderDate,
+                            "time": orderTime
+                        },
+                        "contact": {
+                            "name": contactName.value,
+                            "email": contactEmail.value,
+                            "phone": contactPhone.value
+                        }
+                    }
+            })
+        }).then(response => {
+            return response.json()
+        })
+
 
         // send prime to your server, to pay with Pay by Prime API .
         // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
-    // })
+    })
 })
 
+
+// --- FAIL TO BOOKING ------------------------------------------------------------------------
+failPay_home.addEventListener("click", () => {
+    window.location.href = "/";
+})
+failPay_booking.addEventListener("click", () => {
+    window.location.href = "/booking";
+})
