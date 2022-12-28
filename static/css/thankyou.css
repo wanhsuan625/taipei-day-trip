@@ -28,10 +28,18 @@
     font-weight: bolder;
     color: var(--primary-light);
 }
+.booking-fail__content{
+    font-size: 18px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 500;
+    color: var(--secondary);
+    margin: 30px;
+}
 
 footer{
     padding-top: 50px;
-    padding-bottom: 30%;
+    padding-bottom: 50%;
 }
 
 

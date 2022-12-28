@@ -259,7 +259,6 @@ confirmButton.addEventListener("click", () => {
     if (contactName.value != "" && contactEmail.value != "" && contactPhone.value != ""){
         // 確認是否可以 getPrime
         if (tappayStatus.canGetPrime === false) {
-            console.log("456456");
             creditCardError.style.display = "block";
             creditCardError.textContent = "⚠ 信用卡資料有誤，請重新填寫";
             return
@@ -277,14 +276,18 @@ confirmButton.addEventListener("click", () => {
     // Get prime
     TPDirect.card.getPrime((result) => {
         if (result.status !== 0) {
-            // failPay.style.display = "block";
+            failPay.style.display = "block";
+            blackScreen.style.display = "block";
             return
         }
         prime = result.card.prime;
 
-        fetch("/api/order",{
+        // send prime to your server, to pay with Pay by Prime API .
+        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
+
+        fetch("/api/orders",{
             method: "POST",
-            headers: {"Content-Type:": "application/json"},
+            headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({
                     "prime": prime,
                     "order": {
@@ -305,14 +308,18 @@ confirmButton.addEventListener("click", () => {
                             "phone": contactPhone.value
                         }
                     }
-            })
+                })
         }).then(response => {
             return response.json()
+        }).then((data) => {
+            if (data.data.payment.status == 0) {
+                window.location.href = `/thankyou?number=${data.data.number}`;
+            }
+            else{
+                failPay.style.display = "block";
+                return
+            }
         })
-
-
-        // send prime to your server, to pay with Pay by Prime API .
-        // Pay By Prime Docs: https://docs.tappaysdk.com/tutorial/zh/back.html#pay-by-prime-api
     })
 })
 

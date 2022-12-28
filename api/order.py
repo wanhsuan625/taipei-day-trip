@@ -1,6 +1,6 @@
 from flask import *
 import jwt
-import datetime
+from datetime import datetime
 import requests
 from module import connect
 import os
@@ -29,7 +29,7 @@ sqlorder_table = "CREATE TABLE IF NOT EXISTS `orders`( \
                     `contact_name` VARCHAR(255) not null,\
                     `contact_email` VARCHAR(255) not null,\
                     `contact_phone` VARCHAR(255) not null,\
-                    `status` BIGINT not null,\
+                    `status` BIGINT,\
                     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\
                     `updated_at` TIMESTAMP DEFAULT 0 ON UPDATE CURRENT_TIMESTAMP,\
                     FOREIGN KEY(user_id) REFERENCES users(id),\
@@ -59,9 +59,9 @@ def order_post():
     attraction_id = get_trip["attraction"]["id"]
     date = get_trip["date"]
     time = get_trip["time"]
-    contact_name = getdata["contact"]["name"]
-    contact_email = getdata["contact"]["email"]
-    contact_phone = getdata["contact"]["phone"]
+    contact_name = getdata["order"]["contact"]["name"]
+    contact_email = getdata["order"]["contact"]["email"]
+    contact_phone = getdata["order"]["contact"]["phone"]
 
     if contact_name == "" or contact_email == "" or contact_phone == "":
         return jsonify({
@@ -81,15 +81,10 @@ def order_post():
             user_id = decode["id"]
 
             # 訂單編號 - 可自訂
-            time_num = "0813"
-            if time == "afternoon":
-                time_num = "1318"
-            date_num = date.split("-")
-            date_num = "".join(date_num)
             current_time = datetime.now()
-            current_time = current_time.strftime("%Y%m%d%H%M%S")
+            current_time = int(current_time.strftime("%Y%m%d%H%M%S"))
 
-            order_id = date_num + time_num + attraction_id + user_id + "-" + current_time
+            order_id = current_time + attraction_id + user_id
 
             # 訂購資訊寫入 orders資料庫
             sql_order = "INSERT INTO\
@@ -120,8 +115,14 @@ def order_post():
                     "remember": True
                 }
             result = requests.post(url, headers=headers, json=data, timeout=30).json()
-            
+            print(result)
+
             if result["status"] == 0:
+                sql_status = "UPDATE orders SET status=%s WHERE order_id=%s"
+                val_status = (result["status"], order_id)
+                cursor.execute(sql_status, val_status)
+                connection_object.commit()
+
                 sql_delete = "DELETE FROM booking WHERE userId = %s;"
                 val_delete = (user_id,)
                 cursor.execute(sql_delete, val_delete)
@@ -131,8 +132,8 @@ def order_post():
                             "data": {
                                 "number": order_id,
                                 "payment": {
-                                "status": 0,
-                                "message": "付款成功"
+                                    "status": result["status"],
+                                    "message": "付款成功"
                                 }
                             }
                         }), 200
@@ -141,8 +142,8 @@ def order_post():
                             "data": {
                                 "number": order_id,
                                 "payment": {
-                                "status": 0,
-                                "message": "付款失敗"
+                                    "status": result["status"],
+                                    "message": "付款失敗"
                                 }
                             }
                         }), 200
@@ -179,13 +180,12 @@ def order_get(orderNumber):
             user_id = decode["id"]
 
             # 抓資料
-            sql_data = "SELECT order.* , travel.name, travel.address, travel.images\
-                        FROM order INNER JOIN travel ON order.attraction_id = travel.id\
-                        WHERE order.user_id = %s AND order.order_id = %s"
+            sql_data = "SELECT orders.* , travel.name, travel.address, travel.images FROM\
+                        orders INNER JOIN travel ON orders.attraction_id = travel.id\
+                        WHERE orders.user_id = %s AND orders.order_id = %s"
             val_data = (user_id, orderNumber)
             cursor.execute(sql_data, val_data)
             result = cursor.fetchone()
-            print(result)
 
             if result:
                 data = {
