@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/css/member.css">
+<title>會員專區</title>
+{% endblock %}
+
+{% block body %}
+<main>
+    <aside class="aside">
+        <div class="aside__user-box">
+            <!-- 大頭貼 -->
+            <img class="aside__user-box__img" src="/image/test.jpg" alt="">
+            <div class="aside__user-box__name">野源新之助超可愛的唷</div>
+        </div>
+        
+        <!--  -->
+        <div class="aside__box">
+            <i class="fa-solid fa-user aside__box__icon"></i>
+            <span class="aside__box__content">我的帳戶</span>
+        </div>
+        <div class="aside__box account-info" id="userInfo">個人檔案</div>
+        <div class="aside__box account-info" id="changePassword">變更密碼</div>
+
+        <div class="aside__box">
+            <i class="fa-solid fa-clipboard-list aside__box__icon"></i>
+            <span class="aside__box__content">訂購紀錄</span>
+        </div>
+
+        <div class="aside__box">
+            <i class="fa-solid fa-heart aside__box__icon"></i>
+            <span class="aside__box__content">我的收藏</span>
+        </div>
+
+        <div class="aside__box">
+            <i class="fa-solid fa-right-from-bracket aside__box__icon"></i>
+            <span class="aside__box__content">登出</span>
+        </div>
+    </aside>
+
+
+    <article class="article">
+        <div class="article__title">我的檔案</div>
+        <hr>
+    </article>
+</main>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

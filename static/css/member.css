@@ -1,0 +1,122 @@
+@import url(color.css);
+
+main{
+    width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+/* --- ASIDE ------------------------------------------------ */
+.aside{
+    width: 300px;
+    height: 400px;
+    border: 2px solid #67b9cd;
+    justify-content: space-around;
+    background-color: var(--white);
+    border-radius: 8px;
+}
+
+/* user-box */
+.aside__user-box{
+    background-color: #5aa2b4;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.aside__user-box__img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1.5px solid var(--white);
+    margin-right: 10px;
+}
+.aside__user-box__name{
+    color: var(--white);
+    font-weight: 500;
+    font-size: 18px;
+}
+
+/* box */
+.aside__box{
+    padding: 10px;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.aside__box:hover .aside__box__content{
+    color: var(--primary-light)
+}
+.aside__box__icon{
+    width: 22px;
+    font-size: 22px;
+    color: var(--secondary);
+    text-align: center;
+}
+.aside__box__content{
+    color: var(--secondary);
+    margin-left: 15px;
+    font-size: 18px;
+}
+.account-info{
+    font-size: 18px;
+    color: var(--secondary);
+    left: 20%;
+    cursor: pointer;
+}
+.account-info:hover{
+    color: var(--primary-light);
+}
+
+
+/* --- ARTICLE ------------------------------------------------ */
+.article{
+    width: 860px;
+    background-color: var(--secondary-light);
+}
+
+
+/* --- RWD --------------------------------------------------- */
+@media (max-width: 1280px){
+    main{ width: 95%;}
+    .aside{ width: 25%;}
+    .article{ width: 70%;}
+}
+@media (max-width: 768px){
+    .aside{ width: 200px;}
+    .aside__user-box{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .aside__user-box__img{ 
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+    .aside__user-box__name{ font-size: 16px;}
+    .article{ width: 60%;}
+    .account-info{ left: 25%;}
+}
+@media (max-width: 480px){
+    main{
+        width: 100%;
+        margin: 0;
+    }
+    .aside{
+        width: 100%;
+        border: 0;
+    }
+    .aside__user-box{
+        padding: 15px 12px;
+        justify-content: space-evenly;
+    }
+    .aside__user-box__name{ font-size: 25px;}
+    .aside__user-box__img{
+        width: 80px;
+        height: 80px;
+        margin-bottom: 0px;
+    }
+    .account-info{ left: 20%;}
+}
