@@ -1,3 +1,4 @@
+@import url("color.css");
 *{
     position: relative;
     box-sizing: border-box;
@@ -14,7 +15,7 @@ ul{
 }
 a{
     text-decoration: none;
-    color: #666666;
+    color: var(--secondary);
 }
 hr{
     width: 1200px;
@@ -29,8 +30,8 @@ input:-webkit-autofill {
 header{
     width: 100%;
     height: 54px;
-    background-color:#ffff;
-    box-shadow: 0px 3px 10px #757575 ;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--secondary-light);
     
     display: flex;
     justify-content: center;
@@ -46,38 +47,46 @@ nav{
     justify-content: space-between;
     align-items: center;
 }
-.title{
+.nav__title{
     display: block;
     font-size: 30px;
     line-height: 34px;
     font-weight: 700;
-    color: #448899;
+    color: var(--primary);
 }
-.menu{
-    height: 14px;
+.nav__menu{
+    height: 54px;
+    align-items: center;
     font-size: 16px;
     line-height: 13px;
     font-weight: 500;
-    color: #666666;
+    color: var(--secondary);
     display: flex;
     cursor: pointer;
 }
-.list_1{
-    width: 64px;
-    margin-right: 20px;
+.menu__item{
+    padding: 21px 10px;
 }
-.list_2{width: 71px;}
-.list_1:hover, .list_2:hover{
-    transform: scale(1.05);
+.menu__item:hover{
+    color: var(--white);
+    background-color:var(--primary-light);
 }
-
+.nav__bars-container{
+    display: none;
+    cursor: pointer;
+}
+.bars{
+    font-size: 22px;
+    color: var(--primary);
+    margin: 5px;
+}
 
 
 /* === SIGNIN / SIGNUP BOX =================================== */
-.sign_in_container{
+.sign-container{
     width: 340px;
     background: linear-gradient(white, white) padding-box,
-                linear-gradient(90deg,#66AABB,#337788) border-box;
+                linear-gradient(90deg,var(--primary-light),var(--primary-dark)) border-box;
     border-radius: 5px;
     border-top: 10px solid transparent;
     box-shadow: 0px 4px 60px #AAAAAA;;
@@ -88,21 +97,7 @@ nav{
     left: 50%;
     transform: translateX(-50%);
 }
-.sign_up_container{
-    width: 340px;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(90deg,#66AABB,#337788) border-box;
-    border-radius: 5px;
-    border-top: 10px solid transparent;
-    box-shadow: 0px 4px 60px #AAAAAA;;
-    z-index: 4;
-
-    position: fixed;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.close_icon{
+.sign__close-icon{
     position: absolute;
     right: 17px;
     top: 15px;
@@ -110,85 +105,107 @@ nav{
 
     transition: 0.1s;
 }
-.close_icon:hover{
+.sign__close_icon:hover{
     transform: scale(1.1);
 }
-.sign_in_container h1, .sign_up_container h1{
+.sign__title{
     width: 144px;
     font-weight: 700;
     font-size: 24px;
     line-height: 24px;
-    color: #666666;
+    color: var(--secondary);
     margin: 0 auto 18px auto;
     top: 15px;
+    cursor: default;
+    text-align: center;
 }
-.sign_in_box, .sign_up_box{
+.sign__box{
     top: 15px;
-    left: 15px;
+    text-align: center;
 }
-.sign_in_box input, .sign_up_box input{
+.input-group__input{
     width: 310px;
     height: 47px;
     font-size: 15px;
     font-weight: 500;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
-    cursor: pointer;
+    cursor: text;
     
     margin-bottom: 10px;
     padding: 15px;
+    padding-left: 43px;
 }
-.sign_in_box button, .sign_up_box button{
-    width: 310px;
-    height: 47px;
-    color: #fff;
-    font-weight: 400;
-    font-size: 19px;
+.input-group__input:hover{
+    border: 2px solid #8f8f8f;
+}
+.input-group__image{              /* fontawesome 圖片視為字體 */
+    color: var(--secondary-dark);
+    font-size: 21px;
+    
+    position: absolute;
+    top: 14px;
+    left: 27px;
+    z-index: 5;
+}
+.input-group__password-eye{
+    color: var(--secondary-dark);
+    font-size: 17px;
     cursor: pointer;
-
-    background-color: #448899;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    
+    position: absolute;
+    top: 15px;
+    right: 27px;
+    z-index: 5;
 }
-.sign_in_box button:hover, .sign_up_box button:hover{
-    transform: scale(1.01);
-    box-shadow: 1px 2px 5px 1px #AAAAAA;
-}
-.sign_in_box button:active, .sign_up_box button:active{
-    transform: scale(1) translate(1px,1px);
-}
-
-.switch_signUp, .switch_signIn{
-    font-weight: 500;
-    font-size: 16px;
-    color: #666666;
-    margin: 18px 0 20px 0;
-    text-align: center;
-}
-.switch_signUp button, .switch_signIn button{
-    border: none;
-    margin: 0;
-    padding: 0;
-    color: #448899;
-    background-color: transparent;
-    cursor: pointer;
-}
-.switch_signUp button:hover, .switch_signIn button:hover{
-    text-decoration: underline;
-}
-.in_email_error, .in_password_error, .up_name_error, .up_email_error, .up_password_error{
+.input-group__error-message{
     display: block;
     width: 100%;
     height: 10px;
     font-size: 15px;
-    color: red;
+    color: var(--error);
+    text-align: left;
 
     top: -7px;
-    left: 9px;
+    left: 30px;
     margin-bottom: 4px;
 }
-.whole{
+.sign__button{
+    width: 310px;
+    height: 47px;
+    color: var(--white);
+    font-weight: 400;
+    font-size: 19px;
+    cursor: pointer;
+
+    background-color: var(--primary);
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.sign__button:hover{
+    background-color: var(--primary-dark);
+}
+.sign__switch{
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--secondary);
+    margin: 18px 0 20px 0;
+    text-align: center;
+    cursor: default;
+}
+.sign__switch__button{
+    border: none;
+    margin: 0;
+    padding: 0;
+    color: var(--primary);
+    background-color: transparent;
+    cursor: pointer;
+}
+.sign__switch__button:hover{
+    text-decoration: underline;
+}
+.black-screen{
     width: 100%;
     height: 100%;
     background-color: rgb(0, 0, 0, 0.4);
@@ -198,30 +215,65 @@ nav{
     top: 0;
     left: 0;
 }
+/* 登入/註冊成功 */
+.sign-success{
+    width: 280px;
+}
+.sign-success__icon{
+    font-size: 50px;
+    color: var(--primary);
+    margin-bottom: 20px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.sign-success__title{
+    font-size: 22px;
+    padding-bottom: 15px;
+}
+.sign-success__content{
+    font-size: 16px;
+    color: var(--primary-light);
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+    font-weight: lighter;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.sign-success__button{
+    background-color: var(--white);
+    border: none;
+    cursor: pointer;
+    
+    left: 50%;
+    transform: translate(-50%);
+}
+
 
 /* === TOP BUTTON ==========================================*/
-.top_button{
+.top-button{
     width: 25px;
     height: 25px;
     display: none;
     transform: scale(2);
     border-radius: 50%;
-    border: 1px solid #448899;
-    color: #448899;
-    background-color: #fff;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background-color: var(--white);
     
     z-index: 2;
     position: fixed;
     bottom: 15%;
     right: 2%;
 }
-.top_button i{
+.top-button i{
     right: 1.2px;
     bottom: 0.8px;
 }
-.top_button:hover{
-    color: #fff;
-    background-color: #448899;
+.top-button:hover{
+    color: var(--white);
+    background-color: var(--primary);
     opacity: 1;
 }
 
@@ -229,7 +281,7 @@ nav{
 footer{
     width: 100%;
     height: 104px;
-    background-color: #757575;
+    background-color: var(--secondary-dark);
     display: flex;
 }
 footer > p{
@@ -238,7 +290,7 @@ footer > p{
     font-size: 16px;
     font-weight: 700;
     line-height: 13px;
-    color: #ffff;
+    color: var(--white);
 
     display: flex;
     align-items: center;
@@ -249,22 +301,51 @@ footer > p{
 @media (max-width: 1280px){
     nav{ padding: 10px 20px;}
     hr{ width: 95%;}
-    .top_button{
+    .top-button{
         transform: scale(1.8);
         opacity: 0.7;
     }
 }
+
 @media (max-width: 768px){
     nav{ padding: 10px;}
-    .top_button{
+    .top-button{
         transform: scale(1.5);
         bottom: 10%;
     }
 }
+
 @media (max-width: 480px){
-    .top_button{
+    .top-button{
         opacity: 0.5;
         bottom: 5%;
     }
-    .sign_in_container, .sign_up_container{width: 335px;}
+    .sign-container{ width: 335px;}
+    .sign-success{ width: 280px;}
+
+    /* 開合選單設定 */
+    .nav__menu{
+        width: 100%;
+        text-align: center;
+        display: block;
+
+        position: absolute;
+        top: 54px;
+        left: 0;
+        
+        height: 0;
+        overflow: hidden;
+        transition: height 0.2s ease-out;
+    }
+    .menu__item{
+        color: var(--white);
+        border-bottom: 1px solid var(--secondary-light);
+        background-color: var(--primary-light);
+        opacity: 0.9;
+    }
+    .menu__item:hover{
+        background-color: var(--primary);
+        opacity: 1;
+    }
+    .nav__bars-container{ display: block;}
 }

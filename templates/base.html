@@ -21,11 +21,12 @@
         <!-- //NAVBAR -->
         <header>
             <nav>
-                <a class="title" href="/">台北一日遊</a>
-                <ul class="menu">
-                    <li class="list_1">預定行程</li>
-                    <li class="list_2">登入/註冊</li>
+                <a class="nav__title" href="/">台北一日遊</a>
+                <ul class="nav__menu">
+                    <li class="menu__item" id="menuBookingButton">預定行程</li>
+                    <li class="menu__item" id="menuSignButton">登入/註冊</li>
                 </ul>
+                <div class="nav__bars-container"><i class="fa-solid fa-bars bars" id="bars"></i></div>
             </nav>
         </header>
         <!-- END NAVBAR -->
@@ -35,71 +36,110 @@
 
 
         <!-- //SIGN_IN BOX -->
-        <div class="sign_in_container" style="display: none;">
-            <img class="close_icon" src="/image/icon_close.png" alt="">
-            <h1>登入會員帳號</h1>
+        <div class="sign-container" id="signInContainer" style="display: none;">
+            <img class="sign__close-icon" src="/image/icon_close.png" alt="">
+            <h1 class="sign__title">登入會員帳號</h1>
+            <div class = "sign__box">
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-group__image"></i>
+                    <input required
+                    type="email"
+                    id="signInEmail"
+                    class="input-group__input"
+                    name="email"
+                    placeholder="輸入電子信箱" >
+                    <span class="input-group__error-message" id="signInEmailError" style="display: none"></span>
+                </div>
 
-            <div class = "sign_in_box">
-                <input required
-                 type="email"
-                 id="signInEmail"
-                 name="email"
-                 placeholder="輸入電子信箱" >
-                <span class="in_email_error" style="display: none"></span>
-                
-                <input  required
-                 type="password"
-                 id="signInPassword"
-                 name="password"
-                 placeholder="輸入密碼" >
-                <span class="in_password_error" style="display: none"></span>
+                <div class="input-group">
+                    <i class="fa-solid fa-key input-group__image"></i>
+                    <input  required
+                    type="password"
+                    id="signInPassword"
+                    class="input-group__input"
+                    name="password"
+                    placeholder="輸入密碼" >
+                    <i class="fa-regular fa-eye-slash input-group__password-eye"></i>
+                    <span class="input-group__error-message" id="signInPasswordError" style="display: none"></span>
+                </div>
 
-                <button>登入帳戶</button>
+                <button type="submit" class="sign__button" id="signInButton">登入帳戶</button>
             </div>
-            <div class="switch_signUp">還沒有帳戶？<button>點此註冊</button></div>
+            <div class="sign__switch">還沒有帳戶？<button class="sign__switch__button switch-to-signUp">點此註冊</button></div>
         </div>
         <!-- END SIGN_IN BOX -->
 
+        <!-- //SIGN_IN SUCCESS BOX -->
+        <div class="sign-container sign-success" id="signInSuccess" style="display: none;">
+            <i class="fa-solid fa-circle-check sign-success__icon"></i>
+            <h1 class="sign__title sign-success__title">登入成功</h1>
+            <h3 class="sign-success__content">請稍後，系統將重新載入</h3>            
+        </div>
+        <!-- END SIGN_IN SUCCESS BOX -->
+
+
         <!-- //SIGN_UP BOX -->
-        <div class="sign_up_container" style="display: none;">
-            <img class="close_icon" src="/image/icon_close.png" alt="">
-            <h1>註冊會員帳號</h1>
+        <div class="sign-container" id="signUpContainer" style="display: none;">
+            <img class="sign__close-icon" src="/image/icon_close.png" alt="">
+            <h1 class="sign__title">註冊會員帳號</h1>
+            <div class="sign__box">
+                <div class="input-group">
+                    <i class="fa-solid fa-user input-group__image"></i>
+                    <input required
+                    type="text"
+                    id="signUpName"
+                    class="input-group__input"
+                    name="name"
+                    placeholder="輸入姓名" >
+                    <span class="input-group__error-message" id="signUpNameError" style="display: none"></span>
+                </div>
 
-            <div class="sign_up_box">
-                <input required
-                 type="text"
-                 id="signUpName"
-                 name="name"
-                 placeholder="輸入姓名" >
-                <span class="up_name_error" style="display: none"></span>
+                <div class="input-group">
+                    <i class="fa-solid fa-envelope input-group__image"></i>
+                    <input required
+                    type="email"
+                    id="signUpEmail"
+                    class="input-group__input"
+                    name="email"
+                    placeholder="輸入電子信箱" >
+                    <span class="input-group__error-message" id="signUpEmailError" style="display: none"></span>
+                </div>
 
-                <input required
-                 type="email"
-                 id="signUpEmail"
-                 name="email"
-                 placeholder="輸入電子信箱" >
-                <span class="up_email_error" style="display: none"></span>
 
-                
-                 <input required
-                 type="password"
-                 id="signUpPassword"
-                 name="password"
-                 placeholder="輸入密碼 (密碼長度可為4至20個字元)" >
-                <span class="up_password_error" style="display: none"></span>
+                <div class="input-group">
+                    <i class="fa-solid fa-key input-group__image"></i>
+                    <input required
+                    type="password"
+                    id="signUpPassword"
+                    class="input-group__input"
+                    name="password"
+                    placeholder="輸入密碼" >
+                    <i class="fa-regular fa-eye-slash input-group__password-eye"></i>
+                    <span class="input-group__error-message" id="signUpPasswordError" style="display: none"></span>
+                </div>
 
-                <button type="submit">註冊新帳戶</button>
+                <button type="submit" class="sign__button" id="signUpButton">註冊新帳戶</button>
             </div>
-            <div class="switch_signIn">已經有帳戶？<button>點此登入</button></div>
+            <div class="sign__switch">已經有帳戶？<button class="sign__switch__button switch-to-signIn">點此登入</button></div>
         </div>
         <!-- END SIGN_UP BOX -->
 
+        <!-- //SIGN_UP SUCCESS BOX -->
+        <div class="sign-container sign-success" id="signUpSuccess" style="display: none;">
+            <img class="sign__close-icon" src="/image/icon_close.png" alt="">
+            <i class="fa-solid fa-circle-check sign-success__icon"></i>
+            <h1 class="sign__title sign-success__title">註冊成功</h1>
+            <button class="sign-success__content sign-success__button switch-to-signIn">點此登入</button>            
+        </div>
+        <!-- END SIGN_UP SUCCESS BOX -->
+
+
         <!-- //SIGN_IN_UP BACKGROUND EFFECT-->
-        <div class="whole" style="display: none;"></div>
+        <div class="black-screen" style="display: none;"></div>
         <!-- END SIGN_IN_UP BACKGROUND EFFECT-->
         
         <!-- //TO_TOP_BUTTON -->
-        <button class="top_button"><i class="fa-solid fa-angles-up"></i></button>
+        <button class="top-button"><i class="fa-solid fa-angles-up"></i></button>
         <!-- END TO_TOP_BUTTON -->
         
         <!-- //FOOTER -->

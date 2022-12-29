@@ -16,12 +16,12 @@ eachAttractionFetch(attractionID);
 
 // --- CREATE DOM OF IMG --------------------------------------
 const title = document.querySelector("head title");
-const img_box = document.querySelector(".img_box");
+const imgBox = document.querySelector(".img-box");
 const arrow = document.querySelector(".arrow");
-const info_box = document.querySelector(".info_box");
-const booking_form = document.querySelector(".booking_form");
+const infoBox = document.querySelector(".info-box");
+const bookingForm = document.querySelector(".booking-form");
 const section = document.querySelector("section");
-const headline = document.querySelectorAll(".headline");
+const headline = document.querySelectorAll(".section__headline");
 var slide;
 var dot;
 var slideIndex;
@@ -35,28 +35,28 @@ let attractionImg = (data) =>{
     
     // IMAGES
     for(let i = 0; i < len; i++){
-        let img_slide = document.createElement("div");
-        img_slide.className = "img_slide fade";
-        img_box.insertBefore(img_slide, arrow);
+        let imgSlide = document.createElement("div");
+        imgSlide.className = "img-slide fade";
+        imgBox.insertBefore(imgSlide, arrow);
 
         let img = document.createElement("img");
-        img.className = "attraction_img";
+        img.className = "attraction-img";
         img.src = result.images[i];
-        img_slide.appendChild(img);
+        imgSlide.appendChild(img);
     }
 
      // BOTTOM DOT
-     let dot_group = document.createElement("div");
-     dot_group.className = "dot_group";
-     img_box.appendChild(dot_group);
+     let dotGroup = document.createElement("div");
+     dotGroup.className = "dot-group";
+     imgBox.appendChild(dotGroup);
      for(let i = 0; i < len; i++){
-         let dot = dot_group.appendChild(document.createElement("div"));
+         let dot = dotGroup.appendChild(document.createElement("div"));
          dot.className = "dot";
-         dot_group.appendChild(dot);
+         dotGroup.appendChild(dot);
      }
 
     // SLIDE IMAGES
-    slide = document.querySelectorAll(".img_slide");
+    slide = document.querySelectorAll(".img-slide");
     dot = document.querySelectorAll(".dot");
 
     slideIndex = 1;
@@ -82,7 +82,7 @@ function slideShow(n){
 }
 
 // ARROW BUTTON
-const arrowButton = document.querySelectorAll(".arrow img");
+const arrowButton = document.querySelectorAll(".arrow__icon");
 arrowButton[0].addEventListener("click",() => {
     slideShow(slideIndex -= 1);
 })
@@ -120,13 +120,13 @@ function selectTime(){
 
 
 // --- BOOKING ITINERARY BUTTON -----------------------------------------------
-const itineraryButton = document.querySelector(".booking_form button");
-const bookingError = document.querySelector(".error_message");
+const itineraryButton = document.querySelector(".booking-form__button");
+const bookingError = document.querySelector(".booking-form__error-message");
 
 itineraryButton.addEventListener("click", () => {
     if(document.cookie == ""){
     signInContainer.style.display = "block";
-    whole.style.display = "block"; }
+    blackScreen.style.display = "block"; }
     else{
         if(bookingDate.value == ""){
             bookingDate.style.border = "2px solid red";
@@ -164,26 +164,31 @@ let attractionInformation = (data) =>{
 
     // NAME , MRT AND CATEGORY
     let name = document.createElement("h1");
+    name.className = "info-box__headline";
     name.innerHTML = result.name;
-    info_box.insertBefore(name, booking_form);
+    infoBox.insertBefore(name, bookingForm);
     
     let site = document.createElement("p");
+    site.className = "info-box__sub-headline";
     if(result.mrt == null){
         site.innerHTML = result.category;}
     else{
         site.innerHTML = result.category + " at " + result.mrt;}
-    info_box.insertBefore(site, booking_form);
+    infoBox.insertBefore(site, bookingForm);
 
     // INFORMATION
     let content1 = document.createElement("div");
+    content1.className = "section__content";
     content1.innerHTML = result.description;
     section.insertBefore(content1, headline[0]);
 
     let content2 = document.createElement("div");
+    content2.className = "section__content";
     content2.innerHTML = result.address;
     section.insertBefore(content2, headline[1]);
 
     let content3 = document.createElement("div");
+    content3.className = "section__content";
     content3.innerHTML = result.transport;
     section.appendChild(content3);
 };

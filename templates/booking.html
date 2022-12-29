@@ -4,8 +4,7 @@
 {% block head %}
 <link rel="stylesheet" href="/css/booking.css">
 <title>預約行程</title>
-<!-- Cleave.js v1.1.1 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.1.0/cleave.min.js"></script>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
 {% endblock %}
 
 <!-- BODY -------------------------------------------------- -->
@@ -17,79 +16,90 @@
     <hr>
 
     <!-- // CONTACT INFOMATION -->
-    <div class="contact_container">
-        <div class="contact_headline">您的聯絡資訊</div>
+    <div class="contact-container">
+        <div class="contact__headline">您的聯絡資訊</div>
         
-        <label class="contact_detail">聯絡姓名：
-            <input required
-            type="text"
-            name="name"
-            id="name">
-        </label><br>
+        <div class="contact__sync-box">
+            <input
+            type="checkbox"
+            name="contactSync"
+            id="contactSync" >
+            <label for="contactSync" class="contact__sync-info">同會員資料</label>
+        </div>
 
-        <label class="contact_detail">連絡信箱：
+        <label class="contact__detail">聯絡姓名：
             <input required
-            type="email"
-            inputmode="email"
-            name="email"
-            id="email">
-        </label><br>
-        
-        <label class="contact_detail">手機號碼：
-            <input required
-            type="tel"
-            inputmode="tel"
-            name="phone"
-            id="phone">
+             type="text"
+             name="name"
+             class="contact__info"
+             id="contactName">
         </label>
+        <span class="contact__error-message" id="contactNameError" style="display: none;"></span>
 
-        <p>請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
+        <label class="contact__detail">連絡信箱：
+            <input required
+             type="email"
+             inputmode="email"
+             name="email"
+             class="contact__info"
+             id="contactEmail">
+        </label>
+        <span class="contact__error-message" id="contactEmailError" style="display: none;"></span>
+        
+        <label class="contact__detail">手機號碼：
+            <input required
+             type="tel"
+             inputmode="tel"
+             name="phone"
+             class="contact__info"
+             id="contactPhone">
+        </label>
+        <span class="contact__error-message" id="contactPhoneError" style="display: none;"></span>
+
+        <p class="contact__notice">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</p>
     </div>
     <!-- END CONTACT INFOMATION -->
 
     <hr>
 
     <!-- // CREDIT CARD -->
-    <div class="credit_container">
-        <div class="credit_headline">信用卡付款資訊</div>
+    <div class="credit-container">
+        <div class="credit__headline">信用卡付款資訊</div>
 
-        <label class="credit_detail">卡片號碼：
-            <input required
-            type="tel"
-            inputmode="numeric"
-            name="creditNumber"
-            id="creditNumber"
-            placeholder="xxxx xxxx xxxx xxxx">
-        </label><br>
+        <div class="credit__detail">卡片號碼：
+            <div class="tpfield" id="card-number"></div>
+        </div>
+        <span class="credit__error-message" id="creditCardError"></span>
+        
+        <div class="credit__detail">過期時間：
+            <div class="tpfield" id="card-expiration-date"></div>
+        </div>
 
-        <label class="credit_detail">過期時間：
-            <input required
-            type="text"
-            name="creditExpire"
-            id="creditExpire"
-            placeholder="MM/YY">
-        </label><br>
-
-        <label class="credit_detail">驗證密碼：
-            <input required
-            type="password"
-            inputmode="numeric"
-            name="creditCvv"
-            id="creditCvv"
-            placeholder="CVV"
-            onkeyup="value=value.replace(/\D/g,'')"
-            minlength="3"
-            maxlength="4">
-        </label>
+        <div class="credit__detail">驗證密碼：
+            <div class="tpfield" id="card-ccv"></div>
+        </div>
     </div>
     <!-- END CREDIT CARD -->
 
     <hr>
-    <div class="confirm_container">
-        <div class="total_price"></div>
-        <button class="pay_button">確認訂購並付款</button>
+    <div class="confirm-container">
+        <div class="confirm__price"></div>
+        <button type="submit" class="confirm__button">確認訂購並付款</button>
     </div>
+
+    <!-- //FAIL TO PAY  -->
+    <div class="failPay-container" style="display: none;">
+        <i class="fa-solid fa-circle-xmark failPay__icon"></i>
+        <div class="failPay__title">付款失敗</div>
+        <div class="failPay__box">
+            <button class="failPay__button to-home">首頁</button>
+            <button class="failPay__button to-booking">預購頁面</button>
+        </div>
+    </div>
+    <!-- END FAIL TO PAY -->
+
 </main>
+<div class="black-screen" style="display: none"></div>
 {% endblock %}
 
 {% block script %}
