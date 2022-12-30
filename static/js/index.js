@@ -1,4 +1,4 @@
-const main = document.querySelector("main");
+const main = document.querySelector("#main");
 const searchInput = document.querySelector(".search-box__input");
 const searchButton = document.querySelector(".search-box__icon");
 let nextpage;
@@ -57,10 +57,20 @@ async function fetchAttraction(page, keyword){
     let attractionAPI = await fetch(`/api/attractions?page=${page}&keyword=${keyword}`);
     let attractionData = await attractionAPI.json();
     if(attractionData.data.length === 0){
-        main.innerHTML = "查無此景點";
+        main.classList.remove("main");
+        main.classList.add("no-search");
+
+        const noSearchIcon = `<img src="/image/no-location.png">
+                              <div class="no-search__content">查無此景點</div>`;
+        main.insertAdjacentHTML("afterbegin", noSearchIcon);
     }
-    getAttraction(attractionData);
-    nextpage = attractionData.nextPage;
+    else{
+        main.classList.add("main");
+        main.classList.remove("no-search");
+
+        getAttraction(attractionData);
+        nextpage = attractionData.nextPage;
+    }
 
     isLoading = false;
 };
