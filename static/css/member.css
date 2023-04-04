@@ -123,17 +123,23 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .change__input{
     width: 180px;
     height: 35px;
-    padding: 10px;
+    padding: 10px 13px;
     border: 0;
     border-radius: 5px;
     cursor: pointer;
     background-color: #d6d6d6;
     outline: 0;
+}
+.change__message{
+    color: var(--secondary-dark);
+    font-size: 14px;
+    margin-bottom: 10px;
+    left: 65px;
 }
 .change__button-box{
     width: 70%;
@@ -153,6 +159,20 @@
 .change__button-confirm:hover{ background-color: var(--primary-light);}
 .change__button-cancel{ background-color: var(--secondary);}
 .change__button-cancel:hover{ background-color: #a7a7a7;}
+.change__success-box{
+    width: 240px;
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+}
+.change__success-icon{
+    font-size: 22px;
+    color: var(--primary);
+    margin-right: 10px;
+}
+.change__success-text{
+    vertical-align: top;
+}
 
 /* --- member ------------------------------------------------ */
 .member__container{ padding: 20px 35px;}
@@ -282,7 +302,8 @@
     border-radius: 5px;
     box-shadow: 0 0 12px 7px var(--secondary-dark);
     background-color: var(--white);
-    padding: 15px 10px;
+    padding: 15px;
+    padding-left: 10px;
 
     z-index: 1;
     position: absolute;

@@ -82,11 +82,37 @@ def signup():
 # --- SIGNIN MEMBER : GET -----------------------------------------------------------
 @user.route("/api/user/auth", methods=["GET"])
 def auth_get():
-    cookieToken = request.cookies.get("token")   
-    if cookieToken:
-        decode = jwt.decode(cookieToken, jwt_key, algorithms="HS256")
-        return jsonify({"data":decode})
-    return jsonify({"data": None})
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor = connection_object.cursor(dictionary = True)
+
+        cookieToken = request.cookies.get("token")
+        if cookieToken:
+            decode = jwt.decode(cookieToken, jwt_key, algorithms="HS256")
+            sql_user = "SELECT * FROM users WHERE email = %s"
+            val_user = (decode["email"],)
+            cursor.execute(sql_user, val_user)
+            result = cursor.fetchone()
+
+            return jsonify({
+                "data": {
+                    "id": result["id"],
+                    "name": result["name"],
+                    "email": result["email"]
+                }
+            })
+        return jsonify({"data": None})
+    
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "error": True,
+                "message": "伺服器內部錯誤"
+        }), 500
+
+    finally:
+        cursor.close()
+        connection_object.close()
 
 
 # --- SIGNIN MEMBER : PUT -----------------------------------------------------------
@@ -104,7 +130,7 @@ def auth_put():
         
         try:
             connection_object = connection_pool.get_connection()
-            cursor = connection_object.cursor()
+            cursor = connection_object.cursor(dictionary = True)
 
             # CONFIRM ACCOUNT AND PASSWORD
             sql = "SELECT * FROM users WHERE email = %s;"
@@ -112,11 +138,11 @@ def auth_put():
             result = cursor.fetchone()
 
             if result:
-                checkPassword = bcrypt.check_password_hash(result[3], password)
+                checkPassword = bcrypt.check_password_hash(result["password"], password)
                 if checkPassword == True:
-                    userInfo = {"id": result[0],
-                                "name": result[1],
-                                "email": result[2]
+                    userInfo = {"id": result["id"],
+                                "name": result["name"],
+                                "email": result["email"]
                             }
                     # JWT
                     token = jwt.encode(userInfo, jwt_key, algorithm="HS256")
@@ -153,3 +179,45 @@ def auth_delete():
     response = make_response(jsonify({"ok": True}))
     response.delete_cookie("token")
     return response
+
+
+# ======================================================================================
+# --- CHANGE USERNAME ------------------------------------------------------------------
+@user.route("/api/member/username", methods=["POST"])
+def member_username():
+    getdata = request.get_json()
+    username = getdata["username"]
+    email = getdata["email"]
+
+    if username == "":
+        return jsonify({
+            "error": True,
+            "message": "請填入名稱"
+        }), 400
+    
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor = connection_object.cursor(dictionary = True)
+
+        update_username = 'UPDATE users SET name = %s WHERE email = %s'
+        update_username_parameter = (username, email)
+        cursor.execute(update_username , update_username_parameter)
+        connection_object.commit()
+
+        return jsonify({
+            "ok": True,
+            "message": "使用者名稱更改成功"
+        })
+
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "error": True,
+            "message": "伺服器內部錯誤"
+        }), 500
+    
+    finally:
+        cursor.close()
+        connection_object.close()
+
+# --- CHANGE PASSWORD ------------------------------------------------------------------
