@@ -12,6 +12,14 @@ bcrypt = Bcrypt()
 member = Blueprint("member", __name__)
 connection_pool = module.connect.db_connection()
 
+# --- OUT OF SERVICE ----------------------------------------------------
+@member.route("/member")
+def isLogin():
+    cookie = request.cookies
+    if not cookie :
+        return redirect("/")
+    return render_template("member.html")
+
 # --- CHANGE USERNAME ------------------------------------------------------------------
 @member.route("/api/member/username", methods=["POST"])
 def member_username():

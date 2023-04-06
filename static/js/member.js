@@ -33,6 +33,22 @@ orderRecord.addEventListener("click", () => {
     fetch_order_record();
 })
 
+// --- 登出 -----------------------------------------------------------------------------
+logout.addEventListener("click",() =>{
+    if(document.cookie != ""){
+        fetch("/api/user/auth",{
+            method: "DELETE",
+            headers: {'Content-type':'application/json'}
+        })
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            if(data.ok == true){
+                window.location.href = "/";  // 登出成功，回首頁
+            }
+        })
+    }
+})
 
 // --- 變更會員資料介面 -------------------------------------------------------------------
 let member_html = 
