@@ -162,8 +162,9 @@
 .change__success-box{
     width: 240px;
     padding: 20px;
-    text-align: center;
     font-size: 18px;
+    align-items: center;
+    text-align: center;
 }
 .change__success-icon{
     font-size: 22px;
@@ -171,7 +172,7 @@
     margin-right: 10px;
 }
 .change__success-text{
-    vertical-align: top;
+    line-height: 25px;
 }
 
 /* --- member ------------------------------------------------ */
@@ -200,7 +201,7 @@
 .member__password{
     width: 300px;
     height: 38px;
-    margin: 8px 0px 8px 20px;
+    margin: 10px 0px 10px 20px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--secondary-light);
@@ -209,11 +210,18 @@
 .member__password:focus{
     outline: #000 solid 1.5px;
 }
+.member__password__message{
+    width: 100%;
+    color: var(--error);
+    font-weight: 500;
+    position: absolute;
+    left: 100px;
+}
 
 /* member ─ CONFIRM BUTTON */
 .button__box{
     width: 95%;
-    padding-top: 30px;
+    padding-top: 20px;
     display: flex;
     justify-content: end;
 }

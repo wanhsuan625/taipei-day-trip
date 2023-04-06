@@ -15,7 +15,7 @@ fetch("/api/user/auth",{
     data => {
         let result = data.data;
         username.textContent = result.name;
-    }    
+    }
 )
 
 // 選項變更
@@ -34,7 +34,7 @@ orderRecord.addEventListener("click", () => {
 })
 
 
-// 變更會員資料
+// --- 變更會員資料介面 -------------------------------------------------------------------
 let member_html = 
    `<div class="member__container">
         <div class="member__box">
@@ -74,6 +74,7 @@ let member_html =
                         class="member__password"
                         autocomplete="new-password">
                 </label>
+                <div class="member__password__message"></div>
             </form>
         </div>
 
@@ -82,6 +83,8 @@ let member_html =
         </div>
     </div>`;
 
+let member_name;
+let member_email;
 let fetch_change_member_data = () =>{
     fetch("/api/user/auth")
     .then(response => {return response.json();})
@@ -97,20 +100,29 @@ let fetch_change_member_data = () =>{
             article.insertAdjacentHTML("afterbegin", changeData_headline);
             article.insertAdjacentHTML("beforeend", member_html);
 
-            // 填入-使用者資料
-            let member_name = document.querySelector("#memberName");
-            let member_email = document.querySelector("#memberEmail");
+            // 寫入-使用者資料
+            member_name = document.querySelector("#memberName");
+            member_email = document.querySelector("#memberEmail");
             member_name.insertAdjacentText("afterbegin", result_user.name);
             member_email.textContent = result_user.email;
 
+            // 使用者名稱變更
             change_user_name();
+
+            // 密碼變更
+            let password_confirm_button = document.querySelector(".member__button");
+            password_confirm_button.addEventListener("click", () => {
+                change_password();
+            })
         }
     )
 }
 // 初始畫面
 fetch_change_member_data();
 
-// 變更-使用者名稱
+
+// --- 使用者名稱變更 -----------------------------------------------------------------
+// 變更框之函式 - 不同情況的變化
 let func_change_message = (e, message, style_change, input, input_border) => {
     e.textContent = message;
     e.style = style_change;
@@ -118,7 +130,7 @@ let func_change_message = (e, message, style_change, input, input_border) => {
 }
 
 let change_user_name = () => {
-    let member_name = document.querySelector("#memberName");
+    member_name = document.querySelector("#memberName");
     let change_name_box = 
         `<div class="change__username-box">
             <label for="changeUsername" class="change__headline">
@@ -146,7 +158,7 @@ let change_user_name = () => {
     let change_error_message = document.querySelector("#changeMessage");
     let member_email = document.querySelector("#memberEmail");
 
-    // 確認變更
+    // 新名稱 - 確認變更
     username_confirm.addEventListener("click", ()=>{
         if(change_name_input.value){
             if (change_name_input.value.length < 1 || change_name_input.value.length > 8) {
@@ -155,7 +167,7 @@ let change_user_name = () => {
                      change_name_input, "border: 1px solid var(--error);" );  
             }
             else{
-                // 修改成功 - 改寫資料庫
+                // 新名稱 - 修改成功：改寫資料庫
                 fetch("/api/member/username", {
                     method: "POST",
                     headers: {
@@ -180,7 +192,7 @@ let change_user_name = () => {
                 })
                 
                 // 重新整理頁面
-                setTimeout( ()=> { window.location.reload() }, 2000);
+                setTimeout( ()=> { window.location.reload() }, 1000);
             }
         }
         else{
@@ -190,7 +202,7 @@ let change_user_name = () => {
         }
     })
 
-    // 取消變更
+    // 新名稱 - 取消變更
     username_cancel.addEventListener("click",()=>{
         func_change_message(
             change_error_message, "須介於1-8個字元", "color: var(--secondary-dark);",
@@ -200,8 +212,51 @@ let change_user_name = () => {
     })
 }
 
+// --- 密碼變更 -----------------------------------------------------------------
+let change_password = () => {
+    let usernameBox = document.querySelector(".change__username-box");
+    let member_email = document.querySelector("#memberEmail");
+    let old_password = document.querySelector("#passwordOld");
+    let new_password = document.querySelector("#passwordNew");
+    let confirm_password = document.querySelector("#passwordConfirm");
+    let password_message = document.querySelector(".member__password__message");
 
-//  取得歷史訂單
+    fetch("/api/member/password", {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "application/json"},
+        body: JSON.stringify({
+            "email": member_email.textContent,
+            "oldpassword": old_password.value,
+            "newpassword": new_password.value,
+            "confirmpassword": confirm_password.value})
+    })
+    .then(response => { return response.json();})
+    .then( data => {
+            if ( data.ok ){
+                password_message.style.display = "none";
+                let change_password_success_html = 
+                    `<i class="fa-solid fa-circle-check change__success-icon"></i>
+                    <span class= "change__success-text">變更成功，下次登入請使用新密碼</span>`;
+
+                usernameBox.innerHTML = "";
+                usernameBox.style.display = "flex";
+                usernameBox.classList.add("change__success-box");
+                usernameBox.insertAdjacentHTML("afterbegin", change_password_success_html);
+
+                setTimeout( ()=> { window.location.reload() }, 3000);
+            }
+            else {
+                password_message.style.display = "block";
+                password_message.innerHTML = data.message;
+            }
+        }
+    )
+}
+
+
+//  --- 取得歷史訂單 -------------------------------------------------------------
 let fetch_order_record = () => {
     fetch("/api/orderRecord")
     .then(response => {return response.json();})
@@ -222,7 +277,7 @@ let fetch_order_record = () => {
 
             if (result_order == null){
                 // 無訂單
-                let no_order = 
+                let no_order =
                     `<div class="no_order__box">
                         <img class="no_order__img" src="/image/no_reservation.png" alt="">
                         <h3 class="no_order__text">您目前無已訂購之行程</h3>
@@ -230,7 +285,7 @@ let fetch_order_record = () => {
                 hr.insertAdjacentHTML("afterend", no_order);
             }
             else{
-                // 抓取訂單數量 
+                // 抓取訂單數量
                 for( let i = 0; i < result_order.length; i++ ){
                     let order_box = document.createElement("div");
                     order_box.className = "order__box";
@@ -308,11 +363,9 @@ let fetch_order_record = () => {
                             <button class="list__button">再次訂購</button>
                         </div>`;
                         article.insertAdjacentHTML("beforeend", order_detail_list);
-                    
+                        
                         let list_container = document.querySelectorAll(".list__container");
                         let list_close_icon = document.querySelectorAll(".list__close-icon");
-                        // console.log(list_container);
-                        // console.log(list_close_icon);
 
                         list_close_icon.forEach( e => {
                             e.addEventListener("click", () => {

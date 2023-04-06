@@ -7,6 +7,7 @@ from api.user import user
 from api.booking import booking
 from api.order import order
 from api.orderRecord import orderRecord
+from api.member import member
 
 app=Flask(
 		__name__,
@@ -26,6 +27,7 @@ app.register_blueprint(user)
 app.register_blueprint(booking)
 app.register_blueprint(order)
 app.register_blueprint(orderRecord)
+app.register_blueprint(member)
 
 # Pages
 @app.route("/")
