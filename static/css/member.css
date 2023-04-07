@@ -11,7 +11,7 @@
 /* --- ASIDE ------------------------------------------------ */
 .aside{
     width: 265px;
-    height: 250px;
+    height: 300px;
     border: 2px solid #67b9cd;
     justify-content: space-around;
     background-color: var(--white);
@@ -183,7 +183,7 @@
     color: var(--secondary-dark);
 }
 .member__headline{
-    width: 15%;
+    width: 20%;
     text-align: right;
 }
 .member__text, .member__password__box{
@@ -256,6 +256,7 @@
     cursor: pointer;
 }
 .order__number{
+    font-size: 17px;
     font-weight: 700;
     color: var(--primary);
     margin-bottom: 7px;
@@ -371,42 +372,41 @@
 
 /* --- RWD --------------------------------------------------- */
 @media (max-width: 1280px){
-    main{ width: 95%;}
+    .main{ width: 100%;}
     .aside{ width: 22%;}
     .article{ width: 70%;}
 }
-@media (max-width: 768px){
-    .aside{ width: 200px;}
-    .aside__user-box{
-        flex-wrap: wrap;
-        justify-content: center;
+
+@media (max-width: 1024px){
+    .order__container{
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 25px 10px;
     }
-    .aside__user-box__img{ 
-        margin-right: 0;
-        margin-bottom: 10px;
+    .member__container{ padding: 20px 10px;}
+    .member__password{
+        width: 260px;
+        margin-left: 10px;
     }
-    .aside__user-box__name{ font-size: 16px;}
-    .article{ width: 60%;}
-    .account-info{ left: 25%;}
+    .member__button-box{ width: 100%;}
 }
+
+@media (max-width: 768px){
+    .main{
+        width: 95%;
+        margin: 10px auto;
+        flex-wrap: wrap;
+    }
+    .aside{ width: 100%;}
+    .article{
+        width: 100%;
+        padding: 20px 25px;
+    }
+    .order__container{
+        padding: 0 5px;
+        grid-gap: 30px;
+    }
+}
+
 @media (max-width: 480px){
-    main{
-        width: 100%;
-        margin: 0;
-    }
-    .aside{
-        width: 100%;
-        border: 0;
-    }
-    .aside__user-box{
-        padding: 15px 12px;
-        justify-content: space-evenly;
-    }
-    .aside__user-box__name{ font-size: 25px;}
-    .aside__user-box__img{
-        width: 60px;
-        height: 60px;
-        margin-bottom: 0px;
-    }
-    .account-info{ left: 20%;}
+    .order__container{ grid-template-columns: repeat(1, 1fr);}
 }
