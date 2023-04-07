@@ -1,3 +1,27 @@
+// --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
+const header = document.querySelector("header");
+const nav_signInButton = document.querySelector("#menuSignButton");
+const nav_bookingButton = document.querySelector("#menuBookingButton");
+const nav_signOutButton = document.querySelector("#menuSignOutButton");
+const signInContainer = document.querySelector("#signInContainer");
+const signUpContainer = document.querySelector("#signUpContainer");
+const closeIcon = document.querySelectorAll(".sign__close-icon");
+const switchTosignUp = document.querySelector(".switch-to-signUp");
+const switchTosignIn = document.querySelectorAll(".switch-to-signIn");
+const blackScreen = document.querySelector(".black-screen");
+
+let signUpName = document.querySelector("#signUpName");
+let signUpEmail = document.querySelector("#signUpEmail");
+let signUpPassword = document.querySelector("#signUpPassword");
+const signUpButton = document.querySelector("#signUpButton");
+
+let signInEmail = document.querySelector("#signInEmail");
+let signInPassword = document.querySelector("#signInPassword");
+const signInButton = document.querySelector("#signInButton");
+
+const signUpSuccess = document.querySelector("#signUpSuccess");
+const signInSuccess = document.querySelector("#signInSuccess");
+
 // --- CONTAIN LOGIN STATUS ---------------------------------------
 window.addEventListener("load", () =>{
     fetch("/api/user/auth",{
@@ -7,7 +31,8 @@ window.addEventListener("load", () =>{
         return response.json()
     }).then(data => {
         if(data.data !== null){
-            nav_signInButton.innerHTML = "登出系統";
+            nav_signInButton.innerHTML = "會員專區";
+            nav_signOutButton.style.display = "block";
         }
         return
     })
@@ -35,30 +60,6 @@ nav_bars.addEventListener("click",() => {
         barsClick = true;
     }
 })
-
-
-// --- OPEN AND CLOSE SINGIN/SIGNUP BOX --------------------------------
-const header = document.querySelector("header");
-const nav_signInButton = document.querySelector("#menuSignButton");
-const nav_bookingButton = document.querySelector("#menuBookingButton");
-const signInContainer = document.querySelector("#signInContainer");
-const signUpContainer = document.querySelector("#signUpContainer");
-const closeIcon = document.querySelectorAll(".sign__close-icon");
-const switchTosignUp = document.querySelector(".switch-to-signUp");
-const switchTosignIn = document.querySelectorAll(".switch-to-signIn");
-const blackScreen = document.querySelector(".black-screen");
-
-let signUpName = document.querySelector("#signUpName");
-let signUpEmail = document.querySelector("#signUpEmail");
-let signUpPassword = document.querySelector("#signUpPassword");
-const signUpButton = document.querySelector("#signUpButton");
-
-let signInEmail = document.querySelector("#signInEmail");
-let signInPassword = document.querySelector("#signInPassword");
-const signInButton = document.querySelector("#signInButton");
-
-const signUpSuccess = document.querySelector("#signUpSuccess");
-const signInSuccess = document.querySelector("#signInSuccess");
 
 //   登入框、註冊框上的所有按鈕效果
 closeIcon.forEach((e) => {
@@ -281,24 +282,27 @@ let signInFetch = () => {
     })
 }
 
-
-// --- SINGN_OUT ------------------------------------------------------
+// --- LINK TO MEMBER PAGE ---------------------------------------------
 nav_signInButton.addEventListener("click",() =>{
     if(document.cookie != ""){
-        fetch("/api/user/auth",{
-            method: "DELETE",
-            headers: {'Content-type':'application/json'}
-        })
-        .then(response => {
-            return response.json()
-        }).then(data => {
-            if(data.ok == true){
-                window.location.reload();  // 登出成功，畫面重載
-            }
-        })
+        window.location.href = "/member";
     }
 })
 
+// --- SINGN_OUT ------------------------------------------------------
+nav_signOutButton.addEventListener("click", () => {
+    fetch("/api/user/auth",{
+        method: "DELETE",
+        headers: {'Content-type':'application/json'}
+    })
+    .then(response => {
+        return response.json()
+    }).then(data => {
+        if(data.ok == true){
+            window.location.reload();  // 登出成功，畫面重載
+        }
+    })
+})
 
 // --- SETTING TO_TOP_BUTTON EFFECT ------------------------------------------------
 let topButton = document.querySelector(".top-button");

@@ -133,9 +133,6 @@ let fetch_change_member_data = () =>{
         }
     )
 }
-// 初始畫面
-fetch_change_member_data();
-
 
 // --- 使用者名稱變更 -----------------------------------------------------------------
 // 變更框之函式 - 不同情況的變化
@@ -404,3 +401,5 @@ let fetch_order_record = () => {
         }
     )
 }
+// 初始畫面
+fetch_order_record();
