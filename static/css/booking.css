@@ -291,6 +291,13 @@ input[type="checkbox"]{
 .confirm__button:active{
     transform: scale(1) translate(1px,1px);
 }
+.confirm__text{
+    display: none;
+    width: 100%;
+    color: var(--primary);
+    text-align: right;
+    margin-top: 10px;
+}
 
 
 /* --- RWD ---------------------------------------------------------------- */

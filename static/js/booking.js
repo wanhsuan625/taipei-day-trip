@@ -321,6 +321,9 @@ confirmButton.addEventListener("click", () => {
             }
         })
     })
+    
+    const confirmText = document.querySelector(".confirm__text");
+    confirmText.style.display = "block";
 })
 
 

@@ -271,7 +271,7 @@
 .order__img{
     display: block;
     width: 100%;
-    height: inherit;
+    height: 150px;
     border-radius: 7px;
     margin: 0 auto;
     margin-bottom: 5px;
@@ -315,7 +315,7 @@
 
     z-index: 1;
     position: absolute;
-    top: 30%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%);
 }
@@ -337,6 +337,7 @@
 }
 .list__img{
     width: 35%;
+    height: 165px;
     border-radius: 5px;
 }
 .list__content-box{ width: 60%;}
