@@ -116,7 +116,6 @@
     background-color: var(--white);
     
     position: absolute;
-    top: 10px;
     z-index: 1;
 }
 .change__headline{
@@ -207,18 +206,15 @@
     border: 1px solid var(--secondary-light);
     cursor: text;
 }
-.member__password:focus{
-    outline: #000 solid 1.5px;
-}
+.member__password:focus{ outline: #000 solid 1.5px;}
 .member__password__message{
-    width: 100%;
+    width: 300px;
     color: var(--error);
     font-weight: 500;
-    position: absolute;
     left: 100px;
 }
 
-/* member ─ CONFIRM BUTTON */
+/* member ─ PASSWORD_CHANGE CONFIRM BUTTON */
 .button__box{
     width: 95%;
     padding-top: 20px;
@@ -332,41 +328,50 @@
     top: 15px;
 }
 .list__box{
-    padding: 10px 15px;
+    padding: 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 }
 .list__img{
-    width: 35%;
+    width: 38%;
     height: 165px;
     border-radius: 5px;
 }
-.list__content-box{ width: 60%;}
+.list__content-box{ width: 55%;}
+.list__content-innerBox{
+    width: 100%;
+    margin-bottom: 7px;
+    display: flex;
+    justify-content: space-between;
+}
 .list__content-title{
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 10px;
 }
 .list__headline{
-    margin-bottom: 5px;
+    width: 25%;
     font-size: 15px;
     color: var(--secondary-dark);
+    text-align: right;
 }
 .list__content{
+    width: 73%;
     color: #000;
 }
 .list__button{
+    width: 90%;
     background-color: var(--primary);
     color: var(--white);
-    padding: 8px 10px;
+    padding: 10px;
+    margin-bottom: 7px;
     border: 0px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
-    
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+
+    left: 50%;
+    transform: translate(-50%);
 }
 
 
@@ -388,6 +393,23 @@
         margin-left: 10px;
     }
     .member__button-box{ width: 100%;}
+    .member__password__message{
+        width: 240px;
+        left: 95px;
+    }
+    .list__box{ display: block;}
+    .list__title{ margin: 0;}
+    .list__content-title{
+        text-align: center;
+        margin: 10px auto;
+    }
+    .list__img{ 
+        width: 90%;
+        height: 200px;
+        left: 50%;
+        transform: translate(-50%);
+    }
+    .list__content-box{ width: 95%;}
 }
 
 @media (max-width: 768px){
@@ -399,14 +421,62 @@
     .aside{ width: 100%;}
     .article{
         width: 100%;
-        padding: 20px 25px;
+        padding: 20px 15px;
     }
     .order__container{
         padding: 0 5px;
         grid-gap: 30px;
     }
+    .member__password__message{
+        width: 240px;
+        left: 25%;
+    }
 }
 
 @media (max-width: 480px){
     .order__container{ grid-template-columns: repeat(1, 1fr);}
+    .member__box{ display: block;}
+    .member__content{ padding: 15px 0;}
+    .member__headline{
+        width: 100%;
+        text-align: start;
+        padding-left: 5px;
+        font-size: 17px;
+
+    }
+    .member__text{ margin-left: 25px;}
+    .member__password__box{
+        letter-spacing: 0;
+        margin-left: 25px;
+    }
+    .member__password{ width: 70%;}
+    .member__password__message{
+        width: 100%;
+        left: 0;
+        text-align: right;
+    }
+    .change__username-box{
+        left: 50%;
+        transform: translate(-55%);
+    }
+    .list__container{ width: 85%;}
+    .list__title{ font-size: 16px;}
+    .list__img{
+        width: 100%;
+        height: 150px;}
+    .list__content-box{ margin: 0 auto;}
+    .list__content-innerBox{
+        display: block;
+        width: 95%;
+        margin: 0 auto;
+    }
+    .list__headline{
+        width: 100%;
+        text-align: start;
+        padding-bottom: 8px;
+    }
+    .list__content{
+        width: 100%;
+        padding: 0 0 10px 20px;
+    }
 }

@@ -90,6 +90,7 @@ let member_html =
                         class="member__password"
                         autocomplete="new-password">
                 </label>
+
                 <div class="member__password__message"></div>
             </form>
         </div>
@@ -347,34 +348,40 @@ let fetch_order_record = () => {
 
                         let order_detail_list = `
                             <div class="list__container">
-                            <div class="list__title order__number"><span>訂單編號：</span>${result_order[i].order_id}</div>
-                            <img class="list__close-icon" src="/image/icon_close.png" alt="">
-                            <div class="list__box">
-                                <img class="list__img" src="${result_order[i].images}" alt="">
-                                <div class="list__content-box">
-                                    <div class="list__content-title">${result_order[i].name}</div>
-                                    <div class="list__headline">景區地點：
-                                        <span class="list__content">${result_order[i].address}</span>
-                                    </div>
-                                    <div class="list__headline">&emsp;訂購人：
-                                        <span class="list__content">${result_order[i].contact_name}</span>
-                                    </div>
-                                    <div class="list__headline">&emsp;&emsp;信箱：
-                                        <span class="list__content">${result_order[i].contact_email}</span>
-                                    </div>
-                                    <div class="list__headline">&emsp;&emsp;電話：
-                                        <span class="list__content">${result_order[i].contact_phone.slice(0,4)}***${result_order[i].contact_phone.slice(-3)}</span>
-                                    </div>
-                                    <div class="list__headline">出發日期：
-                                        <span class="list__content">${result_order[i].date}</span>
-                                    </div>
-                                    <div class="list__headline">&emsp;&emsp;場次：
-                                        <span class="list__content">${time}</span>
+                                <div class="list__title order__number"><span>訂單編號：</span>${result_order[i].order_id}</div>
+                                <img class="list__close-icon" src="/image/icon_close.png" alt="">
+                                <div class="list__box">
+                                    <img class="list__img" src="${result_order[i].images}" alt="">
+                                    <div class="list__content-box">
+                                        <div class="list__content-title">${result_order[i].name}</div>
+                                        <div class="list__content-innerBox">
+                                            <div class="list__headline">景區地點：</div>
+                                            <div class="list__content">${result_order[i].address}</div>
+                                        </div>
+                                        <div class="list__content-innerBox">
+                                            <div class="list__headline">訂購人：</div>
+                                            <div class="list__content">${result_order[i].contact_name}</div>
+                                        </div>
+                                        <div class="list__content-innerBox">
+                                            <div class="list__headline">信箱：</div>
+                                            <div class="list__content">${result_order[i].contact_email}</div>
+                                        </div>
+                                        <div class="list__content-innerBox">
+                                            <div class="list__headline">電話：</div>
+                                            <div class="list__content">${result_order[i].contact_phone.slice(0,4)}***${result_order[i].contact_phone.slice(-3)}</div>
+                                        </div>
+                                        <div class="list__content-innerBox">
+                                            <div class="list__headline">出發日期：</div>
+                                            <div class="list__content">${result_order[i].date}</div>
+                                        </div>
+                                        <div class="list__content-innerBox">
+                                            <div class="list__headline">場次：</div>
+                                            <div class="list__content">${time}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button class="list__button">再次訂購</button>
-                        </div>`;
+                                <button class="list__button">再次訂購</button>
+                            </div>`;
                         article.insertAdjacentHTML("beforeend", order_detail_list);
                         
                         let list_container = document.querySelectorAll(".list__container");
