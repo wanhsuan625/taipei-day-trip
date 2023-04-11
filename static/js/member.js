@@ -264,6 +264,9 @@ let change_password = () => {
             else {
                 password_message.style.display = "block";
                 password_message.innerHTML = data.message;
+                old_password.value = null;
+                new_password.value = null;
+                confirm_password.value = null;
             }
         }
     )
@@ -394,6 +397,7 @@ let fetch_order_record = () => {
                                 })
                             })
                         })
+                        // window.addEventListener("mouseup",() => {list_container.style.display = "none";})
 
                         // 再次訂購 - 跳轉至該景點頁面ㄋ
                         let list_button = document.querySelectorAll(".list__button");
