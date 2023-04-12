@@ -308,6 +308,7 @@
 
 /* 訂單詳細資料 */
 .list__container{
+    display: none;
     width: 40%;
     border-radius: 5px;
     box-shadow: 0 0 12px 7px var(--secondary-dark);
