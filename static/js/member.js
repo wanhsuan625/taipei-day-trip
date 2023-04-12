@@ -407,7 +407,7 @@ let fetch_order_record = () => {
                     list_address.textContent = result_order[i].address;
                     list_contacter.textContent = result_order[i].contact_name;
                     list_email.textContent = result_order[i].contact_email;
-                    list_phone.textContent = result_order[i].contact_phone;
+                    list_phone.textContent = `${result_order[i].contact_phone.slice(0,4)}***${result_order[i].contact_phone.slice(7)}`;
                     list_date.textContent = result_order[i].date;
                     list_time.textContent = time;
                 })
