@@ -66,10 +66,21 @@ async function fetchBooking(){
 
 let DOMof_No_Booking = () => {
     main.innerHTML = "";
-    let article = document.createElement("article");
-    article.className = "booking-container no-booking";
-    article.textContent = "目前沒有任何待預定的行程";
-    main.appendChild(article);
+    
+    let no_booking_container = document.createElement("article");
+    no_booking_container.className = "no_booking-container";
+    main.appendChild(no_booking_container);
+
+    let empty_cart_img = document.createElement("img");
+    empty_cart_img.src = "/image/empty-cart.png";
+    empty_cart_img.style = "margin-bottom: 15px";
+    no_booking_container.appendChild(empty_cart_img);
+
+    let no_booking_text = document.createElement("div");
+    no_booking_text.className = "no-booking";
+    no_booking_text.textContent = "目前沒有任何待預定的行程";
+    no_booking_container.appendChild(no_booking_text);
+    
     
     //  推薦景點
     let recommend_attraction_title = 

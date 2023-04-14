@@ -77,6 +77,11 @@ main{
     position: absolute;
     right: 0;
 }
+.no_booking-container{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
 
 /* DELETE BOX */
 .booking__delete-container{
@@ -334,7 +339,7 @@ input[type="checkbox"]{
     .booking__detail:last-child{
         margin-bottom: 10px;
     }
-    .no-booking{ margin-top: 30px;}
+    .no_booking-container{ margin-top: 30px;}
     .booking-container::after{ top: 0;}
 }
 @media (max-width: 480px){
