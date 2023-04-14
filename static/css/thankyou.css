@@ -46,10 +46,10 @@
 
 footer{
     padding-top: 50px;
-    padding-bottom: 50%;
+    padding-bottom: 10%;
 }
 
-
+/* RWD */
 @media (max-width: 1280px){
     .booking-success__container{ width: 95%;}
 }
