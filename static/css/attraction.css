@@ -211,6 +211,11 @@ input[type="radio"]:checked::after{
     line-height: 24px;
     letter-spacing: 2px;
 }
+.section__map{
+    width: 100%;
+    height: 400px;
+    margin-top: 10px;
+}
 
 /* --- RWD SETTING ------------------------------------------------------*/
 /* LAYOUT BELOW 1280px */
@@ -243,4 +248,8 @@ input[type="radio"]:checked::after{
         width: 100%;
         padding: 0 20px;
     }
+}
+
+@media (max-width: 480px){
+    .section__map{ height: 300px;}
 }
