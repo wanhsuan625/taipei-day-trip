@@ -284,8 +284,8 @@ contactPhone.addEventListener("change", () =>{
 
 // --- CREDIT CARD ------------------------------------------------------------------------
 TPDirect.setupSDK(
-    126971,
-    "app_bmhD4ubStRHqvzB6Q2RZ9xUJV3hXSwyLrgsMAhV234DQRhdqSwQKGfSc6nzR",
+    tpd_number,
+    tpd_key,
     "sandbox"
 )
 
