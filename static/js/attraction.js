@@ -31,7 +31,7 @@ let eachAttractionFetch = (num) => {
                 map: map,
             });
         }
-        window.initMap = initMap;
+        window.onload = initMap;
     })
 }
 eachAttractionFetch(attractionID);
@@ -39,6 +39,7 @@ eachAttractionFetch(attractionID);
 // --- CREATE DOM OF IMG --------------------------------------
 const title = document.querySelector("head title");
 const imgBox = document.querySelector(".img-box");
+const imgBlur = document.querySelector(".img-background-blur");
 const arrow = document.querySelector(".arrow");
 const infoBox = document.querySelector(".info-box");
 const bookingForm = document.querySelector(".booking-form");
@@ -57,14 +58,43 @@ let attractionImg = (data) =>{
     title.innerHTML = result.name;
     
     // IMAGES
-    for(let i = 0; i < len; i++){
+    let loaded_images = 0;
+    let loader = document.querySelector("#loader");
+    let img_loading_percent = document.querySelector(".img-loading-percent");
+
+    for( let i = 0 ; i < len ; i++ ){
         let imgSlide = document.createElement("div");
-        imgSlide.className = "img-slide fade";
+        imgSlide.className = "img-slide";
         imgBox.insertBefore(imgSlide, arrow);
 
         let img = document.createElement("img");
-        img.className = "attraction-img";
+        img.className= "attraction-img";
         img.src = result.images[i];
+
+        // loading images
+        img.onload = function () {
+            loaded_images++ ;
+            if ( loaded_images == len){
+                img_loading_percent.textContent = "100%";
+                
+                // loading devoration fade out
+                imgBlur.classList.add("fadeOut");
+                loader.classList.add("fadeOut");
+                img_loading_percent.classList.add("fadeOut");
+
+                setTimeout( ()=> {
+                    loader.style.display = "none";
+                    imgBlur.style.display = "none";
+                    img_loading_percent.style.display = "none";
+                }, 2000);
+            }
+            else{
+                let number_loading_percent =  Math.floor(100 * loaded_images / len ) + "%" ;
+                img_loading_percent.textContent = number_loading_percent;
+            }
+        }
+
+        // showing image
         imgSlide.appendChild(img);
     }
 

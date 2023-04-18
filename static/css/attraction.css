@@ -25,6 +25,31 @@ main{
     position: absolute;
     top: 0;
 }
+.img-background-blur{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    backdrop-filter:blur(70px);
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+.img-loading-percent{
+    /* content: attr(data-text); */
+    color: var(--white);
+    font-size: 30px;
+    letter-spacing: -1px;
+    font-weight: 600;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
 
 /* IMAGE - ARROW */
 .arrow{
@@ -65,13 +90,13 @@ main{
 .active, .dot:hover{
     background-color: #000;
 }
-.fade{
-    animation: fade 2s ease;
+.fadeOut{
+    animation: fadeOut 3s ease;
 }
 
-@keyframes fade{
-from {opacity: 0.5}
-to {opacity: 1}
+@keyframes fadeOut{
+    from { opacity: 1}
+    to { opacity: 0;}
 }
 
 /* --- BOOKING FORM ------------------------------------------------------*/

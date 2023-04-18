@@ -4,12 +4,26 @@
 {% block head %}
 <title></title>
 <link rel="stylesheet" href="/css/attraction.css">
+<link rel="stylesheet" href="/css/loading.css">
 {% endblock %}
 
 <!-- BODY -------------------------------------------------- -->
 {% block body %}
 <main>
     <div class="img-box">
+        <div class="img-background-blur"></div>
+        <span class="img-loading-percent"></span>
+        <div style="color: #a3cfdf" id="loader" class="la-ball-spin-clockwise-fade la-3x loading">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
         <div class="arrow">
             <img class="arrow__icon" src="/image/btn_leftArrow.png" alt="">
             <img class="arrow__icon" src="/image/btn_rightArrow.png" alt="">
