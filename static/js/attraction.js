@@ -17,10 +17,6 @@ let eachAttractionFetch = (num) => {
     .then(response => {
         return response.json();})
     .then(data => {
-        // console.log(data);
-        attractionImg(data);
-        attractionInformation(data);
-
         function initMap(){
             var map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 17,
@@ -32,6 +28,9 @@ let eachAttractionFetch = (num) => {
             });
         }
         window.onload = initMap;
+
+        attractionImg(data);
+        attractionInformation(data);
     })
 }
 eachAttractionFetch(attractionID);
