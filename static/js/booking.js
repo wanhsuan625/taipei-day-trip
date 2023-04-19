@@ -142,9 +142,6 @@ let DOMof_No_Booking = () => {
         window.location.href = `/attraction/${random}`;
     })
     }
-
-    footer.style.paddingTop = "50px";
-    footer.style.paddingBottom = "20%";
 }
 
 let DOMofBooking = (data) => {

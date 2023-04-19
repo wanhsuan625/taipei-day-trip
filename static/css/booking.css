@@ -30,7 +30,7 @@ input:-webkit-autofill {
 }
 main{
     width: 1200px;
-    margin: 0 auto 62px auto;
+    margin: 0 auto 150px auto;
     color: var(--secondary);
 }
 .booking-container{

@@ -96,6 +96,7 @@
 .main-size{
     width: 1200px;
     margin: 40px auto;
+    margin-bottom: 150px;
     padding: 15px;
 }
 .attraction{
@@ -166,6 +167,38 @@
     margin-top: 10px;
 }
 
+/* LOADING */
+.loader-container{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.loader {
+    position: relative;
+    margin: 0 auto;
+    width: 85px;
+    height: 75px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0);
+    background-position: 0px center, 15px center, 30px center, 45px center, 60px center, 75px center, 90px center;
+    animation: rikSpikeRoll 1.2s linear infinite alternate;
+}
+
+@keyframes rikSpikeRoll {
+  0% { background-size: 10px 3px;}
+  16% { background-size: 10px 75px, 10px 3px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
+  33% { background-size: 10px 30px, 10px 75px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
+  50% { background-size: 10px 10px, 10px 30px, 10px 75px, 10px 3px, 10px 3px, 10px 3px}
+  66% { background-size: 10px 3px, 10px 10px, 10px 30px, 10px 75px, 10px 3px, 10px 3px}
+  83% { background-size: 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 75px, 10px 3px}
+  100% { background-size: 10px 3px, 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 75px}
+}
+    
 
 /* --- RWD SETTING ------------------------------------ */
 /* LAYOUT - BELOW 1280px   */

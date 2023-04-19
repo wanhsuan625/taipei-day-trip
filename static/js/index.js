@@ -13,7 +13,7 @@ fetchCategory();
 // --- Create main content of Homepage ---------------------
 function getAttraction(data){
     let result = data.data;
-    console.log(data);
+    // console.log(data);
 
     for(let i = 0; i < result.length; i++){
         let attraction = document.createElement("a");
