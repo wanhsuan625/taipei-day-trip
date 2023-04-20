@@ -74,7 +74,10 @@
         height: 75px;}
 }
 @media (max-width: 768px){
-    .recommend__container{ margin: 50px auto;}
+    .recommend__container{ 
+        margin: 50px auto;
+        padding-bottom: 150px;
+    }
     .recommend__attraction-combination{
         grid-template-columns: repeat(2 , 1fr);
     }

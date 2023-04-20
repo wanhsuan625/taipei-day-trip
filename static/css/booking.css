@@ -30,7 +30,7 @@ input:-webkit-autofill {
 }
 main{
     width: 1200px;
-    margin: 0 auto 150px auto;
+    margin: 0 auto;
     color: var(--secondary);
 }
 .booking-container{
@@ -81,6 +81,7 @@ main{
     width: 100%;
     margin: 0 auto;
     text-align: center;
+    color: var(--primary);
 }
 
 /* DELETE BOX */
@@ -226,8 +227,7 @@ input[type="checkbox"]{
     cursor: pointer;
 }
 .contact__error-message, .credit__error-message{
-    display: block;
-    width: 100%;
+    width: 200px;
     height: 10px;
     font-size: 14px;
     color: var(--error);
@@ -265,6 +265,7 @@ input[type="checkbox"]{
 .confirm-container{
     width: 980px;
     margin: 0 auto;
+    padding-bottom: 180px;
     
     display: flex;
     flex-wrap: wrap;
@@ -339,6 +340,7 @@ input[type="checkbox"]{
     .booking__detail:last-child{
         margin-bottom: 10px;
     }
+    .confirm-container{ padding-bottom: 120px;}
     .no_booking-container{ margin-top: 30px;}
     .booking-container::after{ top: 0;}
 }
