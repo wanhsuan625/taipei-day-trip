@@ -3,6 +3,7 @@
 .main{
     width: 1200px;
     margin: 50px auto;
+    padding-bottom: 104px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-evenly;
@@ -81,6 +82,7 @@
 /* --- ARTICLE ------------------------------------------------ */
 .article{
     width: 860px;
+    min-height: 650px;
     background-color: var(--secondary-light);
     border-radius: 10px;
     padding: 20px 30px;
@@ -138,6 +140,7 @@
 }
 .change__message{
     color: var(--secondary-dark);
+    max-width: 160px;
     font-size: 14px;
     margin-bottom: 10px;
     left: 65px;
@@ -450,6 +453,7 @@
     }
     .article{
         width: 100%;
+        min-height: 740px;
         padding: 20px 15px;
     }
     .order__container{

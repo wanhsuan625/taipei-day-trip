@@ -68,6 +68,7 @@ let attractionImg = (data) =>{
 
         let img = document.createElement("img");
         img.className= "attraction-img";
+        img.loading = "eager";
         img.src = result.images[i];
 
         // loading images

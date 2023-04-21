@@ -1,10 +1,13 @@
 const main = document.querySelector("#main");
 const searchInput = document.querySelector(".search-box__input");
 const searchButton = document.querySelector(".search-box__icon");
+const loaderContainer = document.querySelector(".loader-container");
+const loaderText = document.querySelector(".loader-text");
 let nextpage;
 let keyword;
 
 let isLoading = false;
+let isImageLoading = false;
 
 // --- INITIAL PAGE ----------------------------------------
 fetchAttraction(0, "");
@@ -13,7 +16,10 @@ fetchCategory();
 // --- Create main content of Homepage ---------------------
 function getAttraction(data){
     let result = data.data;
-    // console.log(data);
+
+    loaderContainer.style.display = "block";
+    isImageLoading = true;
+    let loaded_image_amount = 0;
 
     for(let i = 0; i < result.length; i++){
         let attraction = document.createElement("a");
@@ -21,14 +27,30 @@ function getAttraction(data){
         attraction.href = `/attraction/${result[i].id}`;
         main.appendChild(attraction);
 
-
+        // --- Images Loading ---
         let imgBox = document.createElement("div");
         imgBox.className = "attraction__img-box";
         attraction.appendChild(imgBox);
+        
         // images
         let img = document.createElement("img");
         img.setAttribute("src",result[i].images[0]);
+
+        // loading image percent
+        img.addEventListener( "load" , () => {
+            loaded_image_amount++;
+            if ( loaded_image_amount == result.length ){
+                loaderContainer.style.display = "none";
+                isImageLoading = false;
+                
+                if(!nextpage){
+                    loaderContainer.style.display = "none";
+                }
+            }
+        })
         imgBox.appendChild(img);
+
+
         // attraction name
         let name = document.createElement("div");
         name.className = "name";
@@ -36,7 +58,7 @@ function getAttraction(data){
         name.title = result[i].name;
         imgBox.appendChild(name);
 
-
+        // --- Information Loading ---
         let infoBox = document.createElement("div");
         infoBox.className = "attraction__info-box";
         attraction.appendChild(infoBox);
@@ -84,7 +106,7 @@ const options = {
 let callback = (entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting){
-            if(nextpage != null && isLoading == false){
+            if(nextpage != null && isLoading == false && isImageLoading == false){
                 if(!keyword){
                     fetchAttraction(nextpage,"");
                 }else{

@@ -88,6 +88,7 @@
 }
 
 /* --- ATTRACTION INFORMATION ----------------------- */
+.main-container{ padding-bottom: 104px;}
 .main{
     display: grid;
     grid-template-columns:repeat(4, 1fr);
@@ -96,7 +97,6 @@
 .main-size{
     width: 1200px;
     margin: 40px auto;
-    margin-bottom: 150px;
     padding: 15px;
 }
 .attraction{
@@ -241,6 +241,7 @@
         width: 100%;
         margin: 35px auto;
         padding: 20px;
+        padding-bottom: 35px;
     }
     .attraction__img-box{ padding-top: 78%;}
 }
