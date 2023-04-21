@@ -3,6 +3,7 @@ from flask_bcrypt import Bcrypt
 import jwt
 import module.connect
 import os
+import re
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -68,12 +69,16 @@ def member_password():
     new_password = getdata["newpassword"]
     confirm_password = getdata["confirmpassword"]
 
+    # REGULAR EXPRESSION OF PASSWORD
+    password_regex = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$"
+    password_match = re.match( password_regex , new_password)
+
     if old_password == "" or new_password == "" or confirm_password == "":
         return jsonify({
             "error": True,
             "message": "請輸入舊密碼、新密碼或確認密碼"
         }), 400
-    
+
     try:
         connection_object = connection_pool.get_connection()
         cursor = connection_object.cursor(dictionary = True)
@@ -83,12 +88,19 @@ def member_password():
         cursor.execute(sql, (email,))
         result = cursor.fetchone()
         
+        
         check_password = bcrypt.check_password_hash(result["password"], old_password)
         if check_password == True:
             if old_password == new_password :
                 return jsonify({
                     "error": True,
                     "message": "舊密碼與新密碼不可相同"
+                }), 400
+            
+            elif password_match == None:
+                return jsonify({
+                    "error": True,
+                    "message": "密碼長度需為8~15位，並且須包含一個大寫字母、一個小寫字母及一個數字"
                 }), 400
             
             elif new_password == confirm_password:

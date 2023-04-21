@@ -214,9 +214,14 @@
 .member__password:focus{ outline: #000 solid 1.5px;}
 .member__password__message{
     width: 300px;
-    color: var(--error);
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: var(--secondary);
     font-weight: 500;
-    left: 100px;
+    left: 95px;
+}
+.message-error{
+    color: var(--error);
 }
 
 /* member ─ PASSWORD_CHANGE CONFIRM BUTTON */
@@ -423,7 +428,7 @@
     .member__button-box{ width: 100%;}
     .member__password__message{
         width: 240px;
-        left: 95px;
+        left: 90px;
     }
 
     /* 訂購紀錄的list訂單 */
@@ -539,9 +544,8 @@
     }
     .member__password{ width: 65%;}
     .member__password__message{
-        width: 100%;
-        left: 0;
-        text-align: right;
+        width: 65%;
+        left: 35%;
     }
     .change__username-box{
         left: 50%;

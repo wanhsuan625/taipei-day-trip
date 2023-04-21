@@ -40,7 +40,6 @@ function getAttraction(data){
         img.addEventListener( "load" , () => {
             loaded_image_amount++;
             if ( loaded_image_amount == result.length ){
-                loaderContainer.style.display = "none";
                 isImageLoading = false;
                 
                 if(!nextpage){

@@ -88,6 +88,7 @@
 }
 
 /* --- ATTRACTION INFORMATION ----------------------- */
+.loader-container{ padding-bottom: 50px;}
 .main-container{ padding-bottom: 104px;}
 .main{
     display: grid;

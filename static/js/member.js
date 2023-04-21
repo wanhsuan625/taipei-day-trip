@@ -91,7 +91,9 @@ let member_html =
                         autocomplete="new-password">
                 </label>
 
-                <div class="member__password__message"></div>
+                <div class="member__password__message" id="memberPasswordMessage">
+                密碼長度需為8~15位，並且須包含一個大寫字母、一個小寫字母及一個數字</div>
+                <div class="member__password__message message-error" id="errorMessage"></div>
             </form>
         </div>
 
@@ -172,6 +174,12 @@ let change_user_name = () => {
     let change_error_message = document.querySelector("#changeMessage");
     let member_email = document.querySelector("#memberEmail");
 
+    change_name_input.addEventListener("input", () => {
+        func_change_message(
+            change_error_message, "須介於1-8個字元", "color: var(--secondary);",
+             change_name_input, "border: 0;" );  
+    })
+
     // 新名稱 - 確認變更
     username_confirm.addEventListener("click", ()=>{
         if(change_name_input.value){
@@ -227,13 +235,26 @@ let change_user_name = () => {
 }
 
 // --- 密碼變更 -----------------------------------------------------------------
+let password_warning_text = ( element , message , error) => {
+    element.addEventListener("input", () => {
+        message.style.display = "block";
+        error.style.display = "none";
+    })
+}
+
 let change_password = () => {
     let usernameBox = document.querySelector(".change__username-box");
-    let member_email = document.querySelector("#memberEmail");
+    member_email = document.querySelector("#memberEmail");
     let old_password = document.querySelector("#passwordOld");
     let new_password = document.querySelector("#passwordNew");
     let confirm_password = document.querySelector("#passwordConfirm");
-    let password_message = document.querySelector(".member__password__message");
+    let password_message = document.querySelector("#memberPasswordMessage");
+    let password_error_message = document.querySelector("#errorMessage");
+    
+    password_warning_text( old_password , password_message , password_error_message);
+    password_warning_text( new_password , password_message , password_error_message);
+    password_warning_text( confirm_password , password_message , password_error_message);
+
 
     fetch("/api/member/password", {
         method: "POST",
@@ -249,7 +270,8 @@ let change_password = () => {
     .then(response => { return response.json();})
     .then( data => {
             if ( data.ok ){
-                password_message.style.display = "none";
+                password_error_message.style.display = "none";
+                password_message.style.display = "block";
                 let change_password_success_html = 
                     `<i class="fa-solid fa-circle-check change__success-icon"></i>
                     <span class= "change__success-text">變更成功，下次登入請使用新密碼</span>`;
@@ -262,8 +284,9 @@ let change_password = () => {
                 setTimeout( ()=> { window.location.reload() }, 3000);
             }
             else {
-                password_message.style.display = "block";
-                password_message.innerHTML = data.message;
+                password_message.style.display = "none";
+                password_error_message.style.display = "block";
+                password_error_message.innerHTML = data.message;
             }
         }
     )
