@@ -139,9 +139,10 @@ let fetch_change_member_data = () =>{
 
 // --- 使用者名稱變更 -----------------------------------------------------------------
 // 變更框之函式 - 不同情況的變化
-let func_change_message = (e, message, style_change, input, input_border) => {
+let func_change_message = (e, message, color_change, font_size_change, input, input_border) => {
     e.textContent = message;
-    e.style = style_change;
+    e.style = color_change;
+    e.style.fontSize = font_size_change;
     input.style = input_border;
 }
 
@@ -150,9 +151,9 @@ let change_user_name = () => {
     let change_name_box = 
         `<div class="change__username-box">
             <label for="changeUsername" class="change__headline">
-                新名稱<input type="text" id="changeUsername" class="change__input">
+                新名稱<input type="text" id="changeUsername" class="change__input" placeholder="須介於1-8個字元">
             </label>
-            <div class="change__message" id="changeMessage">須介於1-8個字元</div>
+            <div class="change__message" id="changeMessage">可用符號 "." , "_" 以及 "─"</div>
             <div class="change__button-box">
                 <button type="submit" class="change__button change__button-confirm">儲存</button>
                 <button type="submit" class="change__button change__button-cancel">取消</button>
@@ -176,7 +177,7 @@ let change_user_name = () => {
 
     change_name_input.addEventListener("input", () => {
         func_change_message(
-            change_error_message, "須介於1-8個字元", "color: var(--secondary);",
+            change_error_message, '可用符號 "." , "_" 以及 "─"', "color : var(--secondary);", "12px" ,
              change_name_input, "border: 0;" );  
     })
 
@@ -185,7 +186,12 @@ let change_user_name = () => {
         if(change_name_input.value){
             if (change_name_input.value.length < 1 || change_name_input.value.length > 8) {
                 func_change_message(
-                    change_error_message, "須介於1-8個字元", "color: var(--error);",
+                    change_error_message, "須介於1~8個字元", "color : var(--error);", "14px",
+                     change_name_input, "border: 1px solid var(--error);" );  
+            }
+            else if (!regName.test(change_name_input.value)){
+                func_change_message(
+                    change_error_message, "格式不符，請重新填寫", "color : var(--error);", "14px",
                      change_name_input, "border: 1px solid var(--error);" );  
             }
             else{
@@ -219,7 +225,7 @@ let change_user_name = () => {
         }
         else{
             func_change_message(
-                change_error_message, "請輸入新的使用者名稱", "color: var(--error);",
+                change_error_message, "請輸入新的使用者名稱", "color : var(--error);", "14px",
                  change_name_input, "border: 1px solid var(--error);" );
         }
     })
@@ -227,7 +233,7 @@ let change_user_name = () => {
     // 新名稱 - 取消變更
     username_cancel.addEventListener("click",()=>{
         func_change_message(
-            change_error_message, "須介於1-8個字元", "color: var(--secondary-dark);",
+            change_error_message, '可用符號 "." , "_" 以及 "─"', "color : var(--secondary-dark);", "12px" ,
              change_name_input, "border: 0;" );
         change_name_input.value = "";
         usernameBox.style.display = "none";

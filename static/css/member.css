@@ -113,8 +113,8 @@
 }
 .change__username-box{
     display: none;
-    width: 280px;
-    padding: 35px 22px 25px 20px;
+    width: 290px;
+    padding: 30px 20px 25px 20px;
     box-shadow: 0px 0px 16px 10px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
     background-color: var(--white);
@@ -129,7 +129,7 @@
     margin-bottom: 5px;
 }
 .change__input{
-    width: 180px;
+    width: 190px;
     height: 35px;
     padding: 10px 13px;
     border: 0;
@@ -140,10 +140,11 @@
 }
 .change__message{
     color: var(--secondary-dark);
-    max-width: 160px;
-    font-size: 14px;
+    max-width: 300px;
+    padding-top: 3px;
+    padding-left: 65px;
+    font-size: 12px;
     margin-bottom: 10px;
-    left: 65px;
 }
 .change__button-box{
     width: 70%;
@@ -542,10 +543,10 @@
         letter-spacing: 0;
         margin: 0px 15px 0px 25px;
     }
-    .member__password{ width: 65%;}
+    .member__password{ width: 70%;}
     .member__password__message{
-        width: 65%;
-        left: 35%;
+        width: 70%;
+        left: 30%;
     }
     .change__username-box{
         left: 50%;
