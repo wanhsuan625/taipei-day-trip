@@ -76,7 +76,7 @@ def member_password():
     if old_password == "" or new_password == "" or confirm_password == "":
         return jsonify({
             "error": True,
-            "message": "請輸入舊密碼、新密碼或確認密碼"
+            "message": "⚠ 請輸入舊密碼、新密碼或確認密碼"
         }), 400
 
     try:
@@ -94,13 +94,13 @@ def member_password():
             if old_password == new_password :
                 return jsonify({
                     "error": True,
-                    "message": "舊密碼與新密碼不可相同"
+                    "message": "⚠ 舊密碼與新密碼不可相同"
                 }), 400
             
             elif password_match == None:
                 return jsonify({
                     "error": True,
-                    "message": "密碼長度需為8~15位，並且須包含一個大寫字母、一個小寫字母及一個數字"
+                    "message": "⚠ 密碼長度需為8~15位，並且須包含一個大寫字母、一個小寫字母及一個數字"
                 }), 400
             
             elif new_password == confirm_password:
@@ -116,19 +116,19 @@ def member_password():
             else:
                 return jsonify({
                     "error": True,
-                    "message": "確認密碼與新密碼不相符"
+                    "message": "⚠ 確認密碼與新密碼不相符"
                 }), 400
         else:    
             return jsonify({
                 "error": True,
-                "message": "舊密碼輸入錯誤，請重新輸入"
+                "message": "⚠ 舊密碼輸入錯誤，請重新輸入"
             }), 400
 
     except Exception as e:
         print(e)
         return jsonify({
             "error": True,
-            "message": "伺服器內部錯誤"
+            "message": "⚠ 伺服器內部錯誤"
         }), 500
     
     finally:

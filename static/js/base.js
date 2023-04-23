@@ -10,13 +10,18 @@ const switchTosignUp = document.querySelector(".switch-to-signUp");
 const switchTosignIn = document.querySelectorAll(".switch-to-signIn");
 const blackScreen = document.querySelector(".black-screen");
 
-let signUpName = document.querySelector("#signUpName");
-let signUpEmail = document.querySelector("#signUpEmail");
-let signUpPassword = document.querySelector("#signUpPassword");
+const signUpName = document.querySelector("#signUpName");
+const signUpEmail = document.querySelector("#signUpEmail");
+const signUpPassword = document.querySelector("#signUpPassword");
+const signUpNameErrorMessage = document.querySelector("#signUpNameErrorMessage");
+const signUpEmailErrorMessage = document.querySelector("#signUpEmailErrorMessage");
+const signUpPasswordErrorMessage = document.querySelector("#signUpPasswordErrorMessage");
+const signUpSubmitErrorMessage = document.querySelector("#signUpSubmitErrorMessage");
 const signUpButton = document.querySelector("#signUpButton");
 
-let signInEmail = document.querySelector("#signInEmail");
-let signInPassword = document.querySelector("#signInPassword");
+const signInEmail = document.querySelector("#signInEmail");
+const signInPassword = document.querySelector("#signInPassword");
+const signInErrorMessage = document.querySelector("#signInErrorMessage");
 const signInButton = document.querySelector("#signInButton");
 
 const signUpSuccess = document.querySelector("#signUpSuccess");
@@ -37,7 +42,6 @@ window.addEventListener("load", () =>{
         return
     })
 })
-
 
 // --- NAVBAR__RWD SETTING : SCREEN BELOW 480 px ----------------------
 const nav_bars = document.querySelector("#bars");
@@ -61,25 +65,28 @@ nav_bars.addEventListener("click",() => {
     }
 })
 
-//   登入框、註冊框上的所有按鈕效果
+// --- 登入框、註冊框上的所有按鈕效果 ---
+//  關閉按鈕
 closeIcon.forEach((e) => {
     e.addEventListener("click",() => {
-        signinInfoClear();
-        signupInfoClear();
+        signInInfoClear();
+        signUpInfoClear();
         signInContainer.style.display = "none";
         signUpContainer.style.display = "none";
         signUpSuccess.style.display = "none";
         blackScreen.style.display = "none";
     })
 })
+// 從登入框轉換至 註冊框
 switchTosignUp.addEventListener("click", () => {
-    signinInfoClear();
+    signInInfoClear();
     signUpContainer.style.display = "block";
     signInContainer.style.display = "none";
 })
+// 從註冊框轉換至 登入框
 switchTosignIn.forEach((e) => {
     e.addEventListener("click", () => {
-        signupInfoClear();
+        signUpInfoClear();
         signUpContainer.style.display = "none";
         signUpSuccess.style.display = "none";
         signInContainer.style.display = "block";
@@ -87,27 +94,31 @@ switchTosignIn.forEach((e) => {
     })
 })
 
-let signupInfoClear = () => {
+//  格式化 註冊框的資料
+let signUpInfoClear = () => {
     signUpName.value = "";
     signUpEmail.value = "";
     signUpPassword.value = "";
     signUpName.style.border = "";
     signUpEmail.style.border = "";
     signUpPassword.style.border = "";
-    upNameError.style.display = "none";
-    upEmailError.style.display = "none";
-    upPasswordError.style.display = "none";
+    signUpNameErrorMessage.style.display = "none";
+    signUpEmailErrorMessage.style.display = "none";
+    signUpPasswordErrorMessage.style.display = "none";
+    signUpSubmitErrorMessage.style.display = "none";
+    signUpButton.setAttribute("disabled","disabled");
 }
-let signinInfoClear = () => {
-    signInEmail.value = "";
+//  格式化 登入框的資料
+let signInInfoClear = () => {
+    // signInEmail.value = "";
     signInPassword.value = "";
     signInEmail.style.border = "";
     signInPassword.style.border = "";
-    inEmailError.style.display = "none";
-    inPasswordError.style.display = "none";
+    signInErrorMessage.style.display = "none";
+    signInButton.setAttribute("disabled","disabled");
 }
 
-//   未登入狀態 - NAVBAR上的按鈕
+//  未登入狀態 - NAVBAR上的按鈕
 nav_signInButton.addEventListener("click",() => { outOfService()});
 nav_bookingButton.addEventListener("click", () => { outOfService()});
 
@@ -118,15 +129,14 @@ function outOfService(){
     }
 }
 
-//   登入狀態
+//  登入狀態
 nav_bookingButton.addEventListener("click",() => {
     if(document.cookie != ""){
         document.location.href = "/booking";
     }
 })
 
-// --- SIGN_UP  --------------------------------------------------
-// 密碼可見
+//  密碼可見
 let secretEye = document.querySelectorAll(".input-group__password-eye");
 let eyeClick = true;
 
@@ -149,57 +159,112 @@ secretEye.forEach((e) => {
     })
 })
 
-// reg
+
+// --- Regular Expression ---------------
+const regName = new RegExp("^[\\u4e00-\\u9fa5a-zA-Z0-9._-]+$");
 const regEmail = new RegExp("^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$");
-const regPassword = new RegExp("\\w{4,19}");
+const regPassword = new RegExp("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}$");
 
 function errorMessage(input, element, message){
     input.style.outline = "none";
-    input.style.border = "2px solid red";
+    input.style.border = "1px solid red";
     element.style.display = "block";
     element.textContent = message;
 }
 
-// 註冊資訊 - 正則表達式
-let upNameError = document.querySelector("#signUpNameError");
-let upEmailError = document.querySelector("#signUpEmailError");
-let upPasswordError = document.querySelector("#signUpPasswordError");
+// --- SING_UP VALIDITY ---
+// sign_up validity ── Username
+let signUpNameLoad;
+let signUpEmailLoad;
+let signUpPasswordLoad;
 
-signUpName.addEventListener("input", () => {
-    if (signUpName.value == ""){
-        errorMessage(signUpName, upNameError, "⚠ 此欄位必填")
+signUpName.addEventListener("change", () => {
+    signUpNameLoad = false;
+    switch (true) {
+        case (signUpName.value === ""):
+            errorMessage( signUpName, signUpNameErrorMessage, "⚠ 請輸入姓名" );
+            break;
+        case (signUpName.value.length > 8 || signUpName.value.length < 1):
+            errorMessage( signUpName, signUpNameErrorMessage, "⚠ 姓名長度需介於1~8字元" );
+            break;
+        case (!regName.test(signUpName.value)):
+            errorMessage( signUpName, signUpNameErrorMessage, "⚠ 姓名格式不符，請重新填寫" );
+            break;
+        default:
+            signUpName.style = "border: 1px solid #CCCCCC";
+            signUpNameErrorMessage.style.display = "none";
+            signUpNameLoad = true;
+    }
+});
+
+
+// sign_up validity ── Email
+signUpEmail.addEventListener("change", () => {
+    signUpEmailLoad = false;
+    switch (true) {
+        case (signUpEmail.value === ""):
+            errorMessage( signUpEmail, signUpEmailErrorMessage , "⚠ 請輸入電子信箱" );
+            break;
+        case (!regEmail.test(signUpEmail.value)):
+            errorMessage( signUpEmail, signUpEmailErrorMessage , "⚠ 信箱格式不符，請輸入正確格式" );
+            break;
+        default:
+            signUpEmail.style = "border: 1px solid #CCCCCC";
+            signUpEmailErrorMessage.style.display = "none";
+            signUpEmailLoad = true;
+    }
+});
+
+
+// sign_up validity ── Password
+signUpPassword.addEventListener("change", () => {
+    signUpPasswordLoad = false;
+    switch (true) {
+        case (signUpPassword.value === ""):
+            errorMessage( signUpPassword , signUpPasswordErrorMessage , "⚠ 請輸入密碼" );
+            break;
+        case (signUpPassword.value.length > 15 || signUpPassword.value.length < 8 ):
+            errorMessage( signUpPassword , signUpPasswordErrorMessage , "⚠ 密碼長度需介於8~15字元" );
+            break;
+        case (!regPassword.test(signUpPassword.value)):
+            errorMessage( signUpPassword , signUpPasswordErrorMessage, "⚠ 密碼格式不符，請重新填寫" );
+            break;
+        default:
+            signUpPassword.style = "border: 1px solid #CCCCC";
+            signUpPasswordErrorMessage.style.display = "none";
+            signUpPasswordLoad = true;
+    }
+});
+
+signUpName.addEventListener("input", () => { signUpSubmitErrorMessage.style.display = "none";})
+signUpEmail.addEventListener("input", () => { signUpSubmitErrorMessage.style.display = "none";})
+signUpPassword.addEventListener("input", () => { signUpSubmitErrorMessage.style.display = "none";})
+signInEmail.addEventListener("input", () => { signInErrorMessage.style.display = "none";})
+signInPassword.addEventListener("input", () => { signInErrorMessage.style.display = "none";})
+
+// --- BUTTON DISABLED ATTRIBUTE CHANGE ---------------------------------------
+let signButtonDisable = ( ) => {
+    console.log("check name = "+ signUpNameLoad);
+    console.log("check email = " +signUpEmailLoad);
+    console.log("check password = " + signUpPasswordLoad);
+
+    if ( signUpName.value != "" && signUpEmail.value != "" && signUpPassword.value != ""
+         && signUpNameLoad && signUpEmailLoad && signUpPasswordLoad){
+        signUpButton.removeAttribute("disabled");
+    }
+    else if( signInEmail.value != "" && signInPassword.value != "" ){
+            signInButton.removeAttribute("disabled");
     }
     else{
-        signUpName.style.border = "";
-        upNameError.style.display = "none";
+        signUpButton.setAttribute("disabled", "disabled");
+        signInButton.setAttribute("disabled", "disabled");
     }
-})
-
-signUpEmail.addEventListener("input", () => {
-    if (signUpEmail.value == ""){
-        errorMessage(signUpEmail, upEmailError, "⚠ 此欄位必填")
-    }
-    else if(!regEmail.test(signUpEmail.value)) {
-        errorMessage(signUpEmail, upEmailError, "⚠ 格式有誤，請重新輸入")
-    }
-    else{
-        signUpEmail.style.border = "";
-        upEmailError.style.display = "none";
-    }
-})
-
-signUpPassword.addEventListener("input", () => {
-    if (signUpPassword.value == ""){
-        errorMessage(signUpPassword, upPasswordError, "⚠ 此欄位必填");
-    }
-    else if(!regPassword.test(signUpPassword.value)) {
-        errorMessage(signUpPassword, upPasswordError, "⚠ 密碼長度最短不得低於4碼");
-    }
-    else{
-        signUpPassword.style.border = "";
-        upPasswordError.style.display = "none";
-    }
-})
+}
+signUpName.addEventListener("change", signButtonDisable);
+signUpEmail.addEventListener("change", signButtonDisable);
+signUpPassword.addEventListener("change", signButtonDisable);
+signInEmail.addEventListener("input", signButtonDisable);
+signInPassword.addEventListener("input", signButtonDisable);
 
 
 // 傳送 SIGN_UP 資料
@@ -220,42 +285,12 @@ let signUpFetch = () => {
             // 註冊成功畫面
             signUpContainer.style.display = "none";
             signUpSuccess.style.display = "block";
+            return;
         }
-        else{
-            upPasswordError.style.display = "block";
-            upPasswordError.textContent = data.message;
-        }
+        signUpSubmitErrorMessage.style.display = "block";
+        signUpSubmitErrorMessage.textContent = data.message;
     })
 }
-
-
-// --- SIGN_IN -----------------------------------------------------
-// 登入資訊 - 正則表達式
-let inEmailError = document.querySelector("#signInEmailError");
-let inPasswordError = document.querySelector("#signInPasswordError");
-
-signInEmail.addEventListener("input", () => {
-    if (signInEmail.value == ""){
-        errorMessage(signInEmail, inEmailError, "此欄位必填")
-    }
-    else if(!regEmail.test(signInEmail.value)) {
-        errorMessage(signInEmail, inEmailError, "格式有誤，請重新輸入")
-    }
-    else{
-        signInEmail.style.border = "";
-        inEmailError.style.display = "none";
-    }
-})
-
-signInPassword.addEventListener("input", () => {
-    if (signInPassword.value == ""){
-        errorMessage(signInPassword, inPasswordError, "此欄位必填");
-    }
-    else{
-        signInPassword.style.border = "";
-        inPasswordError.style.display = "none";
-    }
-})
 
 // 傳送 SIGN_IN 資料
 signInButton.addEventListener("click", ()=> { signInFetch()});
@@ -277,8 +312,8 @@ let signInFetch = () => {
                 location.reload()
             }, 2000);
         }
-        inPasswordError.style.display = "block";
-        inPasswordError.textContent = data.message;
+        signInErrorMessage.style.display = "block";
+        signInErrorMessage.textContent = data.message;
     })
 }
 

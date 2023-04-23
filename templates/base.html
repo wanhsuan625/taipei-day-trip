@@ -33,9 +33,7 @@
         </header>
         <!-- END NAVBAR -->
 
-
         {% block body%}{% endblock %}
-
 
         <!-- //SIGN_IN BOX -->
         <div class="sign-container" id="signInContainer" style="display: none;">
@@ -49,8 +47,8 @@
                     id="signInEmail"
                     class="input-group__input"
                     name="email"
-                    placeholder="輸入電子信箱" >
-                    <span class="input-group__error-message" id="signInEmailError" style="display: none"></span>
+                    value="test@test.com"
+                    placeholder="請輸入電子信箱">
                 </div>
 
                 <div class="input-group">
@@ -60,12 +58,18 @@
                     id="signInPassword"
                     class="input-group__input"
                     name="password"
-                    placeholder="輸入密碼" >
+                    value="Test1234"
+                    placeholder="請輸入密碼" >
                     <i class="fa-regular fa-eye-slash input-group__password-eye"></i>
-                    <span class="input-group__error-message" id="signInPasswordError" style="display: none"></span>
                 </div>
+                <div class="input-group__error-message" id="signInErrorMessage"></div>
 
-                <button type="submit" class="sign__button" id="signInButton">登入帳戶</button>
+                <button
+                    type="submit"
+                    class="sign__button"
+                    id="signInButton">
+                        登入帳戶
+                </button>
             </div>
             <div class="sign__switch">還沒有帳戶？<button class="sign__switch__button switch-to-signUp">點此註冊</button></div>
         </div>
@@ -92,8 +96,10 @@
                     id="signUpName"
                     class="input-group__input"
                     name="name"
-                    placeholder="輸入姓名" >
-                    <span class="input-group__error-message" id="signUpNameError" style="display: none"></span>
+                    placeholder="請輸入姓名 (需介於1~8個字元)" >
+                </div>
+                <div class="sign-up__hint-message" id="signUpRemind">
+                    <b>姓名</b>可包含特殊符號 "." , "_" 以及 "─"
                 </div>
 
                 <div class="input-group">
@@ -103,10 +109,8 @@
                     id="signUpEmail"
                     class="input-group__input"
                     name="email"
-                    placeholder="輸入電子信箱" >
-                    <span class="input-group__error-message" id="signUpEmailError" style="display: none"></span>
+                    placeholder="請輸入電子信箱" >
                 </div>
-
 
                 <div class="input-group">
                     <i class="fa-solid fa-key input-group__image"></i>
@@ -115,12 +119,25 @@
                     id="signUpPassword"
                     class="input-group__input"
                     name="password"
-                    placeholder="輸入密碼" >
+                    placeholder="請輸入密碼 (需介於8~15位)" >
                     <i class="fa-regular fa-eye-slash input-group__password-eye"></i>
-                    <span class="input-group__error-message" id="signUpPasswordError" style="display: none"></span>
+                </div>
+                <div class="sign-up__hint-message" id="signUpRemind">
+                    <b>密碼</b>須包含一個大寫字母、一個小寫字母及一個數字
                 </div>
 
-                <button type="submit" class="sign__button" id="signUpButton">註冊新帳戶</button>
+                <div class="input-group__error-message" id="signUpNameErrorMessage" style="display: none"></div>
+                <div class="input-group__error-message" id="signUpEmailErrorMessage" style="display: none"></div>
+                <div class="input-group__error-message" id="signUpPasswordErrorMessage" style="display: none"></div>
+                <div class="input-group__error-message" id="signUpSubmitErrorMessage" style="display: none"></div>
+
+                <button 
+                    type="submit"
+                    class="sign__button"
+                    id="signUpButton"
+                    disabled>
+                        註冊新帳戶
+                </button>
             </div>
             <div class="sign__switch">已經有帳戶？<button class="sign__switch__button switch-to-signIn">點此登入</button></div>
         </div>

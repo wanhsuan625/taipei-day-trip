@@ -38,7 +38,7 @@ def signup():
     if name == "" or email == "" or password == "":
         return jsonify({
             "error" : True,
-            "message" : "請填寫姓名、信箱或密碼"
+            "message" : "⚠ 請填寫姓名、信箱或密碼"
         }), 400
 
     try:
@@ -53,7 +53,7 @@ def signup():
         if result:
             return jsonify({
                 "error" : True,
-                "message" : "此信箱已註冊"
+                "message" : "⚠ 此信箱已註冊，可點選登入"
             }), 400
         else:
             hashPassword = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -71,7 +71,7 @@ def signup():
         print(e)
         return jsonify({
             "error" : True,
-            "message" : "伺服器內部錯誤"
+            "message" : "⚠ 伺服器內部錯誤"
         }), 500
 
     finally:
@@ -125,7 +125,7 @@ def auth_put():
         if email == "" or password == "":
             return jsonify({
                 "error": True,
-                "message": "請填寫信箱、密碼"
+                "message": "⚠ 請填寫信箱、密碼"
             }), 400
         
         try:
@@ -152,20 +152,20 @@ def auth_put():
                 
                 return jsonify({
                     "error": True,
-                    "message": "信箱、密碼錯誤"
+                    "message": "⚠ 信箱或密碼不正確，請再試一次"
                 }), 400
 
             else:
                 return jsonify({
                     "error": True,
-                    "message": "此信箱不存在，請點選註冊"
+                    "message": "⚠ 此信箱不存在，請點選註冊"
                 }), 400
                     
         except Exception as e:
             print(e)
             return jsonify({
                 "error": True,
-                "message": "伺服器內部錯誤"
+                "message": "⚠ 伺服器內部錯誤"
             }), 500
 
         finally :
