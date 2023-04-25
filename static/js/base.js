@@ -320,7 +320,7 @@ let signInFetch = () => {
 // --- LINK TO MEMBER PAGE ---------------------------------------------
 nav_signInButton.addEventListener("click",() =>{
     if(document.cookie != ""){
-        window.location.href = "/account/member";
+        window.location.href = "/account/order";
     }
 })
 
