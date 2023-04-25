@@ -14,7 +14,7 @@ member = Blueprint("member", __name__)
 connection_pool = module.connect.db_connection()
 
 # --- OUT OF SERVICE ----------------------------------------------------
-@member.route("/member")
+@member.route("/account/member")
 def isLogin():
     cookie = request.cookies
     if not cookie :
