@@ -10,6 +10,15 @@ jwt_key = os.getenv("jwt_key")
 
 connection_pool = connect.db_connection()
 
+# --- OUT OF SERVICE ----------------------------------------------------
+@orderRecord.route("/account/order")
+def isLogin():
+    cookie = request.cookies
+    if not cookie :
+        return redirect("/")
+    return render_template("orderRecord.html")
+
+# --- order record ------------------------------------------------------
 @orderRecord.route("/api/orderRecord", methods = ["GET"])
 def record():
     try:
