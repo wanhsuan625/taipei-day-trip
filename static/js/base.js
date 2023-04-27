@@ -3,12 +3,15 @@ const header = document.querySelector("header");
 const nav_signInButton = document.querySelector("#menuSignButton");
 const nav_bookingButton = document.querySelector("#menuBookingButton");
 const nav_signOutButton = document.querySelector("#menuSignOutButton");
+const nav_memberButton = document.querySelector("#menuMemberButton");
+const nav_memberContainer = document.querySelector(".item__member-container");
 const signInContainer = document.querySelector("#signInContainer");
 const signUpContainer = document.querySelector("#signUpContainer");
 const closeIcon = document.querySelectorAll(".sign__close-icon");
 const switchTosignUp = document.querySelector(".switch-to-signUp");
 const switchTosignIn = document.querySelectorAll(".switch-to-signIn");
 const blackScreen = document.querySelector(".black-screen");
+const signWarn = document.querySelector("#signWarn");
 
 const signUpName = document.querySelector("#signUpName");
 const signUpEmail = document.querySelector("#signUpEmail");
@@ -36,8 +39,9 @@ window.addEventListener("load", () =>{
         return response.json()
     }).then(data => {
         if(data.data !== null){
-            nav_signInButton.innerHTML = "會員專區";
-            nav_signOutButton.style.display = "block";
+            nav_signInButton.style.display = "none";
+            nav_memberButton.style.display = "block";
+            nav_memberContainer.style.display = "block";
         }
         return
     })
@@ -55,14 +59,21 @@ nav_bars.addEventListener("click",() => {
         nav_menu.style = `height: ${nav_menu.scrollHeight}px`;
 
         barsClick = false;
-    }
-    else{
+    }else{
         nav_bars.classList.remove("fa-xmark");
         nav_bars.classList.add("fa-bars");
-        nav_menu.style = "height: 0px";
+        nav_menu.style.height = "0px";
 
         barsClick = true;
-    }
+    }    
+})
+
+// 會員專區 :hover設定，在會員選單出現時，也維持不變
+nav_memberContainer.addEventListener("mouseenter", () => {
+    nav_memberButton.classList.add("menu__item--hover");
+});
+nav_memberContainer.addEventListener("mouseleave", () => {
+    nav_memberButton.classList.remove("menu__item--hover");
 })
 
 // --- 登入框、註冊框上的所有按鈕效果 ---
@@ -119,15 +130,31 @@ let signInInfoClear = () => {
 }
 
 //  未登入狀態 - NAVBAR上的按鈕
-nav_signInButton.addEventListener("click",() => { outOfService()});
-nav_bookingButton.addEventListener("click", () => { outOfService()});
-
-function outOfService(){
-    if (document.cookie == ""){
+nav_signInButton.addEventListener("click",() => {
+    if(document.cookie == ""){
         signInContainer.style.display = "block";
         blackScreen.style.display = "block";
+    }    
+})
+nav_bookingButton.addEventListener("click", () => {
+    if(document.cookie == ""){
+        signWarn.style.display = "block";
+        blackScreen.style.display = "block";
     }
-}
+})
+
+// 警示登入框
+const signWarnSignInButton = document.querySelector("#signWarnSignInButton");
+const signWarnCancelButton = document.querySelector("#signWarnCancelButton");
+
+signWarnSignInButton.addEventListener("click", () => {
+    signWarn.style.display = "none";
+    signInContainer.style.display = "block";
+})
+signWarnCancelButton.addEventListener("click", () => {
+    signWarn.style.display = "none";
+    blackScreen.style.display = "none";
+})
 
 //  登入狀態
 nav_bookingButton.addEventListener("click",() => {
@@ -318,11 +345,11 @@ let signInFetch = () => {
 }
 
 // --- LINK TO MEMBER PAGE ---------------------------------------------
-nav_signInButton.addEventListener("click",() =>{
-    if(document.cookie != ""){
-        window.location.href = "/account/order";
-    }
-})
+// nav_memberButton.addEventListener("click",() =>{
+//     if(document.cookie != ""){
+//         window.location.href = "/account/order";
+//     }
+// })
 
 // --- SINGN_OUT ------------------------------------------------------
 nav_signOutButton.addEventListener("click", () => {
@@ -334,6 +361,9 @@ nav_signOutButton.addEventListener("click", () => {
         return response.json()
     }).then(data => {
         if(data.ok == true){
+            nav_signInButton.style.display = "block";
+            nav_memberButton.style.display = "none";
+            nav_memberContainer.style.display = "none";
             window.location.reload();  // 登出成功，畫面重載
         }
     })

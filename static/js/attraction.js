@@ -178,7 +178,7 @@ const bookingError = document.querySelector(".booking-form__error-message");
 
 itineraryButton.addEventListener("click", () => {
     if(document.cookie == ""){
-    signInContainer.style.display = "block";
+    signWarn.style.display = "block";
     blackScreen.style.display = "block"; }
     else{
         if(bookingDate.value == ""){
