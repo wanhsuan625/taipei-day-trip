@@ -51,30 +51,63 @@ window.addEventListener("load", () =>{
 const nav_bars = document.querySelector("#bars");
 const nav_menu = document.querySelector(".nav__menu");
 let barsClick = true;
+let memberPosition = true;
+
+let navbarIconSwitch = (removeClassName, addClassName, maxHeight, clickBoolean, topValue) => {
+    nav_bars.classList.remove(removeClassName);
+    nav_bars.classList.add(addClassName);
+    nav_menu.style = `height: ${maxHeight}px`;
+    barsClick = clickBoolean;
+    if(document.cookie != ""){
+        nav_memberContainer.style = `top: ${topValue}px`;
+    }
+}
 
 nav_bars.addEventListener("click",() => {
     if(barsClick){
-        nav_bars.classList.remove("fa-bars");
-        nav_bars.classList.add("fa-xmark");
-        nav_menu.style = `height: ${nav_menu.scrollHeight}px`;
-
-        barsClick = false;
+        navbarIconSwitch( "fa-bars", "fa-xmark", nav_menu.scrollHeight, false , 0 );
     }else{
-        nav_bars.classList.remove("fa-xmark");
-        nav_bars.classList.add("fa-bars");
-        nav_menu.style.height = "0px";
-
-        barsClick = true;
-    }    
+        navbarIconSwitch( "fa-xmark", "fa-bars", 0, true , 27);
+    }
 })
 
-// 會員專區 :hover設定，在會員選單出現時，也維持不變
+window.addEventListener("resize", () => {
+    if( window.innerWidth > 480 ){
+        navbarIconSwitch( "fa-xmark", "fa-bars", 0, true , 27);
+        nav_memberButton.classList.remove("menu__item--collapse");
+        nav_memberButton.setAttribute("data-text", "+");
+        memberClick = true;
+    }
+})
+
+// --- 會員專區按鈕 below 480，折疊式選單 -------------------------
+let memberClick = true;
+let memberAfter = window.getComputedStyle(nav_memberButton, "after");
+
+nav_memberButton.addEventListener("click", () => {
+    if(memberClick){
+        nav_memberButton.classList.add("menu__item--collapse");
+        nav_memberButton.setAttribute("data-text", "-");
+        nav_memberContainer.style = "transform: translate(0)";
+
+        memberClick = false;
+    }else{
+        nav_memberButton.classList.remove("menu__item--collapse");
+        nav_memberButton.setAttribute("data-text", "+");
+        nav_memberContainer.style = "transform: translateY(-500px)";
+
+        memberClick = true;
+    }
+})
+
+// hover設定，在會員選單出現時，也維持不變
 nav_memberContainer.addEventListener("mouseenter", () => {
     nav_memberButton.classList.add("menu__item--hover");
 });
 nav_memberContainer.addEventListener("mouseleave", () => {
     nav_memberButton.classList.remove("menu__item--hover");
 })
+
 
 // --- 登入框、註冊框上的所有按鈕效果 ---
 //  關閉按鈕

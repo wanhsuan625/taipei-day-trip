@@ -419,7 +419,7 @@ footer > p{
         bottom: 5%;
     }
     .sign-container{ width: 335px;}
-    .sign-success{ width: 280px;}
+    .sign-success, .sign-warn{ width: 280px;}
 
     /* 開合選單設定 */
     .nav__menu{
@@ -440,6 +440,7 @@ footer > p{
         border-bottom: 1px solid var(--secondary-light);
         background-color: var(--primary-light);
         opacity: 0.9;
+        z-index: 1;
     }
     .menu__item:hover{
         background-color: var(--primary);
@@ -447,8 +448,8 @@ footer > p{
     }
     .nav__bars-container{ display: block;}
 
+
     /* 會員專區選單 */
-    
     .item__member-container{
         width: 100%;
         border-radius: 0;
@@ -457,15 +458,32 @@ footer > p{
         top: 0;
         left: 0;
         transform: none;
+        transform: translateY(-500px);
+        z-index: 0;
+        transition: transform 0.3s;
     }
     .item__member-container::after, .item__member-container::before{
         content: none;
     }
-    .item__member{
-        padding: 15px 0;
-    }
+    .item__member{ padding: 15px 0;}
     .item__member:hover{ 
         background-color: rgba( 0 , 0 , 0 , 0.5 );
         border-radius: 0;
+    }
+
+    /* 主控鍵設定 - 會員專區 */
+    .menu__item:nth-child(3):hover + .item__member-container, 
+    .item__member-container:hover{
+        transform: scale(0);           /* 先移除hover效果 */
+    }
+    .menu__item:nth-child(3)::after{
+        content: attr(data-text);     /* 加號 */
+        font-size: 20px;
+        position: absolute;
+        right: 20px;
+    }
+    .menu__item--collapse{
+        background-color: var(--primary);
+        opacity: 1;
     }
 }
