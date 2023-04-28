@@ -46,6 +46,8 @@ fetch("/api/user/auth")
             contactName.style.color = "#448899";
             contactEmail.value = result_user.email;
             contactEmail.style.color = "#448899";
+            valid(contactName, contactNameError);
+            valid(contactEmail, contactEmailError);
         }
         else{
             contactName.value = "";
