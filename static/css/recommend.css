@@ -2,6 +2,7 @@
 .recommend__container{
     width: 1000px;
     margin: 100px auto 150px auto;
+    padding-bottom: 50px;
 }
 .recommend__title{
     margin-top: 0;
@@ -67,7 +68,11 @@
 
 /* --- RWD ------------------------------------------------ */
 @media (max-width: 1024px){
-    .recommend__container{ width: 95%;}
+    .recommend__container{
+        width: 95%;
+        height: 300px;
+        margin: 50px auto;
+    }
     .recommend__attraction-combination{ padding: 0 20px;}
     .recommend__attraction-descript{
         padding: 0px;
@@ -76,6 +81,7 @@
 @media (max-width: 768px){
     .recommend__container{ 
         margin: 50px auto;
+        height: auto;
         padding-bottom: 150px;
     }
     .recommend__attraction-combination{
