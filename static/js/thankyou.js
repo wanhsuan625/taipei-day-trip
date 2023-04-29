@@ -20,7 +20,7 @@ function DOMof_success(){
                         <h1 class="booking-success__title">訂單完成</h1>
                     </div>
                     <p class="booking-success__content">訂單編號 ─ <span id="orderId">${orderId}</span></p>
-                    <p class="booking-success__content">亦可至<a class="booking-success__hyperlink" href="/member">會員中心</a>查詢歷史訂單</p>
+                    <p class="booking-success__content">亦可至<a class="booking-success__hyperlink" href="/account/order">會員中心</a>查詢歷史訂單</p>
                 </div>`
     main.insertAdjacentHTML("afterbegin", success);
 }
