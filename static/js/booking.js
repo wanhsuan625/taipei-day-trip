@@ -46,6 +46,8 @@ fetch("/api/user/auth")
             contactName.style.color = "#448899";
             contactEmail.value = result_user.email;
             contactEmail.style.color = "#448899";
+            valid(contactName, contactNameError);
+            valid(contactEmail, contactEmailError);
         }
         else{
             contactName.value = "";
@@ -66,13 +68,82 @@ async function fetchBooking(){
 
 let DOMof_No_Booking = () => {
     main.innerHTML = "";
-    let article = document.createElement("article");
-    article.className = "booking-container no-booking";
-    article.textContent = "目前沒有任何待預定的行程";
-    main.appendChild(article);
+    
+    let no_booking_container = document.createElement("article");
+    no_booking_container.className = "no_booking-container";
+    main.appendChild(no_booking_container);
 
-    footer.style.paddingTop = "50px";
-    footer.style.paddingBottom = "100%";
+    let empty_cart_img = document.createElement("img");
+    empty_cart_img.src = "/image/empty-cart.png";
+    empty_cart_img.style = "margin-bottom: 15px";
+    no_booking_container.appendChild(empty_cart_img);
+
+    let no_booking_text = document.createElement("div");
+    no_booking_text.className = "no-booking";
+    no_booking_text.textContent = "目前沒有任何待預定的行程";
+    no_booking_container.appendChild(no_booking_text);
+    
+    
+    //  推薦景點
+    let recommend_attraction_title = 
+    '<article class="recommend__container">\
+        <h4 class="recommend__title">您可能會有興趣的其他景點：</h4>\
+        <div class="recommend__attraction-combination"></div>\
+    </article>\
+    ';
+    main.insertAdjacentHTML("afterend", recommend_attraction_title);
+    const attraction_combination = document.querySelector(".recommend__attraction-combination");
+
+    let recommend_number = [];
+    for ( let i = 0; i < 4 ; i++ ){
+    let random = Math.floor( Math.random() * 57 ) + 1 ;
+
+    if ( recommend_number.includes( random ) ){
+        recommend_number.push( random + 1 );
+        random++ ;
+    }else{
+        recommend_number.push( random );}
+
+    // RECOMMEND ATTRACTION DOM
+    const recommend_img_box = document.createElement("div");
+    recommend_img_box.className = "recommend__attraction-imgBox";
+    attraction_combination.appendChild(recommend_img_box);
+
+    // 景點圖片
+    const recommend_img = document.createElement("img");
+    recommend_img.className = "recommend__attraction-img";
+    recommend_img_box.appendChild(recommend_img);
+
+    // 景點名稱
+    const recommend_attraction_name = document.createElement("div");
+    recommend_attraction_name.className = "recommend__attraction-name";
+    recommend_img_box.appendChild(recommend_attraction_name);
+
+    const recommend_attraction_descript = document.createElement("div");
+    recommend_attraction_descript.className = "recommend__attraction-descript";
+
+    fetch(`/api/attraction/${random}`)
+    .then( response => { return response.json(); })
+    .then( data => {
+        let result = data.data;
+        let attraction_img = result.images[0];
+        let attraction_name = result.name;
+        let attraction_description = result.description.split("。")[0];
+
+        recommend_img.src = attraction_img;
+        recommend_attraction_name.innerText = attraction_name;
+        
+        recommend_attraction_name.appendChild(recommend_attraction_descript);
+        recommend_attraction_descript.textContent = attraction_description;
+        // 景點詳述
+        // recommend_attraction_name.insertAdjacentText("beforeend", attraction_description);
+    })
+
+    // 點選 - 跳轉至該景點頁面
+    recommend_img_box.addEventListener("click", () => {
+        window.location.href = `/attraction/${random}`;
+    })
+    }
 }
 
 let DOMofBooking = (data) => {
@@ -212,8 +283,8 @@ contactPhone.addEventListener("change", () =>{
 
 // --- CREDIT CARD ------------------------------------------------------------------------
 TPDirect.setupSDK(
-    126971,
-    "app_bmhD4ubStRHqvzB6Q2RZ9xUJV3hXSwyLrgsMAhV234DQRhdqSwQKGfSc6nzR",
+    tpd_number,
+    tpd_key,
     "sandbox"
 )
 
@@ -321,6 +392,9 @@ confirmButton.addEventListener("click", () => {
             }
         })
     })
+    
+    const confirmText = document.querySelector(".confirm__text");
+    confirmText.style.display = "block";
 })
 
 

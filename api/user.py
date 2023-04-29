@@ -38,7 +38,7 @@ def signup():
     if name == "" or email == "" or password == "":
         return jsonify({
             "error" : True,
-            "message" : "請填寫姓名、信箱或密碼"
+            "message" : "⚠ 請填寫姓名、信箱或密碼"
         }), 400
 
     try:
@@ -53,7 +53,7 @@ def signup():
         if result:
             return jsonify({
                 "error" : True,
-                "message" : "此信箱已註冊"
+                "message" : "⚠ 此信箱已註冊，可點選登入"
             }), 400
         else:
             hashPassword = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -71,7 +71,7 @@ def signup():
         print(e)
         return jsonify({
             "error" : True,
-            "message" : "伺服器內部錯誤"
+            "message" : "⚠ 伺服器內部錯誤"
         }), 500
 
     finally:
@@ -82,11 +82,37 @@ def signup():
 # --- SIGNIN MEMBER : GET -----------------------------------------------------------
 @user.route("/api/user/auth", methods=["GET"])
 def auth_get():
-    cookieToken = request.cookies.get("token")   
-    if cookieToken:
-        decode = jwt.decode(cookieToken, jwt_key, algorithms="HS256")
-        return jsonify({"data":decode})
-    return jsonify({"data": None})
+    try:
+        connection_object = connection_pool.get_connection()
+        cursor = connection_object.cursor(dictionary = True)
+
+        cookieToken = request.cookies.get("token")
+        if cookieToken:
+            decode = jwt.decode(cookieToken, jwt_key, algorithms="HS256")
+            sql_user = "SELECT * FROM users WHERE email = %s"
+            val_user = (decode["email"],)
+            cursor.execute(sql_user, val_user)
+            result = cursor.fetchone()
+
+            return jsonify({
+                "data": {
+                    "id": result["id"],
+                    "name": result["name"],
+                    "email": result["email"]
+                }
+            })
+        return jsonify({"data": None})
+    
+    except Exception as e:
+        print(e)
+        return jsonify({
+            "error": True,
+                "message": "伺服器內部錯誤"
+        }), 500
+
+    finally:
+        cursor.close()
+        connection_object.close()
 
 
 # --- SIGNIN MEMBER : PUT -----------------------------------------------------------
@@ -99,12 +125,12 @@ def auth_put():
         if email == "" or password == "":
             return jsonify({
                 "error": True,
-                "message": "請填寫信箱、密碼"
+                "message": "⚠ 請填寫信箱、密碼"
             }), 400
         
         try:
             connection_object = connection_pool.get_connection()
-            cursor = connection_object.cursor()
+            cursor = connection_object.cursor(dictionary = True)
 
             # CONFIRM ACCOUNT AND PASSWORD
             sql = "SELECT * FROM users WHERE email = %s;"
@@ -112,11 +138,11 @@ def auth_put():
             result = cursor.fetchone()
 
             if result:
-                checkPassword = bcrypt.check_password_hash(result[3], password)
+                checkPassword = bcrypt.check_password_hash(result["password"], password)
                 if checkPassword == True:
-                    userInfo = {"id": result[0],
-                                "name": result[1],
-                                "email": result[2]
+                    userInfo = {"id": result["id"],
+                                "name": result["name"],
+                                "email": result["email"]
                             }
                     # JWT
                     token = jwt.encode(userInfo, jwt_key, algorithm="HS256")
@@ -126,20 +152,20 @@ def auth_put():
                 
                 return jsonify({
                     "error": True,
-                    "message": "信箱、密碼錯誤"
+                    "message": "⚠ 信箱或密碼不正確，請再試一次"
                 }), 400
 
             else:
                 return jsonify({
                     "error": True,
-                    "message": "此信箱不存在，請點選註冊"
+                    "message": "⚠ 此信箱不存在，請點選註冊"
                 }), 400
                     
         except Exception as e:
             print(e)
             return jsonify({
                 "error": True,
-                "message": "伺服器內部錯誤"
+                "message": "⚠ 伺服器內部錯誤"
             }), 500
 
         finally :

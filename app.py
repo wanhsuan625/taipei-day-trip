@@ -6,6 +6,8 @@ from api.category import category
 from api.user import user
 from api.booking import booking
 from api.order import order
+from api.orderRecord import orderRecord
+from api.member import member
 
 app=Flask(
 		__name__,
@@ -24,6 +26,8 @@ app.register_blueprint(category)
 app.register_blueprint(user)
 app.register_blueprint(booking)
 app.register_blueprint(order)
+app.register_blueprint(orderRecord)
+app.register_blueprint(member)
 
 # Pages
 @app.route("/")
@@ -39,7 +43,13 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
+@app.route("/account/member")
+def member():
+	return render_template("member.html")
+@app.route("/account/order")
+def order():
+	return render_template("orderRecord.html")
 
 if __name__ == "__main__":
-	# app.run(port=3000,debug=True)
-	app.run(host="0.0.0.0",port=3000,debug=True)
+	app.run(port=3000,debug=True)
+	# app.run(host="0.0.0.0",port=3000,debug=True)

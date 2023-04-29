@@ -1,3 +1,14 @@
+//  --- EMBED GOOGLE MAP --------------------------------------------
+const head = document.querySelector("head");
+const map_script = document.createElement("script");
+const map_src = `https://maps.googleapis.com/maps/api/js?key=${map_key}&callback=initMap`;
+
+map_script.src = map_src;
+map_script.async = true;
+map_script.defer = true;
+map_script.type = "text/javascript";
+head.appendChild( map_script );
+
 // --- WEBSITE ADDRESS ---------------------------------------
 let attractionID = location.pathname.split("/")[2];
 
@@ -6,22 +17,34 @@ let eachAttractionFetch = (num) => {
     .then(response => {
         return response.json();})
     .then(data => {
-        console.log(data);
+        function initMap(){
+            var map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 17,
+                center: {lat : data.data.lat, lng: data.data.lng },
+            });
+            var marker = new google.maps.Marker({
+                position: {lat : data.data.lat, lng: data.data.lng },
+                map: map,
+            });
+        }
+        window.onload = initMap;
+
         attractionImg(data);
         attractionInformation(data);
     })
 }
 eachAttractionFetch(attractionID);
 
-
 // --- CREATE DOM OF IMG --------------------------------------
 const title = document.querySelector("head title");
 const imgBox = document.querySelector(".img-box");
+const imgBlur = document.querySelector(".img-background-blur");
 const arrow = document.querySelector(".arrow");
 const infoBox = document.querySelector(".info-box");
 const bookingForm = document.querySelector(".booking-form");
 const section = document.querySelector("section");
 const headline = document.querySelectorAll(".section__headline");
+const map = document.getElementById("map");
 var slide;
 var dot;
 var slideIndex;
@@ -34,14 +57,44 @@ let attractionImg = (data) =>{
     title.innerHTML = result.name;
     
     // IMAGES
-    for(let i = 0; i < len; i++){
+    let loaded_images = 0;
+    let loader = document.querySelector("#loader");
+    let img_loading_percent = document.querySelector(".img-loading-percent");
+
+    for( let i = 0 ; i < len ; i++ ){
         let imgSlide = document.createElement("div");
-        imgSlide.className = "img-slide fade";
+        imgSlide.className = "img-slide";
         imgBox.insertBefore(imgSlide, arrow);
 
         let img = document.createElement("img");
-        img.className = "attraction-img";
+        img.className= "attraction-img";
+        img.loading = "eager";
         img.src = result.images[i];
+
+        // loading images
+        img.onload = function () {
+            loaded_images++ ;
+            if ( loaded_images == len){
+                img_loading_percent.textContent = "100%";
+                
+                // loading devoration fade out
+                imgBlur.classList.add("fadeOut");
+                loader.classList.add("fadeOut");
+                img_loading_percent.classList.add("fadeOut");
+
+                setTimeout( ()=> {
+                    loader.style.display = "none";
+                    imgBlur.style.display = "none";
+                    img_loading_percent.style.display = "none";
+                }, 2000);
+            }
+            else{
+                let number_loading_percent =  Math.floor(100 * loaded_images / len ) + "%" ;
+                img_loading_percent.textContent = number_loading_percent;
+            }
+        }
+
+        // showing image
         imgSlide.appendChild(img);
     }
 
@@ -125,7 +178,7 @@ const bookingError = document.querySelector(".booking-form__error-message");
 
 itineraryButton.addEventListener("click", () => {
     if(document.cookie == ""){
-    signInContainer.style.display = "block";
+    signWarn.style.display = "block";
     blackScreen.style.display = "block"; }
     else{
         if(bookingDate.value == ""){
@@ -184,11 +237,11 @@ let attractionInformation = (data) =>{
 
     let content2 = document.createElement("div");
     content2.className = "section__content";
-    content2.innerHTML = result.address;
+    content2.innerHTML = result.transport;
     section.insertBefore(content2, headline[1]);
 
     let content3 = document.createElement("div");
     content3.className = "section__content";
-    content3.innerHTML = result.transport;
-    section.appendChild(content3);
+    content3.innerHTML = result.address;
+    section.insertBefore(content3, map);
 };

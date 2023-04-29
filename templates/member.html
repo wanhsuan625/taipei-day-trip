@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="/css/member.css">
+<title>會員專區</title>
+{% endblock %}
+
+{% block body %}
+<main class="main">
+    <aside class="aside">
+        <div class="aside__user-box">
+            <i class="fa-solid fa-play"></i>
+            <div class="aside__user-box__name" id="memberUsername"></div>
+        </div>
+        
+        <!-- 會員專區 -->
+        <div class="aside__box">
+            <img src="/image/changepassword.png" class="aside__box__icon" alt="">
+            <span class="aside__box__content select-option" id="changeData">變更資料</span>
+        </div>
+        
+        <div class="aside__box">
+            <i class="fa-solid fa-clipboard-list aside__box__icon order-record__icon"></i>
+            <span class="aside__box__content" id="orderRecord">訂購紀錄</span>
+        </div>
+
+        <div class="aside__box">
+            <i class="fa-solid fa-right-from-bracket aside__box__icon"></i>
+            <span class="aside__box__content" id="logOut">登出</span>
+        </div>
+    </aside>
+
+    <!-- 右側內容 -->
+    <article class="article">
+        
+    </article>
+</main>
+{% endblock %}
+
+{% block script %}
+<script src="/js/member.js"></script>
+{% endblock %}

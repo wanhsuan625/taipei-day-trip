@@ -23,10 +23,17 @@
     margin-top: 10px;
     font-weight: 500;
     color: var(--secondary);
+    letter-spacing: 1.5px;
 }
 .booking-success__content > span{
     font-weight: bolder;
     color: var(--primary-light);
+}
+.booking-success__hyperlink{
+    color: var(--primary-light);
+}
+.booking-success__hyperlink:hover{
+    text-decoration-line: underline;
 }
 .booking-fail__content{
     font-size: 18px;
@@ -36,13 +43,7 @@
     color: var(--secondary);
     margin: 30px;
 }
-
-footer{
-    padding-top: 50px;
-    padding-bottom: 50%;
-}
-
-
+/* RWD */
 @media (max-width: 1280px){
     .booking-success__container{ width: 95%;}
 }

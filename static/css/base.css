@@ -24,7 +24,12 @@ hr{
 input:-webkit-autofill { 
     -webkit-box-shadow:0 0 0px 1000px white inset;
 }
-.wrapper{ width: 100%;}
+.wrapper{ 
+    width: 100%;
+    min-height: 100vh;
+
+    margin-bottom: -104px;         /* 配合 footer 高度 */
+}
 
 /* === NAVBAR ==========================================*/
 header{
@@ -39,7 +44,7 @@ header{
 
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 999999;
 }
 nav{
     width: 1200px;
@@ -55,7 +60,6 @@ nav{
     color: var(--primary);
 }
 .nav__menu{
-    height: 54px;
     align-items: center;
     font-size: 16px;
     line-height: 13px;
@@ -64,12 +68,14 @@ nav{
     display: flex;
     cursor: pointer;
 }
-.menu__item{
-    padding: 21px 10px;
-}
+.menu__item{ padding: 21px 10px;}
 .menu__item:hover{
     color: var(--white);
     background-color:var(--primary-light);
+}
+.menu__item--hover{
+    color: var(--white);
+    background-color: var(--primary-light);
 }
 .nav__bars-container{
     display: none;
@@ -134,7 +140,7 @@ nav{
     
     margin-bottom: 10px;
     padding: 15px;
-    padding-left: 43px;
+    padding-left: 45px;
 }
 .input-group__input:hover{
     border: 2px solid #8f8f8f;
@@ -159,17 +165,22 @@ nav{
     z-index: 5;
 }
 .input-group__error-message{
-    display: block;
-    width: 100%;
-    height: 10px;
+    width: 295px;
     font-size: 15px;
     color: var(--error);
     text-align: left;
-
-    top: -7px;
-    left: 30px;
-    margin-bottom: 4px;
+    margin: 0 auto;
+    margin-bottom: 5px;
 }
+.sign-up__hint-message{
+    width: 300px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--secondary-dark);
+    text-align: left;
+    margin: -5px auto 8px auto;
+}
+
 .sign__button{
     width: 310px;
     height: 47px;
@@ -184,7 +195,12 @@ nav{
     margin-bottom: 10px;
 }
 .sign__button:hover{
-    background-color: var(--primary-dark);
+    background-color: var(--primary-light);
+}
+
+.sign__button:disabled, .sign__button:disabled:hover{
+    background-color: #999999;
+    cursor: not-allowed;
 }
 .sign__switch{
     font-weight: 500;
@@ -216,7 +232,7 @@ nav{
     left: 0;
 }
 /* 登入/註冊成功 */
-.sign-success{
+.sign-success, .sign-warn{
     width: 280px;
 }
 .sign-success__icon{
@@ -228,7 +244,7 @@ nav{
     left: 50%;
     transform: translate(-50%);
 }
-.sign-success__title{
+.sign-success__title, .sign-warn__title{
     font-size: 22px;
     padding-bottom: 15px;
 }
@@ -250,6 +266,88 @@ nav{
     transform: translate(-50%);
 }
 
+/* 警示框 - 需先登入會員 */
+.sign-warn__icon{
+    font-size: 50px;
+    color: rgb(251, 80, 80);
+    margin-bottom: 20px;
+
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%);
+}
+.sign-warn__button-box{
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+.sign-warn__button{
+    width: 80px;
+    padding: 10px 5px;
+    border-radius: 5px;
+    border: 0;
+    color: var(--white);
+    cursor: pointer;
+}
+.sign-warn__signIn-button{ background-color: var(--primary);}
+.sign-warn__signIn-button:hover{ background-color: var(--primary-light);}
+.sign-warn__cancel-button{ background-color: var(--secondary-dark);}
+.sign-warn__cancel-button:hover{ background-color: #a7a7a7;}
+
+
+/* === 會員專區 ============================================ */
+.item__member-container{
+    width: 130px;
+    border: 1px solid #bebebe;
+    text-align: center;
+    color: var(--white);
+    background-color: rgba( 0, 0, 0, 0.5 );
+    border-radius: 5px;
+    
+    position: absolute;
+    top: 54px;
+    right: 0;
+    transform: scale(0);
+    transform-origin: 80px top;
+    transition: transform 0.3s;
+}
+.menu__item:nth-child(3):hover + .item__member-container, 
+.item__member-container:hover{
+    transform: scale(1);
+}
+
+/* 上面的箭頭 */
+.item__member-container::before {
+    content: "";
+    border-color: transparent transparent #bebebe transparent ;
+    border-style: solid solid solid solid;
+    border-width: 13px 18px;
+    position: absolute;
+    top: -27px;
+}
+.item__member-container::after {
+    content: "";
+    border-color: transparent transparent rgba( 0, 0, 0, 0.4 ) transparent ;
+    border-style: solid solid solid solid;
+    border-width: 13px 18px;
+    position: absolute;
+    top: -26px;
+}
+.item__member{
+    color: var(--white);
+    padding: 10px 5px;
+}
+.member__change-data:hover{
+    border-radius: 4px 4px 0 0 ;
+}
+.member__log-out:hover{
+    border-radius: 0 0 4px 4px;
+}
+.item__member:hover{
+    font-size: 18px;
+    background-color: rgba( 256, 256 , 256 , 0.4 );
+}
 
 /* === TOP BUTTON ==========================================*/
 .top-button{
@@ -321,7 +419,7 @@ footer > p{
         bottom: 5%;
     }
     .sign-container{ width: 335px;}
-    .sign-success{ width: 280px;}
+    .sign-success, .sign-warn{ width: 280px;}
 
     /* 開合選單設定 */
     .nav__menu{
@@ -335,17 +433,57 @@ footer > p{
         
         height: 0;
         overflow: hidden;
-        transition: height 0.2s ease-out;
+        transition: height 0.3s;
     }
     .menu__item{
         color: var(--white);
         border-bottom: 1px solid var(--secondary-light);
         background-color: var(--primary-light);
         opacity: 0.9;
+        z-index: 1;
     }
     .menu__item:hover{
         background-color: var(--primary);
         opacity: 1;
     }
     .nav__bars-container{ display: block;}
+
+
+    /* 會員專區選單 */
+    .item__member-container{
+        width: 100%;
+        border-radius: 0;
+
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        transform: translateY(-500px);
+        z-index: 0;
+        transition: transform 0.3s;
+    }
+    .item__member-container::after, .item__member-container::before{
+        content: none;
+    }
+    .item__member{ padding: 15px 0;}
+    .item__member:hover{ 
+        background-color: rgba( 0 , 0 , 0 , 0.5 );
+        border-radius: 0;
+    }
+
+    /* 主控鍵設定 - 會員專區 */
+    .menu__item:nth-child(3):hover + .item__member-container, 
+    .item__member-container:hover{
+        transform: scale(0);           /* 先移除hover效果 */
+    }
+    .menu__item:nth-child(3)::after{
+        content: attr(data-text);     /* 加號 */
+        font-size: 20px;
+        position: absolute;
+        right: 20px;
+    }
+    .menu__item--collapse{
+        background-color: var(--primary);
+        opacity: 1;
+    }
 }

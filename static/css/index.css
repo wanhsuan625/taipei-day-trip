@@ -88,14 +88,17 @@
 }
 
 /* --- ATTRACTION INFORMATION ----------------------- */
-main{
-    width: 1200px;
-    margin: 40px auto;
-    padding: 15px;
-
+.loader-container{ padding-bottom: 50px;}
+.main-container{ padding-bottom: 104px;}
+.main{
     display: grid;
     grid-template-columns:repeat(4, 1fr);
     gap: 30px;
+}
+.main-size{
+    width: 1200px;
+    margin: 40px auto;
+    padding: 15px;
 }
 .attraction{
     border: 2px solid #e3e3e3;
@@ -149,6 +152,55 @@ main{
     justify-content:space-between;
 }
 
+/* NO SEARCH */
+.no-search{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+.no-search__content{
+    width: 100%;
+    font-size: 20px;
+    color: var(--secondary);
+    text-align: center;
+    margin-top: 10px;
+}
+
+/* LOADING */
+.loader-container{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+.loader {
+    position: relative;
+    margin: 0 auto;
+    width: 85px;
+    height: 75px;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0),
+                      linear-gradient(var(--primary-light) 75px, transparent 0);
+    background-position: 0px center, 15px center, 30px center, 45px center, 60px center, 75px center, 90px center;
+    animation: rikSpikeRoll 1.2s linear infinite alternate;
+}
+
+@keyframes rikSpikeRoll {
+  0% { background-size: 10px 3px;}
+  16% { background-size: 10px 75px, 10px 3px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
+  33% { background-size: 10px 30px, 10px 75px, 10px 3px, 10px 3px, 10px 3px, 10px 3px}
+  50% { background-size: 10px 10px, 10px 30px, 10px 75px, 10px 3px, 10px 3px, 10px 3px}
+  66% { background-size: 10px 3px, 10px 10px, 10px 30px, 10px 75px, 10px 3px, 10px 3px}
+  83% { background-size: 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 75px, 10px 3px}
+  100% { background-size: 10px 3px, 10px 3px, 10px 3px,  10px 10px, 10px 30px, 10px 75px}
+}
+    
+
 /* --- RWD SETTING ------------------------------------ */
 /* LAYOUT - BELOW 1280px   */
 @media (max-width: 1280px){
@@ -157,16 +209,16 @@ main{
         overflow-y: visible;    
     }
     .search-box{ width:95%;}
-    main{
-        width: 90%;
+    .main{
         grid-template-columns:repeat(3, 1fr);
         gap: 20px;
     }
+    .main-size{ width: 90%;}
 }
 
 /* LAYOUT - BELOW 768px   */
 @media (max-width: 768px){
-    main{
+    .main{
         grid-template-columns: repeat(2,1fr);
         gap: 20px;
     }
@@ -182,12 +234,15 @@ main{
         width: 100%;
         grid-template-columns: repeat(3, 30%);
     }
-    main{
+    .main{
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .main-size{
         width: 100%;
         margin: 35px auto;
         padding: 20px;
-        grid-template-columns: 1fr;
-        gap: 15px;
+        padding-bottom: 35px;
     }
     .attraction__img-box{ padding-top: 78%;}
 }

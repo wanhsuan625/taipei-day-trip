@@ -1,0 +1,370 @@
+@import url(color.css);
+
+.main{
+    width: 1200px;
+    margin: 50px auto;
+    padding-bottom: 104px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+/* --- ASIDE ------------------------------------------------ */
+.aside{
+    width: 265px;
+    height: 300px;
+    border: 2px solid #67b9cd;
+    justify-content: space-around;
+    background-color: var(--white);
+    border-radius: 8px;
+    padding-bottom: 10px;
+}
+/* user-box */
+.aside__user-box{
+    background-color: #5aa2b4;
+    padding: 25px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.aside__user-box__img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1.5px solid var(--white);
+    margin-right: 10px;
+}
+.aside__user-box__name{
+    color: var(--white);
+    font-size: 22px;
+}
+
+/* box */
+.aside__box{
+    padding: 10px;
+    padding-left: 25px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.aside__box:hover .aside__box__content{
+    color: var(--primary-light)
+}
+.aside__box__icon{
+    width: 22px;
+    font-size: 22px;
+    color: var(--secondary);
+}
+.order-record__icon{ padding-right: 5.5px;}
+.aside__box__content{
+    width: 100%;
+    color: var(--secondary);
+    margin-left: 10px;
+    font-size: 18px;
+}
+.select-option{     /* 會員初始畫面設定--變更資料欄 */
+    color: #66AABB;
+}
+.account-info{
+    font-size: 18px;
+    color: var(--secondary);
+    left: 20%;
+    cursor: pointer;
+}
+.account-info:hover{
+    color: var(--primary-light);
+}
+.fa-play:before{
+    display: none;
+    color: var(--white);
+}
+
+/* --- ARTICLE ------------------------------------------------ */
+.article{
+    width: 860px;
+    min-height: 650px;
+    background-color: var(--secondary-light);
+    border-radius: 10px;
+    padding: 20px 30px;
+}
+.article__title{
+    margin-left: 10px;
+    font-size: 25px;
+}
+.article__subtitle{
+    margin-left: 10px;
+    font-size: 14px;
+}
+.article__hr{
+    width: 100%;
+    margin: 5px 0;
+}
+
+/* --- USERNAME CHANGE BOX ------------------------------------------- */
+.change__username-button{
+    margin: 0;
+    margin-left: 10px;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    color: var(--primary);
+    text-decoration: underline;
+    background-color: transparent;
+}
+.change__username-box{
+    display: none;
+    width: 290px;
+    padding: 30px 20px 25px 20px;
+    box-shadow: 0px 0px 16px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background-color: var(--white);
+    
+    position: absolute;
+    z-index: 1;
+}
+.change__headline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.change__input{
+    width: 190px;
+    height: 35px;
+    padding: 10px 13px;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #d6d6d6;
+    outline: 0;
+}
+.change__message{
+    color: var(--secondary-dark);
+    max-width: 300px;
+    padding-top: 3px;
+    padding-left: 65px;
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+.change__button-box{
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.change__button{
+    cursor: pointer;
+    border: 0;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    padding: 10px 15px;
+    color: var(--white);
+}
+.change__button-confirm{ background-color: var(--primary);}
+.change__button-confirm:hover{ background-color: var(--primary-light);}
+.change__button-cancel{ background-color: var(--secondary);}
+.change__button-cancel:hover{ background-color: #a7a7a7;}
+.change__success-box{
+    width: 240px;
+    padding: 20px;
+    font-size: 18px;
+    align-items: center;
+    text-align: center;
+}
+.change__success-icon{
+    font-size: 22px;
+    color: var(--primary);
+    margin-right: 10px;
+}
+.change__success-text{
+    line-height: 25px;
+}
+
+/* --- member ------------------------------------------------ */
+.member__container{ padding: 20px 35px;}
+.member__box{ display: flex;}
+.member__content{
+    padding: 20px 0;
+    color: var(--secondary-dark);
+}
+.member__headline{
+    width: 20%;
+    text-align: right;
+}
+.member__text, .member__password__box{
+    margin-left: 40px;
+    color: black;
+    letter-spacing: 1.5px;
+    font-weight: bolder;
+}
+.member__input{ height: 38px;}
+.password__text{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.member__password{
+    width: 300px;
+    height: 38px;
+    margin: 10px 0px 10px 20px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--secondary-light);
+    cursor: text;
+}
+.member__password:focus{ outline: #000 solid 1.5px;}
+.member__password__message{
+    width: 300px;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: var(--secondary);
+    font-weight: 500;
+    left: 95px;
+}
+.message-error{
+    color: var(--error);
+}
+
+/* member ─ PASSWORD_CHANGE CONFIRM BUTTON */
+.button__box{
+    width: 95%;
+    padding-top: 20px;
+    display: flex;
+    justify-content: end;
+}
+.member__button{
+    background-color: var(--primary);
+    cursor: pointer;
+    padding: 15px;
+    color: var(--white);
+    font-weight: lighter;
+    letter-spacing: 2px;
+    border: 0px;
+    border-radius: 5px;
+}
+.member__button:hover{
+    transform: scale(1.01);
+    box-shadow: 1px 2px 5px 1px #999999;
+}
+.member__button:active{
+    transform: scale(1) translate(1px,1px);
+}
+
+/* --- RWD --------------------------------------------------- */
+@media (max-width: 1280px){
+    .main{ width: 100%;}
+    .aside{ width: 22%;}
+    .article{ width: 70%;}
+}
+
+@media (max-width: 1024px){
+    .order__container{
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 40px 35px;
+    }
+    .member__container{ padding: 20px 10px;}
+    .member__password{
+        width: 260px;
+        margin-left: 10px;
+    }
+    .member__button-box{ width: 100%;}
+    .member__password__message{
+        width: 240px;
+        left: 90px;
+    }
+}
+
+@media (max-width: 768px){
+    .main{
+        width: 95%;
+        margin: 10px auto;
+        flex-wrap: wrap;
+    }
+    .article{
+        width: 100%;
+        min-height: 740px;
+        padding: 20px 15px;
+    }
+    .order__container{
+        padding: 0 25px;
+        grid-gap: 30px 50px;
+    }
+    .member__password__message{
+        width: 240px;
+        left: 25%;
+    }
+
+    /* 左側ASIDE 換至下面平放 */
+    .aside{
+        width: 140px;
+        height: 170px;
+        z-index: 1;
+        padding: 5px 0;
+        border-radius: 0px 5px 5px 0px;
+
+        position: fixed;
+        right: -138px;
+        top: 70px;
+
+        transition-duration: 0.6s;
+    }
+    .aside:hover{ right: 0px;}     /* 展開 */
+    .aside__user-box{
+        display: block;
+        width: 40px;
+        height: 170px;
+        padding: 3px 8px;
+        margin: 0;
+        border-radius: 5px 0px 0px 5px;
+        text-align: center;
+        cursor: pointer;
+
+        position: absolute;
+        top: -2px;
+        right: 135px;
+    }
+    .fa-play:before{
+        display: block;
+        font-size: 10px;
+        margin-bottom: 7px;
+        transform: rotate(180deg);
+    }
+    .aside__user-box__name{
+        letter-spacing: 2px;
+        writing-mode: vertical-lr;
+        text-orientation: mixed;    /* 英文字轉向; mixed or upright */
+        font-size: 15px;
+        margin: 0 auto;
+    }
+    .aside__box{ padding-left: 15px;}
+}
+
+@media (max-width: 480px){
+    .order__container{
+        padding: 0px 5px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .member__box{ display: block;}
+    .member__content{ padding: 15px 0;}
+    .member__headline{
+        width: 100%;
+        text-align: start;
+        padding-left: 5px;
+        font-size: 17px;
+
+    }
+    .member__text{ margin-left: 25px;}
+    .member__password__box{
+        letter-spacing: 0;
+        margin: 0px 15px 0px 25px;
+    }
+    .member__password{ width: 70%;}
+    .member__password__message{
+        width: 70%;
+        left: 32%;
+    }
+    .change__username-box{
+        left: 50%;
+        transform: translate(-55%);
+    }
+}
