@@ -53,6 +53,8 @@ main{
     width: 250px;
     height: 200px;
     margin-right: 30px;
+    object-fit: cover;
+    object-position: center;
 }
 .booking__info-box h1{
     color: var(--primary);
@@ -236,6 +238,11 @@ input[type="checkbox"]{
     top: -12px;
     left: 93px;
     margin-bottom: 1px;
+}
+.credit__error-message{
+    top: -18px;
+    left: 144px;
+    font-weight: 500;
 }
 .contact__info.invalid{
     border: 1.5px solid var(--error);
