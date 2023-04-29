@@ -51,7 +51,6 @@ window.addEventListener("load", () =>{
 const nav_bars = document.querySelector("#bars");
 const nav_menu = document.querySelector(".nav__menu");
 let barsClick = true;
-let memberPosition = true;
 
 let navbarIconSwitch = (removeClassName, addClassName, maxHeight, clickBoolean, topValue) => {
     nav_bars.classList.remove(removeClassName);
@@ -59,16 +58,21 @@ let navbarIconSwitch = (removeClassName, addClassName, maxHeight, clickBoolean, 
     nav_menu.style = `height: ${maxHeight}px`;
     barsClick = clickBoolean;
     if(document.cookie != ""){
-        nav_memberContainer.style = `top: ${topValue}px`;
+        nav_memberContainer.style = `top: ${topValue}px;`;
     }
 }
-
+// 折疊式選單
+let menu_minus_memberContainer_height;
 nav_bars.addEventListener("click",() => {
+    menu_minus_memberContainer_height = nav_menu.scrollHeight - nav_memberContainer.scrollHeight;
     if(barsClick){
-        navbarIconSwitch( "fa-bars", "fa-xmark", nav_menu.scrollHeight, false , 0 );
-    }else{
-        navbarIconSwitch( "fa-xmark", "fa-bars", 0, true , 27);
+        navbarIconSwitch( "fa-bars", "fa-xmark", menu_minus_memberContainer_height , false , 0);
+        return;
     }
+    navbarIconSwitch( "fa-xmark", "fa-bars", 0, true , 27);
+    nav_memberButton.classList.remove("menu__item--collapse");
+    nav_memberButton.setAttribute("data-text", "+");
+    memberClick = true;
 })
 
 window.addEventListener("resize", () => {
@@ -80,24 +84,35 @@ window.addEventListener("resize", () => {
     }
 })
 
+// --- 未登入狀態 -----------------------------------------------
+window.addEventListener("mouseup", (event) => {
+    if ( window.innerWidth > 480){ return;}
+    if ( event.target == nav_bars ){ return;}
+    if ( document.cookie != ""){ 
+        if (event.target == nav_memberButton){ return;}
+        navbarIconSwitch( "fa-xmark", "fa-bars", 0, true , 27);
+        return;
+    }
+    navbarIconSwitch( "fa-xmark", "fa-bars", 0, true , 27);
+})
+
 // --- 會員專區按鈕 below 480，折疊式選單 -------------------------
 let memberClick = true;
-let memberAfter = window.getComputedStyle(nav_memberButton, "after");
-
 nav_memberButton.addEventListener("click", () => {
+    if (window.innerWidth > 480) { return;}
     if(memberClick){
+        nav_menu.style = `height: ${nav_menu.scrollHeight}px`;
         nav_memberButton.classList.add("menu__item--collapse");
         nav_memberButton.setAttribute("data-text", "-");
         nav_memberContainer.style = "transform: translate(0)";
-
         memberClick = false;
-    }else{
-        nav_memberButton.classList.remove("menu__item--collapse");
-        nav_memberButton.setAttribute("data-text", "+");
-        nav_memberContainer.style = "transform: translateY(-500px)";
-
-        memberClick = true;
+        return;
     }
+    nav_menu.style = `height: ${menu_minus_memberContainer_height}px`;
+    nav_memberButton.classList.remove("menu__item--collapse");
+    nav_memberButton.setAttribute("data-text", "+");
+    nav_memberContainer.style = "transform: translateY(-500px)";
+    memberClick = true;
 })
 
 // hover設定，在會員選單出現時，也維持不變
@@ -164,12 +179,15 @@ let signInInfoClear = () => {
 
 //  未登入狀態 - NAVBAR上的按鈕
 nav_signInButton.addEventListener("click",() => {
+    signWarn.style.display = "none";
     if(document.cookie == ""){
         signInContainer.style.display = "block";
         blackScreen.style.display = "block";
-    }    
+    }
+    
 })
 nav_bookingButton.addEventListener("click", () => {
+    signInContainer.style.display = "none";
     if(document.cookie == ""){
         signWarn.style.display = "block";
         blackScreen.style.display = "block";
@@ -304,10 +322,6 @@ signInPassword.addEventListener("input", () => { signInErrorMessage.style.displa
 
 // --- BUTTON DISABLED ATTRIBUTE CHANGE ---------------------------------------
 let signButtonDisable = ( ) => {
-    console.log("check name = "+ signUpNameLoad);
-    console.log("check email = " +signUpEmailLoad);
-    console.log("check password = " + signUpPasswordLoad);
-
     if ( signUpName.value != "" && signUpEmail.value != "" && signUpPassword.value != ""
          && signUpNameLoad && signUpEmailLoad && signUpPasswordLoad){
         signUpButton.removeAttribute("disabled");
@@ -376,13 +390,6 @@ let signInFetch = () => {
         signInErrorMessage.textContent = data.message;
     })
 }
-
-// --- LINK TO MEMBER PAGE ---------------------------------------------
-// nav_memberButton.addEventListener("click",() =>{
-//     if(document.cookie != ""){
-//         window.location.href = "/account/order";
-//     }
-// })
 
 // --- SINGN_OUT ------------------------------------------------------
 nav_signOutButton.addEventListener("click", () => {
