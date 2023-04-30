@@ -326,6 +326,8 @@ TPDirect.card.setup({
 confirmButton.addEventListener("click", () => {
     // 取得 TapPay Fields 的 status
     const tappayStatus = TPDirect.card.getTappayFieldsStatus();
+    creditCardError.style.display = "block";
+    creditCardError.textContent = "⚠ 請填寫信用卡資料";
 
     if (contactName.value != "" && contactEmail.value != "" && contactPhone.value != ""){
         // 確認是否可以 getPrime
@@ -395,6 +397,7 @@ confirmButton.addEventListener("click", () => {
     
     const confirmText = document.querySelector(".confirm__text");
     confirmText.style.display = "block";
+    creditCardError.style.display = "none";
 })
 
 

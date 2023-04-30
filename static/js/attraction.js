@@ -4,9 +4,6 @@ const map_script = document.createElement("script");
 const map_src = `https://maps.googleapis.com/maps/api/js?key=${map_key}&callback=initMap`;
 
 map_script.src = map_src;
-map_script.async = true;
-map_script.defer = true;
-map_script.type = "text/javascript";
 head.appendChild( map_script );
 
 // --- WEBSITE ADDRESS ---------------------------------------
