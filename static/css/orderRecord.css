@@ -397,10 +397,14 @@
         margin: 0 auto;
     }
     .list__headline{
+        width: 30%;
         font-size: 13px;
+        padding-right: 5px;
     }
     .list__content{
+        width: 70%;
         font-size: 13px;
+        padding-left: 5px;
     }
     .list__close-icon{
         width: 13px;
