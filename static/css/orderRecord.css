@@ -200,7 +200,7 @@
     top: 15px;
 }
 .list__box{
-    padding: 10px;
+    padding: 10px 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -209,32 +209,49 @@
     width: 38%;
     height: 180px;
     border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
 }
 .list__content-box{ width: 55%;}
-.list__content-innerBox{
-    width: 100%;
-    margin-bottom: 7px;
-    display: flex;
-    justify-content: space-between;
-}
 .list__content-title{
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
+}
+.list__content-subtitle{
+    font-size: 13px;
+    color: #a8a8a8;
+    margin-bottom: 5px;
+}
+.list__table{
+    width: 100%;
+    display: flex;
 }
 .list__headline{
-    width: 75px;
+    width: 35%;
     font-size: 15px;
-    color: var(--secondary-dark);
+    padding: 5px 12px 5px 0;
+    color: var(--white);
+    background-color: #92bfca;
     text-align: right;
+    border: 1px solid #dcdcdc;
+    border-top: 0;
 }
 .list__content{
-    width: 75%;
+    width: 65%;
+    font-size: 15px;
+    padding: 5px;
+    padding-left: 8px;
     color: #000;
     word-break: break-all;
+    border: 1px solid #dcdcdc;
+    border-top: 0;
+}
+.list-topBorder{
+    border-top: 1px solid #dcdcdc;
 }
 .list__button{
-    width: 90%;
+    width: 95%;
     background-color: var(--primary);
     color: var(--white);
     padding: 10px;
@@ -263,7 +280,6 @@
         width: 50%;
         left: 38%;
     }
-    .list__headline{ width: 80px;}
 }
 
 @media (max-width: 1024px){
@@ -275,12 +291,11 @@
     /* 訂購紀錄的list訂單 */
     .list__box{ display: block;}
     .list__title{ margin: 0;}
-    .list__content-title{
-        margin: 10px 5px;
-    }
+    .list__content-title{ margin: 5px;}
+    .list__content-subtitle{ margin: 0px 5px 3px 5px;}
     .list__img{ 
         width: 90%;
-        height: 200px;
+        height: 160px;
         left: 50%;
         transform: translate(-50%);
     }
@@ -288,7 +303,9 @@
         width: 90%;
         margin: 0 auto;
     }
-    .list__content{ width: 80%;}
+    .list__button{
+        width: 90%;
+    }
 }
 
 @media (max-width: 768px){
@@ -311,9 +328,8 @@
     .list__container{
         width: 65%;
         left: 20%;
+        top: 15%;
     }
-    .list__img{ height: 220px;}
-    .list__headline{ width: 90px;}
 
     /* 左側ASIDE 換至下面平放 */
     .aside{
@@ -380,21 +396,15 @@
         width: 95%;
         margin: 0 auto;
     }
-    .list__content-title{ margin: 10px 0;}
-    .list__content-innerBox{
-        display: block;
-        width: 95%;
-        margin: 0 auto;
-    }
     .list__headline{
-        font-size: 17px;
-        width: 100%;
-        text-align: start;
-        padding-bottom: 8px;
+        width: 30%;
+        font-size: 13px;
+        padding-right: 5px;
     }
     .list__content{
-        width: 100%;
-        padding: 0 0 10px 20px;
+        width: 70%;
+        font-size: 13px;
+        padding-left: 5px;
     }
     .list__close-icon{
         width: 13px;

@@ -58,30 +58,28 @@ let order_list_html =
         <img class="list__img" src="" alt="">
         <div class="list__content-box">
             <div class="list__content-title"></div>
-            <div class="list__content-innerBox">
-                <div class="list__headline">景區地點：</div>
-                <div class="list__content" id="listAddress"></div>
+            <div class="list__content-subtitle" id="listAddress"></div>
+            <div class="list__table">
+                <div class="list__headline list-topBorder">訂購人</div>
+                <div class="list__content list-topBorder" id="listContacter"></div>
             </div>
-            <div class="list__content-innerBox">
-                <div class="list__headline">訂購人：</div>
-                <div class="list__content" id="listContacter"></div>
-            </div>
-            <div class="list__content-innerBox">
-                <div class="list__headline">信箱：</div>
+            <div class="list__table">
+                <div class="list__headline">信箱</div>
                 <div class="list__content" id="listEmail"></div>
             </div>
-            <div class="list__content-innerBox">
-                <div class="list__headline">電話：</div>
+            <div class="list__table">
+                <div class="list__headline">電話</div>
                 <div class="list__content" id="listPhone"></div>
             </div>
-            <div class="list__content-innerBox">
-                <div class="list__headline">出發日期：</div>
+            <div class="list__table">
+                <div class="list__headline">出發日期</div>
                 <div class="list__content" id="listDate"></div>
             </div>
-            <div class="list__content-innerBox">
-                <div class="list__headline">場次：</div>
+            <div class="list__table">
+                <div class="list__headline">場次</div>
                 <div class="list__content" id="listTime"></div>
             </div>
+
         </div>
     </div>
     <button class="list__button">再次訂購</button>
