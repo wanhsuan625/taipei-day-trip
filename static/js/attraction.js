@@ -1,30 +1,13 @@
-//  --- EMBED GOOGLE MAP --------------------------------------------
-const head = document.querySelector("head");
-const map_script = document.createElement("script");
-const map_src = `https://maps.googleapis.com/maps/api/js?key=${map_key}&callback=initMap`;
-
-map_script.src = map_src;
-head.appendChild( map_script );
-
 // --- WEBSITE ADDRESS ---------------------------------------
 let attractionID = location.pathname.split("/")[2];
+const map = document.querySelector(".map");
 
 let eachAttractionFetch = (num) => {
     fetch(`/api/attraction/${num}`)
     .then(response => {
         return response.json();})
     .then(data => {
-        function initMap(){
-            var map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 17,
-                center: {lat : data.data.lat, lng: data.data.lng },
-            });
-            var marker = new google.maps.Marker({
-                position: {lat : data.data.lat, lng: data.data.lng },
-                map: map,
-            });
-        }
-        window.onload = initMap;
+        map.src = `https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${data.data.address}(${data.data.name})&z=16&output=embed&t=`;
 
         attractionImg(data);
         attractionInformation(data);
@@ -41,7 +24,6 @@ const infoBox = document.querySelector(".info-box");
 const bookingForm = document.querySelector(".booking-form");
 const section = document.querySelector("section");
 const headline = document.querySelectorAll(".section__headline");
-const map = document.getElementById("map");
 var slide;
 var dot;
 var slideIndex;

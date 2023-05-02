@@ -73,22 +73,12 @@
 <section class="section">
     <div class="section__headline">交通方式：</div>
     <div class="section__headline">景點地址：</div>
-    <div id="map" class="section__map">
-        <div style="color: #a3cfdf" id="loader" class="la-ball-spin-clockwise-fade la-3x loading">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
+    <iframe class="map"
+     width="100%" height="350px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+    </iframe>
 </section>
 {% endblock %}
 
 {% block script %}
-<script src = "/js/config.js"></script>
 <script src="/js/attraction.js"></script>
 {% endblock %}

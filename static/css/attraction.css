@@ -224,6 +224,7 @@ input[type="radio"]:checked::after{
     padding: 10px;
     color:#666666;
     font-size: 16px;
+    padding-bottom: 80px;
 }
 .section__headline{
     height: 32px;
@@ -236,12 +237,7 @@ input[type="radio"]:checked::after{
     line-height: 24px;
     letter-spacing: 2px;
 }
-.section__map{
-    width: 100%;
-    height: 400px;
-    margin-top: 10px;
-    margin-bottom: 100px;
-}
+.map{ margin-top: 5px;}
 
 /* --- RWD SETTING ------------------------------------------------------*/
 /* LAYOUT BELOW 1280px */
@@ -272,7 +268,7 @@ input[type="radio"]:checked::after{
     }
     .section{
         width: 100%;
-        padding: 0 20px;
+        padding: 0 20px 80px 20px;
     }
     .section__map{ margin-bottom: 160px;}
 }
