@@ -7,6 +7,7 @@ let eachAttractionFetch = (num) => {
     .then(response => {
         return response.json();})
     .then(data => {
+        // map.src = `https://maps.google.com/maps?q=${data.data.lat}, ${data.data.lng}&z=16&output=embed`;  // 經緯度
         map.src = `https://maps.google.com.tw/maps?f=q&hl=zh-TW&geocode=&q=${data.data.address}(${data.data.name})&z=16&output=embed&t=`;
 
         attractionImg(data);
