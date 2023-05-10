@@ -15,14 +15,14 @@ Tappay Credit Card :
 - CVC : **123**
 
 # Table of Contents
-- [Main Features](#Main-Features)
-- [Frontend Technique](#Frontend-Technique)
-- [Backend Technique](#Backend-Technique)
-- [API Doc](#API-Doc)
-- [Figma](#Figma)
+- [Main Features](#main-features)
+- [Frontend Technique](#frontend-technique)
+- [Backend Technique](#backend-technique)
+- [API Doc](#api-doc)
+- [Figma](#figma)
 - [Contact](#contact)
 
-# Main Features <a name="Main-Features"></a>
+# Main Features <a name="main-features"></a>
 
 1. RWD (Responsive Web Design)
   ![RWD](/demo/device.png)
@@ -47,14 +47,14 @@ Tappay Credit Card :
 5. Payment : third-party TapPay SDK
   ![payment](/demo/booking%20process.gif)
 
-# Frontend Technique <a name="Frontend-Technique"></a>
+# Frontend Technique <a name="frontend-technique"></a>
 - HTML
 - Junjia2 template
 - CSS
 - Javascript
 - AJAX
 
-# Backend Technique <a name="Backend-Technique"></a>
+# Backend Technique <a name="backend-technique"></a>
 ### Environment
 - Python Flask
 
@@ -73,10 +73,10 @@ Tappay Credit Card :
 ### Database Schema
   ![schema](/demo/database%20schema.png)
 
-# API Doc <a name="API-Doc"></a>
+# API Doc <a name="api-doc"></a>
 [API Doc](https://app.swaggerhub.com/apis-docs/padax/taipei-day-trip/1.1.0)
 
-# Figma <a name="Figma"></a>
+# Figma <a name="figma"></a>
 [Figma](https://www.figma.com/file/MZkYBH31H5gyLoZoZq116j/Taipei-Trip-%E5%8F%B0%E5%8C%97%E4%B8%80%E6%97%A5%E9%81%8A-2.0)
 
 # Contact <a name="contact"></a>
